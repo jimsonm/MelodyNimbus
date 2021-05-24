@@ -16,6 +16,35 @@ const removeUser = () => {
   };
 };
 
+// export const createUser = (user) => async (dispatch) => {
+//   const { images, image, username, email, password } = user;
+//   const formData = new FormData();
+//   formData.append("username", username);
+//   formData.append("email", email);
+//   formData.append("password", password);
+
+//   // for multiple files
+//   if (images && images.length !== 0) {
+//     for (var i = 0; i < images.length; i++) {
+//       formData.append("images", images[i]);
+//     }
+//   }
+
+//   // for single file
+//   if (image) formData.append("image", image);
+
+//   const res = await csrfFetch(`/api/users/`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//     body: formData,
+//   });
+
+//   const data = await res.json();
+//   dispatch(setUser(data.user));
+// };
+
 export const restoreUser = () => async dispatch => {
   const response = await csrfFetch('/api/session');
   const data = await response.json();
@@ -38,18 +67,33 @@ export const login = (user) => async (dispatch) => {
 };
 
 export const signup = (user) => async (dispatch) => {
-  const { display_name, email, password } = user;
-  const response = await csrfFetch("/api/users", {
+  const { images, image, display_name, email, password } = user;
+  const formData = new FormData();
+  formData.append("display_name", display_name);
+  formData.append("email", email);
+  formData.append("password", password);
+
+  // for multiple files
+  if (images && images.length !== 0) {
+    for (var i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+  }
+
+  // for single file
+  if (image) formData.append("image", image);
+
+  const res = await csrfFetch(`/api/users/`, {
     method: "POST",
-    body: JSON.stringify({
-      display_name,
-      email,
-      password,
-    }),
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
   });
-  const data = await response.json();
+
+  const data = await res.json();
   dispatch(setUser(data.user));
-  return response;
+  // return response;
 };
 
 export const logout = () => async (dispatch) => {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  // const sessionUser = useSelector((state) => state.session.user);
   
   const openMenu = () => {
     if (showMenu) return;
@@ -28,6 +30,11 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
+  // const editProfile = (e) => {
+  //   e.preventDefault();
+  //   return dispatch(sessionActions.createUser());
+  // }
+
   return (
     <>
       <button onClick={openMenu}>
@@ -35,7 +42,23 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
+          <li>
+            {/* <button onClick={editProfile}>Link to Profile</button> */}
+            <div>
+                {user && (
+                    <div>
+                      {console.log('>>>>>>>>>>>>', user.avatar_img)}
+                      {console.log('<<<<<<<<<<', user)}
+                        <h1>{user.display_name}</h1>
+                        <img
+                            style={{ width: "150px" }}
+                            src={user.avatar_img}
+                            alt="profile"
+                        />
+                    </div>
+                )}
+            </div>
+          </li>
           <li>{user.email}</li>
           <li>
             <button onClick={logout}>Log Out</button>
