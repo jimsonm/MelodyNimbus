@@ -16,35 +16,6 @@ const removeUser = () => {
   };
 };
 
-// export const createUser = (user) => async (dispatch) => {
-//   const { images, image, username, email, password } = user;
-//   const formData = new FormData();
-//   formData.append("username", username);
-//   formData.append("email", email);
-//   formData.append("password", password);
-
-//   // for multiple files
-//   if (images && images.length !== 0) {
-//     for (var i = 0; i < images.length; i++) {
-//       formData.append("images", images[i]);
-//     }
-//   }
-
-//   // for single file
-//   if (image) formData.append("image", image);
-
-//   const res = await csrfFetch(`/api/users/`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "multipart/form-data",
-//     },
-//     body: formData,
-//   });
-
-//   const data = await res.json();
-//   dispatch(setUser(data.user));
-// };
-
 export const restoreUser = () => async dispatch => {
   const response = await csrfFetch('/api/session');
   const data = await response.json();
@@ -66,7 +37,29 @@ export const login = (user) => async (dispatch) => {
   return response;
 };
 
-export const signup = (user) => async (dispatch) => {
+export const getProfileById = (user) => async (dispatch) => {
+  console.log('user', user)
+  const response = await csrfFetch(`api/users/${user.id}`)
+  console.log('response', response);
+  const data = await response.json();
+  console.log('data', data.user);
+  dispatch(setUser(data.user));
+  return response;
+}
+
+export const editProfile = (payload) => async (dispatch) => {
+  const response = await csrfFetch(`api/users/${payload.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload),
+  })
+  const updatedProfile = await response.json();
+  dispatch(setUser(updatedProfile));
+}
+
+export const signup = (user) => async dispatch => {
   const { images, image, display_name, email, password } = user;
   const formData = new FormData();
   formData.append("display_name", display_name);
@@ -77,7 +70,7 @@ export const signup = (user) => async (dispatch) => {
   if (images && images.length !== 0) {
     for (var i = 0; i < images.length; i++) {
       formData.append("images", images[i]);
-    }
+    } 
   }
 
   // for single file

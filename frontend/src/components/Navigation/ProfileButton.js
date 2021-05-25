@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 
 function ProfileButton({ user }) {
+  const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  // const sessionUser = useSelector((state) => state.session.user);
-  
+
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
-  
+
   useEffect(() => {
     if (!showMenu) return;
 
@@ -21,7 +24,7 @@ function ProfileButton({ user }) {
     };
 
     document.addEventListener('click', closeMenu);
-  
+
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
@@ -30,10 +33,10 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
-  // const editProfile = (e) => {
-  //   e.preventDefault();
-  //   return dispatch(sessionActions.createUser());
-  // }
+  const toEditProfile = (e) => {
+    e.preventDefault();
+    return dispatch(sessionActions.getProfileById(user));
+  }
 
   return (
     <>
@@ -43,20 +46,22 @@ function ProfileButton({ user }) {
       {showMenu && (
         <ul className="profile-dropdown">
           <li>
-            {/* <button onClick={editProfile}>Link to Profile</button> */}
+            <NavLink to={`/users/${sessionUser.id}`}>
+              <button onClick={toEditProfile}>Profile</button>
+            </NavLink>
+          </li>
+          <li>
             <div>
-                {user && (
-                    <div>
-                      {console.log('>>>>>>>>>>>>', user.avatar_img)}
-                      {console.log('<<<<<<<<<<', user)}
-                        <h1>{user.display_name}</h1>
-                        <img
-                            style={{ width: "150px" }}
-                            src={user.avatar_img}
-                            alt="profile"
-                        />
-                    </div>
-                )}
+              {user && (
+                <div>
+                  <h1>{user.display_name}</h1>
+                  <img
+                    style={{ width: "150px" }}
+                    src={user.avatar_img}
+                    alt="profile"
+                  />
+                </div>
+              )}
             </div>
           </li>
           <li>{user.email}</li>
@@ -64,7 +69,8 @@ function ProfileButton({ user }) {
             <button onClick={logout}>Log Out</button>
           </li>
         </ul>
-      )}
+      )
+      }
     </>
   );
 }
