@@ -1,7 +1,7 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -48,12 +48,36 @@ router.post(
 );
 
 router.get(
-    '/:id',
+    '',
     asyncHandler(async (req, res) => {
-        const user = await User.findByPk(req.params.id);
-        console.log('got here');
-        return res.json(user);
+        const users = await User.findAll();
+        res.json(users);
+    })
+)
+
+router.get(
+    '/:id',
+    restoreUser,
+    asyncHandler(async (req, res) => {
+        console.log('bodyyyyyyyyyyyyy', req.body);
+        const user = await User.getCurrentUserById(req.params.id);
+        console.log('userrrrrrrrrrrrr', user)
+        // console.log('===========', res.json(user))
+        console.log('get /:id')
+        return res.json(user);;
     }),
 );
 
+router.put(
+    '/:id',
+    restoreUser,
+    singleMulterUpload("image"),
+    asyncHandler(async (req, res) => {
+        console.log('put route body', req.body);
+        const avatar_img = await singlePublicFileUpload(req.file);
+        const { display_name, image, first_name, last_name, city, country, bio, id } = req.body
+        const user = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, avatar_img });
+        return res.json(user);
+    })
+)
 module.exports = router;

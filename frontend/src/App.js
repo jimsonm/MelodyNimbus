@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import UserProfilePage from "./components/UserProfile/UserProfile";
+import UsersContainer from "./components/UsersContainer/UsersContainer"
 
 
 function App() {
@@ -19,16 +20,18 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <h1>Home</h1>
+          <UsersContainer />
         </Route>
         <Route exact path='/users/:id/:trackid'>
-          <h1>Hello</h1>
+          <h1>users/:id/:trackid</h1>
         </Route>
         <Route exact path='/users/:id'>
-          <h1>Hello2</h1>
+          <h1>users/:id</h1>
           <UserProfilePage />
         </Route>
         <Route exact path ='/users'>
-          <h1>Hello3</h1>
+          <h1>users</h1>
+          <UsersContainer />
         </Route>
       </Switch>
     </>

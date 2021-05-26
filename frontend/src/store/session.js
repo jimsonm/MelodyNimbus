@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const SET_USER = 'session/setUser';
+const GET_USER = 'session/getUser';
 const REMOVE_USER = 'session/removeUser';
 
 const setUser = (user) => {
@@ -9,6 +10,13 @@ const setUser = (user) => {
     payload: user,
   };
 };
+
+const getUser = (user) => {
+  return {
+    type: GET_USER,
+    payload: user,
+  }
+}
 
 const removeUser = () => {
   return {
@@ -37,26 +45,69 @@ export const login = (user) => async (dispatch) => {
   return response;
 };
 
-export const getProfileById = (user) => async (dispatch) => {
-  console.log('user', user)
-  const response = await csrfFetch(`api/users/${user.id}`)
-  console.log('response', response);
-  const data = await response.json();
-  console.log('data', data.user);
-  dispatch(setUser(data.user));
-  return response;
+export const getProfile = (id) => async (dispatch) => {
+  console.log('41 id', id)
+  const response = await csrfFetch(`/api/users/${id}`)
+  console.log('43 res', response);
+  const updatedProfile = await response.json();
+  console.log('45 updatedProfile', updatedProfile);
+  dispatch(getUser(updatedProfile))
+  return updatedProfile;
 }
 
 export const editProfile = (payload) => async (dispatch) => {
-  const response = await csrfFetch(`api/users/${payload.id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload),
-  })
-  const updatedProfile = await response.json();
-  dispatch(setUser(updatedProfile));
+
+  const { images, display_name, image, first_name, last_name, city, country, bio, id } = payload;
+  console.log('display_name', display_name)
+  const formData = new FormData();
+  formData.append("display_name", display_name);
+  console.log('64, formData', formData)
+  formData.append("image", image);
+  formData.append("first_name", first_name);
+  formData.append("last_name", last_name);
+  formData.append("city", city);
+  formData.append("country", country);
+  formData.append("bio", bio);
+  formData.append("id", id);
+
+  // for multiple files
+  if (images && images.length !== 0) {
+    for (var i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    } 
+  }
+
+  // for single file
+  if (image) formData.append("image", image);
+  console.log('82, formData', formData);
+  console.log('payload.id:', payload.id);
+  console.log('payload:', payload);
+  const res = await csrfFetch(`/api/users/${payload.id}`, {
+    method: "PUT",
+    // headers: {
+    //   "Content-Type": "multipart/form-data",
+    // },
+    body: formData,
+  });
+  console.log('res', res);
+  const data = await res.json();
+  console.log('data', data);
+  dispatch(setUser(data));
+
+  // console.log('payload', payload);
+  // const response = await csrfFetch(`/api/users/${payload.id}`, {
+  //   method: 'PUT',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(payload),
+  // })
+  // console.log('response', response);
+  // if(response.ok) {
+  // const updatedProfile = await response.json();
+  // console.log('updatedprofile', updatedProfile);
+  // dispatch(setUser(updatedProfile));
+  // }
 }
 
 export const signup = (user) => async dispatch => {
@@ -75,7 +126,7 @@ export const signup = (user) => async dispatch => {
 
   // for single file
   if (image) formData.append("image", image);
-
+  console.log('formData', formData)
   const res = await csrfFetch(`/api/users/`, {
     method: "POST",
     headers: {
@@ -85,6 +136,7 @@ export const signup = (user) => async dispatch => {
   });
 
   const data = await res.json();
+  console.log('data', data);
   dispatch(setUser(data.user));
   // return response;
 };
@@ -114,5 +166,7 @@ const sessionReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+
 
 export default sessionReducer;

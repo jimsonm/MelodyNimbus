@@ -29,10 +29,10 @@ function SignupFormPage() {
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };
 
-    const updateFile = (e) => {
-        const file = e.target.files[0];
-        if (file) setImage(file);
-    };
+    // const updateFile = (e) => {
+    //     const file = e.target.files[0];
+    //     if (file) setImage(file);
+    // };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -75,9 +75,9 @@ function SignupFormPage() {
                     required
                 />
             </label>
-            <label>
+            {/* <label>
                 <input type="file" onChange={updateFile} />
-            </label>
+            </label> */}
             <button type="submit">Sign Up</button>
         </form>
 

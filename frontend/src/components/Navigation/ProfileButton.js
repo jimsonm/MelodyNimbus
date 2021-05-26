@@ -33,10 +33,10 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
-  const toEditProfile = (e) => {
-    e.preventDefault();
-    return dispatch(sessionActions.getProfileById(user));
-  }
+  // const toEditProfile = (e) => {
+  //   e.preventDefault();
+  //   return dispatch(sessionActions.getProfileById(user));
+  // }
 
   return (
     <>
@@ -47,24 +47,9 @@ function ProfileButton({ user }) {
         <ul className="profile-dropdown">
           <li>
             <NavLink to={`/users/${sessionUser.id}`}>
-              <button onClick={toEditProfile}>Profile</button>
+              Profile
             </NavLink>
           </li>
-          <li>
-            <div>
-              {user && (
-                <div>
-                  <h1>{user.display_name}</h1>
-                  <img
-                    style={{ width: "150px" }}
-                    src={user.avatar_img}
-                    alt="profile"
-                  />
-                </div>
-              )}
-            </div>
-          </li>
-          <li>{user.email}</li>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>

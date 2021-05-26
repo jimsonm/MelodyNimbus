@@ -52,15 +52,7 @@ module.exports = (sequelize, DataTypes) => {
         attributes: {
           exclude: [
             'email',
-            'avatar_img',
-            'header_img',
-            'first_name',
-            'last_name',
-            'city',
-            'country',
-            'bio',
-            'hashedPassword',
-            'updatedAt'],
+            'hashedPassword',],
         },
       },
       scopes: {
@@ -79,8 +71,8 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Track, { foreignKey: 'user_id'});
   };
   User.prototype.toSafeObject = function () { // remember, this cannot be an arrow function
-    const { id, email, avatar_img, header_img, first_name, last_name, city, country, bio } = this; // context will be the User instance
-    return { id, email, avatar_img, header_img, first_name, last_name, city, country, bio };
+    const { id, email, avatar_img, header_img, first_name, last_name, city, country, bio, display_name } = this; // context will be the User instance
+    return { id, email, avatar_img, header_img, first_name, last_name, city, country, bio, display_name };
   };
 
   User.prototype.validatePassword = function (password) {
@@ -113,5 +105,20 @@ module.exports = (sequelize, DataTypes) => {
     });
     return await User.scope('currentUser').findByPk(user.id);
   };
+
+  User.edit = async function ({ display_name, image, first_name, last_name, city, country, bio, id }) {
+    const user = await User.update({
+      display_name,
+      image,
+      first_name,
+      last_name,
+      city,
+      country,
+      bio,
+    }, { where: {
+      id: id
+    }});
+    return await User.scope('currentUser').findByPk(id);
+  }
   return User;
 };

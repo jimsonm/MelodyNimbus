@@ -1,6 +1,5 @@
 .editProfileContainer {
     width: 850px;
-    margin-top: 76px;
     height: auto;
 }
 
@@ -11,4 +10,14 @@
     border-bottom: 1px solid #f2f2f2;
     margin-bottom: 24px;
     -webkit-font-smoothing: antialiased;
+}
+
+.editProfileImage {
+    display: flex;
+    height: 260px;
+    width: 260px;
+}
+
+.editProfileDetails {
+    display: flex;
 }
