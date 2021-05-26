@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import UploadTrack from '../UploadTrack/UploadTrack';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -23,11 +24,18 @@ function Navigation({ isLoaded }){
     );
   }
 
+  const redirect = async (e) => {
+    <UploadTrack />
+  }
+
   return (
     <ul>
       <li>
         <NavLink exact to="/">Home</NavLink>
         {isLoaded && sessionLinks}
+        <NavLink exact to='/Tracks' onClick={redirect}>
+          Upload
+        </NavLink>
       </li>
     </ul>
   );

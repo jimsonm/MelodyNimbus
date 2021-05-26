@@ -8,7 +8,7 @@ import { Modal } from '../../context/Modal';
 import EditUserProfile from './EditUserProfile';
 import { useParams } from 'react-router-dom';
 
-function UserProfilePage({user}) {
+function UserProfilePage() {
     const userId = useParams();
     const dispatch = useDispatch();
     // dispatch(sessionActions.getProfile(userId))
@@ -81,7 +81,9 @@ function UserProfilePage({user}) {
                     </Modal>
                 )}
             </div>
-            <div>Body</div>
+            <div>
+                Body
+            </div>
         </div>
     );
 }

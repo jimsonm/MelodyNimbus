@@ -4,7 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import UserProfilePage from "./components/UserProfile/UserProfile";
-import UsersContainer from "./components/UsersContainer/UsersContainer"
+import UsersContainer from "./components/UsersContainer/UsersContainer";
+import ShowTracks from "./components/Tracks/Tracks";
 
 
 function App() {
@@ -22,8 +23,9 @@ function App() {
           <h1>Home</h1>
           <UsersContainer />
         </Route>
-        <Route exact path='/users/:id/:trackid'>
-          <h1>users/:id/:trackid</h1>
+        <Route exact path='/users/:id/tracks'>
+          <h1>users/:id/tracks</h1>
+          <ShowTracks />
         </Route>
         <Route exact path='/users/:id'>
           <h1>users/:id</h1>

@@ -2,7 +2,7 @@ const express = require('express')
 const asyncHandler = require('express-async-handler');
 
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Track } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
@@ -32,12 +32,12 @@ const validateSignup = [
 // Sign up
 router.post(
     '/',
-    singleMulterUpload("image"),
+    // singleMulterUpload("image"),
     validateSignup,
     asyncHandler(async (req, res) => {
         const { email, password, display_name } = req.body;
-        const avatar_img = await singlePublicFileUpload(req.file);
-        const user = await User.signup({ email, display_name, password, avatar_img });
+        // const avatar_img = await singlePublicFileUpload(req.file);
+        const user = await User.signup({ email, display_name, password });
 
         await setTokenCookie(res, user);
 
@@ -74,10 +74,29 @@ router.put(
     singleMulterUpload("image"),
     asyncHandler(async (req, res) => {
         console.log('put route body', req.body);
-        const avatar_img = await singlePublicFileUpload(req.file);
+        let avatar_img;
+        if(req.file) avatar_img = await singlePublicFileUpload(req.file);
         const { display_name, image, first_name, last_name, city, country, bio, id } = req.body
         const user = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, avatar_img });
         return res.json(user);
+    })
+)
+
+router.get(
+    '/:id/tracks',
+    restoreUser,
+    asyncHandler(async (req, res) => {
+        const userId = req.params.id
+        // console.log('=========', req.params.id)
+        // const user = await User.findByPk(id);
+        const tracks = await Track.findAll({
+            where: {
+                'user_id': userId
+            }
+        });
+        // console.log('95', user)
+        console.log('96', tracks)
+        return res.json(tracks);
     })
 )
 module.exports = router;

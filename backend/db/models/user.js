@@ -70,6 +70,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Track_Comment, { foreignKey: 'user_id'});
     User.hasMany(models.Track, { foreignKey: 'user_id'});
   };
+  
   User.prototype.toSafeObject = function () { // remember, this cannot be an arrow function
     const { id, email, avatar_img, header_img, first_name, last_name, city, country, bio, display_name } = this; // context will be the User instance
     return { id, email, avatar_img, header_img, first_name, last_name, city, country, bio, display_name };
@@ -106,8 +107,9 @@ module.exports = (sequelize, DataTypes) => {
     return await User.scope('currentUser').findByPk(user.id);
   };
 
-  User.edit = async function ({ display_name, image, first_name, last_name, city, country, bio, id }) {
+  User.edit = async function ({ avatar_img, display_name, image, first_name, last_name, city, country, bio, id }) {
     const user = await User.update({
+      avatar_img,
       display_name,
       image,
       first_name,

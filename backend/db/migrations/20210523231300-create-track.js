@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      track_src: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.TEXT
       },

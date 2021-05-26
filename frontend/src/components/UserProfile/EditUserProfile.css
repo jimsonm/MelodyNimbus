@@ -1,5 +1,5 @@
 .editProfileContainer {
-    width: 850px;
+    width: 800px;
     height: auto;
 }
 
@@ -19,5 +19,32 @@
 }
 
 .editProfileDetails {
+    display: block;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.editProfileBody {
     display: flex;
+}
+
+.editProfileButtonsDiv {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#cancelButton {
+    margin: 0px 10px;
+}
+
+.textfield {
+    width: 100%;
+}
+
+.textfield2 {
+    width: 50%;
+}
+
+.halfField {
+    width: 50%;
 }

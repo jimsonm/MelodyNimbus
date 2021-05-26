@@ -33,11 +33,6 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
-  // const toEditProfile = (e) => {
-  //   e.preventDefault();
-  //   return dispatch(sessionActions.getProfileById(user));
-  // }
-
   return (
     <>
       <button onClick={openMenu}>

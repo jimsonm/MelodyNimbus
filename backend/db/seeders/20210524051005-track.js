@@ -5,12 +5,14 @@ module.exports = {
     return queryInterface.bulkInsert('Tracks', [
       {
         track_name: 'Gurenge',
+        track_src: '',
         description: 'The opening for Demon Slayer: Kimetsu no Yaiba',
         user_id: 1,
         plays: 0,
       },
       {
         track_name: 'Dynamite',
+        track_src: '',
         description: 'By BTS',
         user_id: 1,
         plays: 0,
