@@ -70,9 +70,13 @@ export const getProfile = (id) => async (dispatch) => {
   return updatedProfile;
 }
 
+  // export const editAvatar = (payload) => async (dispatch) => {
+  //   const {}
+  // }
+
 export const editProfile = (payload) => async (dispatch) => {
 
-  const { images, display_name, image, first_name, last_name, city, country, bio, id } = payload;
+  const { display_name, image, first_name, last_name, city, country, bio, id } = payload;
   console.log('display_name', display_name)
   const formData = new FormData();
   formData.append("display_name", display_name);
@@ -84,13 +88,6 @@ export const editProfile = (payload) => async (dispatch) => {
   formData.append("country", country);
   formData.append("bio", bio);
   formData.append("id", id);
-
-  // for multiple files
-  // if (images && images.length !== 0) {
-  //   for (var i = 0; i < images.length; i++) {
-  //     formData.append("images", images[i]);
-  //   } 
-  // }
 
   // for single file
   if (image) formData.append("image", image);

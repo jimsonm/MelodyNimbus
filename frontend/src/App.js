@@ -28,7 +28,6 @@ function App() {
           <ShowTracks />
         </Route>
         <Route exact path='/users/:id'>
-          <h1>users/:id</h1>
           <UserProfilePage />
         </Route>
         <Route exact path ='/users'>

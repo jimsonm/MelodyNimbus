@@ -1,0 +1,46 @@
+.LoginButton {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  width: 100%;
+  min-width: 150px;
+  color: #fff;
+  background-color: #333;
+  font-family: Interstate, Lucida Grande, Arial, sans-serif;
+  font-weight: 100;
+  justify-content: space-around;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.LoginButton2 {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  width: 100%;
+  min-width: 150px;
+  color: #fff;
+  background-color: #f50;
+  font-family: Interstate, Lucida Grande, Arial, sans-serif;
+  font-weight: 100;
+  justify-content: space-around;
+  border: 1px solid #f50;
+  border-radius: 3px;
+  justify-content: center;
+}
+
+.block {
+    display: block;
+}
+
+.wide {
+    width: 392px;
+}
+
+.LoginForm {
+    width: 400px;
+}
+
+.smallMargin {
+    margin: 5px 0px;
+}

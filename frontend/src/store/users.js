@@ -44,7 +44,7 @@ const usersReducer = (state = initialState, action) => {
         case GET_TRACKS:
             newState = { ...state };
             action.tracks.forEach((track) => {
-                newState[track.id] = track;
+                newState[`track${track.id}`] = track;
             })
             return newState;
         default:

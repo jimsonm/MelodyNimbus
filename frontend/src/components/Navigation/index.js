@@ -7,7 +7,7 @@ import SignupFormModal from '../SignupFormModal';
 import UploadTrack from '../UploadTrack/UploadTrack';
 import './Navigation.css';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
@@ -18,8 +18,15 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
-        <LoginFormModal />
-        <SignupFormModal />
+        <div className='buttonDiv'>
+          <div className='buttonModalDiv'>
+            <LoginFormModal />
+          </div>
+          <div className='buttonModalDiv'>
+            <SignupFormModal />
+          </div>
+
+        </div>
       </>
     );
   }
@@ -29,15 +36,19 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-        <NavLink exact to='/Tracks' onClick={redirect}>
+    <header className='navigationBar'>
+      <div className='NavBarNavLinkDiv'>
+        <NavLink exact to="/" className='NavBarNavLink'>Home</NavLink>
+      </div>
+      <div className='NavBarNavLinkDiv'>
+        <NavLink exact to='/Tracks' onClick={redirect} className='NavBarNavLink'>
           Upload
         </NavLink>
-      </li>
-    </ul>
+      </div>
+      <div className='navigationBarProfile'>
+        {isLoaded && sessionLinks}
+      </div>
+    </header>
   );
 }
 

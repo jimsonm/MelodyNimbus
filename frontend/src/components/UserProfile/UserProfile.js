@@ -7,16 +7,18 @@ import './UserProfile.css';
 import { Modal } from '../../context/Modal';
 import EditUserProfile from './EditUserProfile';
 import { useParams } from 'react-router-dom';
+import Tracks from '../Tracks/Tracks';
 
 function UserProfilePage() {
     const userId = useParams();
     const dispatch = useDispatch();
     // dispatch(sessionActions.getProfile(userId))
-    const sessionUser = useSelector((state) => state.session.user )
+    const sessionUser = useSelector((state) => state.session.user)
     const userProfile = useSelector((state) => state.user[userId.id]);
     // const [display_name, setDisplay_Name] = useState("");
-    const [image, setImage] = useState(null);
-    // const [image2, setImage2] = useState(null);
+    const [avatar_img, setAvatar_Img] = useState(userProfile?.avatar_img);
+    const [header_img, setHeader_Img] = useState(userProfile?.header_img);
+    console.log('21', sessionUser);
     // const [first_name, setFirst_Name] = useState("");
     // const [last_name, setLast_Name] = useState("");
     // const [city, setCity] = useState("");
@@ -28,9 +30,13 @@ function UserProfilePage() {
     // console.log('26userId', userId.id);
     // console.log('user', user);
 
-    useEffect( () => {
+    useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(sessionActions.editProfile({ avatar_img, header_img }))
+    }, [avatar_img, header_img])
 
     // const handleSubmit = (e) => {
     //     e.preventDefault();
@@ -43,37 +49,52 @@ function UserProfilePage() {
 
     const updateFile = (e) => {
         const file = e.target.files[0];
-        if (file) setImage(file);
+        if (file) setAvatar_Img(file);
+    };
+    const updateFile2 = (e) => {
+        const file = e.target.files[0];
+        if (file) setHeader_Img(file);
     };
 
     return (
         <div>
-            <div className='profileHeader'>
+            <div className='profileHeader' style={{ backgroundImage: `url(${userProfile?.header_img})`, objectFit: 'cover', backgroundRepeat: "no-repeat" }}>
                 <div>
                     <img
-                        style={{ width: "150px" }}
                         src={userProfile?.avatar_img}
                         alt="profile"
+                        className="profileHeaderImg"
                     />
                     {/* make label on hover */}
                     <label>
-                        <input type="file" onChange={updateFile} />
+                        {userProfile?.id === sessionUser?.id
+                            ? <input type="file" onChange={updateFile} className='imageInputs'/>
+                            : null
+                        }
                     </label>
                 </div>
-                <div>
+                <div className='profileNameContainer'>
+                <div className='profileDisplayName'>
                     {userProfile?.display_name}
+                </div>
+                <div className='profileName'>
+                    {userProfile?.first_name} {userProfile?.last_name}
+                </div>
                 </div>
                 <div>
                     <label>
-                        <input type="file" onChange={updateFile} />
+                        {userProfile?.id === sessionUser?.id
+                            ? <input type="file" onChange={updateFile2} className='imageInputs'/>
+                            : null
+                        }
                     </label>
                 </div>
             </div>
             <div>
                 Banner
-                {userProfile?.id === sessionUser?.id 
-                ? <button onClick={() => setShowModal(true)}>Edit</button>
-                : null
+                {userProfile?.id === sessionUser?.id
+                    ? <button onClick={() => setShowModal(true)}>Edit</button>
+                    : null
                 }
                 {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
@@ -82,7 +103,10 @@ function UserProfilePage() {
                 )}
             </div>
             <div>
-                Body
+                All Tracks
+                <div>
+                    <Tracks />
+                </div>
             </div>
         </div>
     );

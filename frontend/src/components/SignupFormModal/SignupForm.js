@@ -35,7 +35,7 @@ function SignupFormPage() {
     // };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='SignupForm'>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
@@ -46,6 +46,7 @@ function SignupFormPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className='block wide'  
                 />
             </label>
             <label>
@@ -55,6 +56,7 @@ function SignupFormPage() {
                     value={display_name}
                     onChange={(e) => setDisplay_Name(e.target.value)}
                     required
+                    className='block wide'
                 />
             </label>
             <label>
@@ -64,6 +66,7 @@ function SignupFormPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className='block wide'
                 />
             </label>
             <label>
@@ -73,12 +76,13 @@ function SignupFormPage() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
+                    className='block wide'
                 />
             </label>
             {/* <label>
                 <input type="file" onChange={updateFile} />
             </label> */}
-            <button type="submit">Sign Up</button>
+            <button type="submit" className='SignupButton'>Sign Up</button>
         </form>
 
     );

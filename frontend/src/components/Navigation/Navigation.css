@@ -1,0 +1,92 @@
+.navigationBar {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background-color: #333;
+  padding: 10px 0px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.profileButton {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  width: 100%;
+  min-width: 150px;
+  color: #fff;
+  background-color: #333;
+  font-family: Interstate, Lucida Grande, Arial, sans-serif;
+  font-weight: 100;
+  justify-content: space-around;
+  border: none;
+}
+
+.profile-dropdown {
+  background-color:white;
+  margin-top: 10px;
+  position: absolute;
+  min-width: 110px;
+  z-index: 1;
+  border: .5px solid gray;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+/* .navigationBarProfile {
+    display: flex;
+    align-self: flex-end;
+} */
+
+.logoutButton {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: black;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.profile-dropdown-li {
+  list-style-type: none;
+  padding: 5px;
+}
+
+.ProfileNavLink {
+  text-decoration: none;
+  color: black;
+  font-family: arial, sans-serif;
+  font-size: 12px;
+}
+
+.NavBarNavLink {
+  text-decoration: none;
+  color: white;
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  padding: 0px 15px;
+}
+
+.NavBarNavLinkDiv {
+  display: flex;
+  align-items: center;
+}
+
+.profileButtonImg {
+    border-radius: 50%;
+    background-color: white;
+    height: 26px;
+    width: 26px;
+    object-fit: cover;
+}
+
+.buttonDiv {
+    display: flex;
+}
+
+.buttonModalDiv {
+    padding: 5px;
+}
