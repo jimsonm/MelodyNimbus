@@ -29,7 +29,7 @@ function EditUserProfile({ setShowModal }) {
         // const payload = { display_name, image, first_name, last_name, city, country, bio, id };
         // dispatch(sessionActions.editProfile(payload))
         dispatch(sessionActions.getProfile(id))
-    }, [display_name, image, first_name, last_name, city, country, bio, id])
+    }, [dispatch, display_name, image, first_name, last_name, city, country, bio, id])
 
     const updateFile = (e) => {
         const file = e.target.files[0];

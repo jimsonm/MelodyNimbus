@@ -4,8 +4,8 @@
     padding: 30px;
     box-sizing: border-box;
     overflow: hidden;
-    height: 260px;
-    width: 1240px;
+    height: 300px;
+    /* width: 100%; */
     z-index: 0;
 }
 
@@ -44,4 +44,28 @@
 
 .imageInputs {
     position: absolute;
+    /* justify-self: end;
+    width: 100%; */
+}
+
+.editButtonDiv {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+}
+
+.rightDiv {
+    display: flex;
+    justify-self: end;
+    width: 100%;
+}
+
+.headerImgForm {
+    width: 100%;
+    justify-self: end;
+}
+
+.allTracksDiv {
+    font-size: 18px;
+    padding-left: 30px;
 }

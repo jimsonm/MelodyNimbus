@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import * as userActions from '../../store/users';
 import './UserProfile.css';
@@ -32,22 +31,45 @@ function UserProfilePage() {
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
-    }, [dispatch]);
+    }, [dispatch, userId.id]);
 
     useEffect(() => {
-        dispatch(sessionActions.editProfile({ avatar_img, header_img }))
-    }, [avatar_img, header_img])
+        dispatch(sessionActions.editProfile({ avatar_img }))
+    }, [dispatch, avatar_img, header_img])
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     return dispatch(sessionActions.editProfile({ display_name, first_name, last_name, city, country, bio, image }))
-    //         .catch(async (res) => {
-    //             const data = await res.json();
-    //             if (data && data.errors) setErrors(data.errors);
-    //         });
-    // };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await dispatch(sessionActions.editProfile({
+            // sessionUser
+            image : avatar_img,
+            id : userId.id,
+            display_name : sessionUser.display_name,
+            first_name: sessionUser.first_name,
+            last_name: sessionUser.last_name,
+            city: sessionUser.city,
+            country: sessionUser.country,
+            bio: sessionUser.bio,
+            // avatar_img
+        }))
+    };
+
+    const handleSubmit2 = async (e) => {
+        e.preventDefault();
+        await dispatch(sessionActions.editProfile({
+            // sessionUser
+            image : header_img,
+            id : userId.id,
+            display_name : sessionUser.display_name,
+            first_name: sessionUser.first_name,
+            last_name: sessionUser.last_name,
+            city: sessionUser.city,
+            country: sessionUser.country,
+            bio: sessionUser.bio,
+        }))
+    };
 
     const updateFile = (e) => {
+        console.log('46 made it here')
         const file = e.target.files[0];
         if (file) setAvatar_Img(file);
     };
@@ -58,40 +80,51 @@ function UserProfilePage() {
 
     return (
         <div>
-            <div className='profileHeader' style={{ backgroundImage: `url(${userProfile?.header_img})`, objectFit: 'cover', backgroundRepeat: "no-repeat" }}>
+            <div className='profileHeader' style={{ backgroundImage: `url(${userProfile?.header_img})`, backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}>
                 <div>
                     <img
                         src={userProfile?.avatar_img}
                         alt="profile"
                         className="profileHeaderImg"
                     />
-                    {/* make label on hover */}
                     <label>
                         {userProfile?.id === sessionUser?.id
-                            ? <input type="file" onChange={updateFile} className='imageInputs'/>
+                            ? <form onSubmit={handleSubmit}>
+                                <input type="file" onChange={updateFile} className='imageInputs' />
+                                <br></br>
+                                <br></br>
+                                <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
+                            </form>
                             : null
                         }
                     </label>
                 </div>
                 <div className='profileNameContainer'>
-                <div className='profileDisplayName'>
-                    {userProfile?.display_name}
+                    <div className='profileDisplayName'>
+                        {userProfile?.display_name}
+                    </div>
+                    {(userProfile?.first_name || userProfile?.last_name) && (userProfile.first_name !== "null" && userProfile.last_name !== "null")
+                        ? <div className='profileName'>
+                            {userProfile?.first_name} {userProfile?.last_name}
+                        </div>
+                        : null
+                    }
                 </div>
-                <div className='profileName'>
-                    {userProfile?.first_name} {userProfile?.last_name}
-                </div>
-                </div>
-                <div>
-                    <label>
+                <div className='rightDiv'>
+                    {/* <label> */}
                         {userProfile?.id === sessionUser?.id
-                            ? <input type="file" onChange={updateFile2} className='imageInputs'/>
+                            ? <form onSubmit={handleSubmit2} className='headerImgForm'>
+                                <input type="file" onChange={updateFile2} className='imageInputs' />
+                                <br></br>
+                                <br></br>
+                                <button type="submit" onSubmit={handleSubmit2}>Save Changes</button>
+                            </form>
                             : null
                         }
-                    </label>
+                    {/* </label> */}
                 </div>
             </div>
-            <div>
-                Banner
+            <div className='editButtonDiv'>
                 {userProfile?.id === sessionUser?.id
                     ? <button onClick={() => setShowModal(true)}>Edit</button>
                     : null
@@ -102,7 +135,7 @@ function UserProfilePage() {
                     </Modal>
                 )}
             </div>
-            <div>
+            <div className='allTracksDiv'>
                 All Tracks
                 <div>
                     <Tracks />

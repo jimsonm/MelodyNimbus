@@ -76,25 +76,28 @@ export const getProfile = (id) => async (dispatch) => {
 
 export const editProfile = (payload) => async (dispatch) => {
 
-  const { display_name, image, first_name, last_name, city, country, bio, id } = payload;
-  console.log('display_name', display_name)
+  const { display_name, image, first_name, last_name, city, country, bio, id, avatar_img, header_img } = payload;
+  // const { display_name, id, avatar_img } = payload;
+  // console.log('payload', payload)
   const formData = new FormData();
   formData.append("display_name", display_name);
-  console.log('64, formData', formData)
-  // formData.append("image", image);
   formData.append("first_name", first_name);
   formData.append("last_name", last_name);
   formData.append("city", city);
   formData.append("country", country);
   formData.append("bio", bio);
   formData.append("id", id);
+  console.log('this is id', id)
+  if (avatar_img) formData.append('avatar_img', avatar_img);
+  if (header_img) formData.append('header_img', header_img);
 
   // for single file
   if (image) formData.append("image", image);
-  console.log('82, formData', formData);
-  console.log('payload.id:', payload.id);
+  // console.log('82, formData', formData);
+  // console.log('payload.id:', payload.id);
   console.log('payload:', payload);
-  const res = await csrfFetch(`/api/users/${payload.id}`, {
+  console.log('99, formData', formData)
+  const res = await csrfFetch(`/api/users/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "multipart/form-data",
@@ -105,25 +108,10 @@ export const editProfile = (payload) => async (dispatch) => {
   const data = await res.json();
   console.log('data', data);
   dispatch(setUser(data));
-
-  // console.log('payload', payload);
-  // const response = await csrfFetch(`/api/users/${payload.id}`, {
-  //   method: 'PUT',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify(payload),
-  // })
-  // console.log('response', response);
-  // if(response.ok) {
-  // const updatedProfile = await response.json();
-  // console.log('updatedprofile', updatedProfile);
-  // dispatch(setUser(updatedProfile));
-  // }
 }
 
 export const signup = (user) => async dispatch => {
-  const { images, image, display_name, email, password } = user;
+  const { display_name, email, password } = user;
   const res = await csrfFetch(`/api/users/`, {
     method: "POST",
     body: JSON.stringify({display_name, email, password}),

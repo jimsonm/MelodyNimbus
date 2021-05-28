@@ -5,7 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import UserProfilePage from "./components/UserProfile/UserProfile";
 import UsersContainer from "./components/UsersContainer/UsersContainer";
-import ShowTracks from "./components/Tracks/Tracks";
+import Tracks from "./components/Tracks/Tracks";
 
 
 function App() {
@@ -20,14 +20,13 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       <Switch>
         <Route exact path='/'>
-          <h1>Home</h1>
+          <h1>Discover New Songs</h1>
           <UsersContainer />
         </Route>
         <Route exact path='/users/:id/tracks'>
-          <h1>users/:id/tracks</h1>
-          <ShowTracks />
+          <Tracks />
         </Route>
-        <Route exact path='/users/:id'>
+        <Route exact path='/users/:id'> 
           <UserProfilePage />
         </Route>
         <Route exact path ='/users'>

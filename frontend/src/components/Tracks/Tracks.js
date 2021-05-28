@@ -4,35 +4,51 @@ import { useEffect } from 'react';
 import * as userActions from '../../store/users';
 import './Tracks.css';
 
-function ShowTracks() {
+function Tracks() {
     const userId = useParams();
     const dispatch = useDispatch();
     const users = useSelector((state) => Object.values(state.user));
-    // const [trackName, setTrackName] = useState('');
-    console.log('15', users);
+    const selectedUser = users[userId.id - 1];
+    // console.log('current user', selectedUser);
+    const tracksBySelectedUser = selectedUser?.tracks;
+    // console.log('tracks', tracksBySelectedUser);
 
     useEffect(() => {
         dispatch(userActions.getTracksFromUser(userId.id))
-    }, [dispatch]);
+    }, [dispatch, userId.id]);
 
     return (
         <div>
-            {users.map((track) =>
-                <div key={track.id}>
+            {tracksBySelectedUser?.map((track) =>
+                <div key={track.id} className='trackDiv'>
                     <div>
+                        <img
+                            src={track?.cover_art}
+                            alt="coverArt"
+                            className='trackCoverArt'
+                        />
                     </div>
-                    <div>
-                        {track.track_name}
-                    </div>
-                    <div>
-                        {track.description}
+                    <div className='descriptionContainer'>
+                        <div>
+                            {track.track_name}
+                        </div>
+                        <div>
+                            By: {selectedUser.display_name}
+                        </div>
+                        <div className='trackDescription'>
+                            {track.description}
+                        </div>
+                        <div>
+                            <audio controls>
+                                <source src={track.track_src} type="audio/mp3" />
+                            </audio>
+                        </div>
                     </div>
                 </div>
-
             )}
         </div>
 
     )
 }
 
-export default ShowTracks;
+export default Tracks;

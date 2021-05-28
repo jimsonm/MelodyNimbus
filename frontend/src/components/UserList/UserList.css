@@ -1,0 +1,9 @@
+.userListDiv {
+    display: flex;
+    margin: 25px;
+    padding: 25px;
+}
+
+.userDivs {
+    margin: 20px;
+}

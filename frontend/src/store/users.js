@@ -8,10 +8,11 @@ const setUsers = (users) => ({
     users,
 });
 
-const getTracks = (tracks) => {
+const getTracks = (tracks, userId) => {
     return {
         type: GET_TRACKS,
         tracks,
+        userId,
     };
 };
 
@@ -24,10 +25,10 @@ export const getUsers = () => async (dispatch) => {
 export const getTracksFromUser = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/users/${id}/tracks`);
     const tracks = await response.json();
-    dispatch(getTracks(tracks))
+    dispatch(getTracks(tracks, id))
     console.log('28 tracks', tracks)
     return tracks;
-  }
+}
 
 const initialState = {};
 
@@ -43,9 +44,20 @@ const usersReducer = (state = initialState, action) => {
             return newState;
         case GET_TRACKS:
             newState = { ...state };
-            action.tracks.forEach((track) => {
-                newState[`track${track.id}`] = track;
-            })
+            for (let key in newState) {
+                newState[key].tracks = [];
+                if (key === action.userId) {
+                    newState[key].tracks = [...action.tracks];
+                }
+            }
+            // action.tracks.forEach((track) => {
+            //     newState[action.userId] = {
+            //         ...state[action.userId],
+                    // tracks: state[action.userId].tracks !== undefined
+                    //     ? [...state[action.userId].tracks, ...track]
+                    //     : [track]
+                // };
+            // })
             return newState;
         default:
             return state;

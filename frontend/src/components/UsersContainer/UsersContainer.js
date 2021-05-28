@@ -17,8 +17,11 @@ const UsersContainer = () => {
     }, [dispatch]);
 
     return (
-        <div>
-            {users.map((user) => <UserList key={user.id} user={user} />)}
+        <div className='container'>
+            {users.map((user) => {
+                return <UserList key={user.id} user={user} />
+            })}
+
         </div>
     )
 }

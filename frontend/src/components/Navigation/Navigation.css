@@ -22,6 +22,10 @@
   border: none;
 }
 
+.profileButton:active {
+  background-color: #111;
+}
+
 .profile-dropdown {
   background-color:white;
   margin-top: 10px;

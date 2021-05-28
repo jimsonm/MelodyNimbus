@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import UploadTrack from '../UploadTrack/UploadTrack';
+import UploadTrack from '../Upload/Upload';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -41,7 +41,7 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/" className='NavBarNavLink'>Home</NavLink>
       </div>
       <div className='NavBarNavLinkDiv'>
-        <NavLink exact to='/Tracks' onClick={redirect} className='NavBarNavLink'>
+        <NavLink exact to='/Upload' onClick={redirect} className='NavBarNavLink' user={sessionUser}>
           Upload
         </NavLink>
       </div>

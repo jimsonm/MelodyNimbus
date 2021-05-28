@@ -35,7 +35,6 @@ function LoginForm() {
       </ul>
       <div className='block smallMargin'>
         <label >
-          {/* Email */}
           <input
             type="text"
             value={credential}
@@ -46,7 +45,6 @@ function LoginForm() {
           />
         </label>
         <label>
-          {/* Password */}
           <input
             type="password"
             value={password}
