@@ -28,3 +28,7 @@
 .SignupForm {
     width: 400px;
 }
+
+.smallMargin {
+  margin: 5px 0px;
+}

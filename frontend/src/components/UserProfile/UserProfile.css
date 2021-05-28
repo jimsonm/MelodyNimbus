@@ -5,8 +5,9 @@
     box-sizing: border-box;
     overflow: hidden;
     height: 300px;
-    /* width: 100%; */
+    width: 100%;
     z-index: 0;
+    margin-bottom: 10px;
 }
 
 .profileHeaderImg {
@@ -29,11 +30,11 @@
 
 .profileName {
     background-color: black;
-    color: white;
+    color: #ccc;
     height: 40px;
     font-size: 16px;
     line-height: 37px;
-    padding: 4px 7px;
+    padding: 2px 7px 3px;
     margin: 5px;
     width: max-content;
 }

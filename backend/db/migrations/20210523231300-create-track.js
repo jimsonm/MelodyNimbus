@@ -14,7 +14,7 @@ module.exports = {
       },
       track_src: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1000)
       },
       description: {
         type: Sequelize.TEXT

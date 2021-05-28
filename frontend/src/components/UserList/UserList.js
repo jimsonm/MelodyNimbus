@@ -15,7 +15,7 @@ const UserList = ({ user }) => {
                         alt="profile"
                     />
                 </div>
-                <div>
+                <div className='profileLink'>
                     <NavLink to={`/users/${user.id}`}>
                         {user.display_name}
                     </NavLink>

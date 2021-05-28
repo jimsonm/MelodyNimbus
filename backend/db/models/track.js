@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Track = sequelize.define('Track', {
     track_name: DataTypes.STRING,
-    track_src: DataTypes.STRING,
+    track_src: DataTypes.STRING(1000),
     description: DataTypes.TEXT,
     user_id: DataTypes.INTEGER,
     cover_art: DataTypes.STRING,

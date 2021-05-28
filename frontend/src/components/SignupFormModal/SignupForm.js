@@ -81,7 +81,9 @@ function SignupFormPage() {
             {/* <label>
                 <input type="file" onChange={updateFile} />
             </label> */}
+            <div className='smallMargin'>
             <button type="submit" className='SignupButton'>Sign Up</button>
+            </div>
         </form>
 
     );

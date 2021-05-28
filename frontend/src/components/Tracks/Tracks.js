@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink  } from 'react-router-dom';
 import { useEffect } from 'react';
 import * as userActions from '../../store/users';
 import './Tracks.css';
@@ -11,7 +11,7 @@ function Tracks() {
     const selectedUser = users[userId.id - 1];
     // console.log('current user', selectedUser);
     const tracksBySelectedUser = selectedUser?.tracks;
-    // console.log('tracks', tracksBySelectedUser);
+    console.log('tracks', tracksBySelectedUser);
 
     useEffect(() => {
         dispatch(userActions.getTracksFromUser(userId.id))
@@ -30,22 +30,35 @@ function Tracks() {
                     </div>
                     <div className='descriptionContainer'>
                         <div>
-                            {track.track_name}
+                            {track?.track_name}
                         </div>
                         <div>
                             By: {selectedUser.display_name}
                         </div>
                         <div className='trackDescription'>
-                            {track.description}
+                            {track?.description}
                         </div>
                         <div>
                             <audio controls>
-                                <source src={track.track_src} type="audio/mp3" />
+                                <source src={track?.track_src} type="audio/mp3" />
                             </audio>
                         </div>
                     </div>
                 </div>
             )}
+            {tracksBySelectedUser?.length === 0 ?
+                <div className='noTrackContainer'>
+                    <div className='quietDiv'>
+                        Seems a little quiet over here
+                    </div>
+                    <div className='uploadNavLink'>
+                        <NavLink exact to='/Upload'>
+                            Upload a track to share it with your followers.
+                        </NavLink>
+                    </div>
+                </div>
+                : null
+            }
         </div>
 
     )

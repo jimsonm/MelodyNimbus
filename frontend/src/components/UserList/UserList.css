@@ -7,3 +7,14 @@
 .userDivs {
     margin: 20px;
 }
+
+.profileLink {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
