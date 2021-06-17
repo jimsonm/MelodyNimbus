@@ -87,7 +87,7 @@ export const editProfile = (payload) => async (dispatch) => {
   formData.append("country", country);
   formData.append("bio", bio);
   formData.append("id", id);
-  console.log('this is id', id)
+  // console.log('this is id', id)
   if (avatar_img) formData.append('avatar_img', avatar_img);
   if (header_img) formData.append('header_img', header_img);
 
@@ -95,8 +95,8 @@ export const editProfile = (payload) => async (dispatch) => {
   if (image) formData.append("image", image);
   // console.log('82, formData', formData);
   // console.log('payload.id:', payload.id);
-  console.log('payload:', payload);
-  console.log('99, formData', formData)
+  // console.log('payload:', payload);
+  // console.log('99, formData', formData);
   const res = await csrfFetch(`/api/users/${id}`, {
     method: "PUT",
     headers: {

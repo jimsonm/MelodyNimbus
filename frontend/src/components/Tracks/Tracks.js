@@ -11,7 +11,7 @@ function Tracks() {
     const selectedUser = users[userId.id - 1];
     // console.log('current user', selectedUser);
     const tracksBySelectedUser = selectedUser?.tracks;
-    console.log('tracks', tracksBySelectedUser);
+    // console.log('tracks', tracksBySelectedUser);
 
     useEffect(() => {
         dispatch(userActions.getTracksFromUser(userId.id))

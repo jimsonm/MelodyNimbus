@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import UserProfilePage from "./components/UserProfile/UserProfile";
 import UsersContainer from "./components/UsersContainer/UsersContainer";
 import Tracks from "./components/Tracks/Tracks";
+import Upload from './components/Upload/Upload';
 
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
         <Route exact path ='/users'>
           <h1>users</h1>
           <UsersContainer />
+        </Route>
+        <Route exact path ='/upload'>
+          <Upload />
         </Route>
       </Switch>
     </>

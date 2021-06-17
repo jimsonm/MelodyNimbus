@@ -10,7 +10,6 @@ const UsersContainer = () => {
     const users = useSelector((state) => {
         return Object.values(state.user);
     })
-    console.log(users);
 
     useEffect(() => {
         dispatch(getUsers());

@@ -1,7 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const SET_USERS = 'users/SET_USERS';
-const GET_TRACKS = 'session/getTracks';
+const GET_TRACKS = 'users/GET_TRACKS';
 
 const setUsers = (users) => ({
     type: SET_USERS,
@@ -26,7 +26,7 @@ export const getTracksFromUser = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/users/${id}/tracks`);
     const tracks = await response.json();
     dispatch(getTracks(tracks, id))
-    console.log('28 tracks', tracks)
+    // console.log('28 tracks', tracks)
     return tracks;
 }
 
@@ -40,7 +40,7 @@ const usersReducer = (state = initialState, action) => {
             action.users.forEach((user) => {
                 newState[user.id] = user;
             });
-            console.log('23', newState)
+            // console.log('23', newState)
             return newState;
         case GET_TRACKS:
             newState = { ...state };

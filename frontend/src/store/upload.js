@@ -18,6 +18,8 @@ const initialState = {};
 
 const uploadReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_UPLOAD:
+            
         default:
             return state;
     }

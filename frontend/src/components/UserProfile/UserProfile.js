@@ -17,7 +17,7 @@ function UserProfilePage() {
     // const [display_name, setDisplay_Name] = useState("");
     const [avatar_img, setAvatar_Img] = useState(userProfile?.avatar_img);
     const [header_img, setHeader_Img] = useState(userProfile?.header_img);
-    console.log('21', sessionUser);
+    // console.log('21', sessionUser);
     // const [first_name, setFirst_Name] = useState("");
     // const [last_name, setLast_Name] = useState("");
     // const [city, setCity] = useState("");
@@ -33,9 +33,9 @@ function UserProfilePage() {
         dispatch(userActions.getUsers(userId.id))
     }, [dispatch, userId.id]);
 
-    useEffect(() => {
-        dispatch(sessionActions.editProfile({ avatar_img }))
-    }, [dispatch, avatar_img, header_img])
+    // useEffect(() => {
+    //     dispatch(sessionActions.editProfile({ avatar_img }))
+    // }, [dispatch, avatar_img, header_img])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

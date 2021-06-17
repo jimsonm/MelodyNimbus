@@ -71,6 +71,7 @@ router.get(
 router.put(
     '/:id',
     restoreUser,
+    requireAuth,
     singleMulterUpload("image"),
     asyncHandler(async (req, res) => {
         await User.getCurrentUserById(req.params.id);
