@@ -2,12 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import * as sessionActions from "../../store/session";
+import * as userActions from '../../store/users';
 import './EditUserProfile.css';
 // import { Modal } from '../../context/Modal';
 
 function EditUserProfile({ setShowModal }) {
+    const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    // const userProfile = useSelector((state) => state.user[userId.id]);
     const [display_name, setDisplay_Name] = useState(sessionUser.display_name);
     const [image, setImage] = useState(sessionUser.avatar_img);
     const [first_name, setFirst_Name] = useState(sessionUser.first_name === "null" ? "" : sessionUser.first_name);
@@ -22,6 +25,7 @@ function EditUserProfile({ setShowModal }) {
         e.preventDefault();
         const payload = { display_name, image, first_name, last_name, city, country, bio, id };
         await dispatch(sessionActions.editProfile(payload))
+        dispatch(userActions.getUsers(userId.id))
         setShowModal(false);
     }
 
@@ -29,7 +33,7 @@ function EditUserProfile({ setShowModal }) {
         // const payload = { display_name, image, first_name, last_name, city, country, bio, id };
         // dispatch(sessionActions.editProfile(payload))
         dispatch(sessionActions.getProfile(id))
-    }, [dispatch, display_name, image, first_name, last_name, city, country, bio, id])
+    }, [])
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -49,11 +53,12 @@ function EditUserProfile({ setShowModal }) {
                     <div className='editProfileImage'>
                         <label>
                             <img
-                                style={{ width: "150px", borderRadius: '50%' }}
+                                style={{ 'border-radius': '50%', 'object-fit': 'cover', height: '240px', width: '240px' }}
                                 src={sessionUser.avatar_img}
                                 alt="profile"
+                                // className='editProfileImage'
                             />
-                            <input type="file" onChange={updateFile} />
+                            <input type="file" onChange={updateFile} value="" title=" "/>
                         </label>
                     </div>
                     <div className='editProfileDetails'>
