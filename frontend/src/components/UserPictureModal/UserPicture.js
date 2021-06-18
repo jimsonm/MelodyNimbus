@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import './UserPicture.css';
 
-function UserPicture() {
+function UserPicture({imgSrc}) {
     const userId = useParams();
     const userProfile = useSelector((state) => state.user[userId.id]);
     return (
@@ -16,7 +16,7 @@ function UserPicture() {
                 }
             </div>
             <img
-                src={userProfile?.avatar_img}
+                src={imgSrc || userProfile?.avatar_img}
                 alt="profile"
                 className='expandedImg'
             />

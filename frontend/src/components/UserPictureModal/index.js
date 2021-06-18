@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import UserPicture from './UserPicture';
 import './UserPicture.css'
 
-function UserPictureModal() {
+function UserPictureModal({imgSrc}) {
     return (
-        <UserPicture />
+        <UserPicture imgSrc={imgSrc}/>
     );
 }
 

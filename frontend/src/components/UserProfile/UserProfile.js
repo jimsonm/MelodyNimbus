@@ -24,6 +24,13 @@ function UserProfilePage() {
     // console.log('25userId', userId);
     // console.log('26userId', userId.id);
     // console.log('user', user);
+    const [imgSrc, setImgSrc] = useState();
+
+    // console.log(avatar_img);
+    // console.log(imgSrc);
+    // useEffect(() => {
+    //     setShowPictureModal(true);
+    // }, [avatar_img])
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
@@ -66,6 +73,10 @@ function UserProfilePage() {
         console.log('64 made it here')
         const file = e.target.files[0];
         if (file) setAvatar_Img(file);
+        console.log('69 made it here', file);
+        setImgSrc(window.URL.createObjectURL(file))
+        console.log(imgSrc, 'sdsfzzzzzzzsd')
+        setShowPictureModal(true)
     };
     const updateFile2 = (e) => {
         const file = e.target.files[0];
@@ -73,14 +84,15 @@ function UserProfilePage() {
     };
 
     const expandImage = () => {
+        setImgSrc()
         setShowPictureModal(true)
     }
-    
+
     const toggle = () => {
         setToggleDisplay(hidden => !hidden)
         setOpacity(invis => !invis)
         const button = document.querySelector(".updateImage");
-        if(opacity===false) {
+        if (opacity === false) {
             button.classList.add("opacity1")
         } else {
             button.classList.remove("opacity1")
@@ -92,27 +104,31 @@ function UserProfilePage() {
             <div className='profileHeader' style={{ backgroundImage: `url(${userProfile?.header_img})`, backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}>
                 <div>
                     <div className='profileHeaderImgDiv'>
-                    <img
-                        src={userProfile?.avatar_img}
-                        alt="profile"
-                        className="profileHeaderImg"
-                        onClick={expandImage}
-                    />
-                    <button class='updateImage' onClick={toggle}>Update Image</button>
-                    {toggleDisplay && (
-                    <div className='replaceDiv'>asddsaasdasdsadf</div>
-                    )}
-                    {toggleDisplay && (
-                    <div className='deleteDiv'>zzzzzzzz</div>
-                    )}
+                        <img
+                            src={userProfile?.avatar_img}
+                            alt="profile"
+                            className="profileHeaderImg"
+                            onClick={expandImage}
+                        />
+                        <button class='updateImage' onClick={toggle}>Update Image</button>
+                        {toggleDisplay && (
+                            <div className='replaceDiv'>
+                                <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
+                                <label for='file' className='imageUpload'>Replace Image</label>
+                                <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
+                            </div>
+                        )}
+                        {toggleDisplay && (
+                            <div className='deleteDiv'>zzzzzzzz</div>
+                        )}
                     </div>
                     {showPictureModal === true ?
                         <Modal onClose={() => setShowPictureModal(false)}>
-                            <UserPictureModal />
+                            <UserPictureModal imgSrc={imgSrc} />
                         </Modal> : null}
                     <label>
-                        {userProfile?.id === sessionUser?.id
-                            ? <form onSubmit={handleSubmit}>
+                        {userProfile?.id === sessionUser?.id ?
+                            <form onSubmit={handleSubmit}>
                                 <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
                                 <label for='file' className='imageUpload'>Update Image</label>
                                 <br></br>
