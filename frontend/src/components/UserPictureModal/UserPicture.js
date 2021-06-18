@@ -20,6 +20,12 @@ function UserPicture({imgSrc}) {
                 alt="profile"
                 className='expandedImg'
             />
+            {imgSrc && (
+                <div className='buttonDiv'>
+                <button className='cancelButton'>Cancel</button>
+                <button className='saveButton'>Save</button>
+                </div>
+            )}
         </div>
     )
 }
