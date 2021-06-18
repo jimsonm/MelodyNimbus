@@ -1,72 +1,131 @@
 .profileHeader {
-    display: flex;
-    position: relative;
-    padding: 30px;
-    box-sizing: border-box;
-    overflow: hidden;
-    height: 300px;
-    width: 100%;
-    z-index: 0;
-    margin-bottom: 10px;
+  display: flex;
+  position: relative;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 300px;
+  width: 100%;
+  z-index: 0;
+  margin-bottom: 10px;
 }
 
 .profileHeaderImg {
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
-    object-fit: cover;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.profileHeaderImgDiv {
+  position: relative;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
 }
 
 .profileDisplayName {
-    background-color: black;
-    color: white;
-    height: 40px;
-    font-size: 24px;
-    line-height: 37px;
-    padding: 4px 7px;
-    margin: 5px;
-    width: max-content;
+  background-color: black;
+  color: white;
+  height: 40px;
+  font-size: 24px;
+  line-height: 37px;
+  padding: 4px 7px;
+  margin: 5px;
+  width: max-content;
 }
 
 .profileName {
-    background-color: black;
-    color: #ccc;
-    height: 40px;
-    font-size: 16px;
-    line-height: 37px;
-    padding: 2px 7px 3px;
-    margin: 5px;
-    width: max-content;
+  background-color: black;
+  color: #ccc;
+  height: 40px;
+  font-size: 16px;
+  line-height: 37px;
+  padding: 2px 7px 3px;
+  margin: 5px;
+  width: max-content;
 }
 
 .profileNameContainer {
-    display: block;
+  display: block;
 }
 
 .imageInputs {
-    position: absolute;
-    /* justify-self: end;
+  position: absolute;
+  /* justify-self: end;
     width: 100%; */
 }
 
 .editButtonDiv {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 30px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
 }
 
 .rightDiv {
-    display: flex;
-    justify-self: end;
-    width: 100%;
+  display: flex;
+  justify-self: flex-end;
+  width: 100%;
 }
 
 .headerImgForm {
-    width: 100%;
-    justify-self: end;
+  width: 100%;
+  justify-self: flex-end;
 }
 
 .allTracksDiv {
-    font-size: 18px;
-    padding-left: 30px;
+  font-size: 18px;
+  padding-left: 30px;
+}
+
+input[type="file"] {
+  display: none;
+}
+.imageUpload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.updateImage {
+  /* display: none; */
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  height: 26px;
+  top: 150px;
+  left: 35px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.profileHeaderImgDiv:hover .updateImage {
+  opacity: 1;
+}
+
+.replaceDiv {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  height: 26px;
+  top: 176px;
+  left: 35px;
+  /* opacity: 0; */
+  color: white;
+  background-color: red;
+}
+
+.deleteDiv {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  height: 26px;
+  top: 202px;
+  left: 35px;
+  /* opacity: 0; */
+  color: white;
+  background-color: blue;
 }

@@ -74,16 +74,39 @@ function UserProfilePage() {
         setShowPictureModal(true)
     }
 
+    const updateImageDropdown = () => {
+        console.log('test');
+        const replaceDiv=document.querySelector(".replaceDiv");
+        const deleteDiv=document.querySelector(".deleteDiv");
+
+        if(replaceDiv.style.display==='none') {
+            replaceDiv.style.display = 'block';
+        } else {
+            replaceDiv.style.display = 'none';
+        }
+
+        if(deleteDiv.style.display==='none') {
+            deleteDiv.style.display = 'block';
+        } else {
+            deleteDiv.style.display = 'none';
+        }
+    }
+
     return (
         <div>
             <div className='profileHeader' style={{ backgroundImage: `url(${userProfile?.header_img})`, backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}>
                 <div>
+                    <div className='profileHeaderImgDiv'>
                     <img
                         src={userProfile?.avatar_img}
                         alt="profile"
                         className="profileHeaderImg"
                         onClick={expandImage}
                     />
+                    <button class='updateImage' onClick={updateImageDropdown}>Update Image</button>
+                    <div className='replaceDiv'>asddsaasdasdsadf</div>
+                    <div className='deleteDiv'>zzzzzzzz</div>
+                    </div>
                     {showPictureModal === true ?
                         <Modal onClose={() => setShowPictureModal(false)}>
                             <UserPictureModal />
@@ -91,7 +114,8 @@ function UserProfilePage() {
                     <label>
                         {userProfile?.id === sessionUser?.id
                             ? <form onSubmit={handleSubmit}>
-                                <input type="file" onChange={updateFile} className='imageInputs' />
+                                <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
+                                <label for='file' className='imageUpload'>Update Image</label>
                                 <br></br>
                                 <br></br>
                                 <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
