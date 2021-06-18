@@ -104,28 +104,28 @@ input[type="file"] {
   opacity: 1;
 }
 
+.opacity1 {
+    opacity: 1;
+}
+
 .replaceDiv {
-  display: none;
   position: absolute;
   z-index: 1;
   width: 125px;
   height: 26px;
   top: 176px;
   left: 35px;
-  /* opacity: 0; */
   color: white;
   background-color: red;
 }
 
 .deleteDiv {
-  display: none;
   position: absolute;
   z-index: 1;
   width: 125px;
   height: 26px;
   top: 202px;
   left: 35px;
-  /* opacity: 0; */
   color: white;
   background-color: blue;
 }

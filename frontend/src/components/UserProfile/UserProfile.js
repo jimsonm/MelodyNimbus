@@ -19,6 +19,8 @@ function UserProfilePage() {
     // const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showPictureModal, setShowPictureModal] = useState(false);
+    const [toggleDisplay, setToggleDisplay] = useState(false);
+    const [opacity, setOpacity] = useState(false);
     // console.log('25userId', userId);
     // console.log('26userId', userId.id);
     // console.log('user', user);
@@ -73,22 +75,15 @@ function UserProfilePage() {
     const expandImage = () => {
         setShowPictureModal(true)
     }
-
-    const updateImageDropdown = () => {
-        console.log('test');
-        const replaceDiv=document.querySelector(".replaceDiv");
-        const deleteDiv=document.querySelector(".deleteDiv");
-
-        if(replaceDiv.style.display==='none') {
-            replaceDiv.style.display = 'block';
+    
+    const toggle = () => {
+        setToggleDisplay(hidden => !hidden)
+        setOpacity(invis => !invis)
+        const button = document.querySelector(".updateImage");
+        if(opacity===false) {
+            button.classList.add("opacity1")
         } else {
-            replaceDiv.style.display = 'none';
-        }
-
-        if(deleteDiv.style.display==='none') {
-            deleteDiv.style.display = 'block';
-        } else {
-            deleteDiv.style.display = 'none';
+            button.classList.remove("opacity1")
         }
     }
 
@@ -103,9 +98,13 @@ function UserProfilePage() {
                         className="profileHeaderImg"
                         onClick={expandImage}
                     />
-                    <button class='updateImage' onClick={updateImageDropdown}>Update Image</button>
+                    <button class='updateImage' onClick={toggle}>Update Image</button>
+                    {toggleDisplay && (
                     <div className='replaceDiv'>asddsaasdasdsadf</div>
+                    )}
+                    {toggleDisplay && (
                     <div className='deleteDiv'>zzzzzzzz</div>
+                    )}
                     </div>
                     {showPictureModal === true ?
                         <Modal onClose={() => setShowPictureModal(false)}>
