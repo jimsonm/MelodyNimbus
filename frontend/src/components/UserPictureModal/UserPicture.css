@@ -58,3 +58,7 @@
     -webkit-user-select: none;
     box-sizing: border-box;
 }
+
+.addBorderRadius {
+    border-radius: 50%;
+}

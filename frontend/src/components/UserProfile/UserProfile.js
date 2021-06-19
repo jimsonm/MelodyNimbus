@@ -21,16 +21,7 @@ function UserProfilePage() {
     const [showPictureModal, setShowPictureModal] = useState(false);
     const [toggleDisplay, setToggleDisplay] = useState(false);
     const [opacity, setOpacity] = useState(false);
-    // console.log('25userId', userId);
-    // console.log('26userId', userId.id);
-    // console.log('user', user);
     const [imgSrc, setImgSrc] = useState();
-
-    // console.log(avatar_img);
-    // console.log(imgSrc);
-    // useEffect(() => {
-    //     setShowPictureModal(true);
-    // }, [avatar_img])
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
@@ -110,11 +101,11 @@ function UserProfilePage() {
                             className="profileHeaderImg"
                             onClick={expandImage}
                         />
-                        <button class='updateImage' onClick={toggle}>Update Image</button>
+                        <button className='updateImage' onClick={toggle}>Update Image</button>
                         {toggleDisplay && (
                             <div className='replaceDiv'>
                                 <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
-                                <label for='file' className='imageUpload'>Replace Image</label>
+                                <label htmlFor='file' className='imageUpload'>Replace Image</label>
                                 <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
                             </div>
                         )}
@@ -124,13 +115,13 @@ function UserProfilePage() {
                     </div>
                     {showPictureModal === true ?
                         <Modal onClose={() => setShowPictureModal(false)}>
-                            <UserPictureModal imgSrc={imgSrc} />
+                            <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal}/>
                         </Modal> : null}
                     <label>
                         {userProfile?.id === sessionUser?.id ?
                             <form onSubmit={handleSubmit}>
                                 <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
-                                <label for='file' className='imageUpload'>Update Image</label>
+                                <label htmlFor='file' className='imageUpload'>Update Image</label>
                                 <br></br>
                                 <br></br>
                                 <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
