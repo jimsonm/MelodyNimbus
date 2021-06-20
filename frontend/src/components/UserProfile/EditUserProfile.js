@@ -30,8 +30,6 @@ function EditUserProfile({ setShowModal }) {
     }
 
     useEffect(() => {
-        // const payload = { display_name, image, first_name, last_name, city, country, bio, id };
-        // dispatch(sessionActions.editProfile(payload))
         dispatch(sessionActions.getProfile(id))
     }, [])
 

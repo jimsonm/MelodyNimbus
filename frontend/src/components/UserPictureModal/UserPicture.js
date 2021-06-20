@@ -5,7 +5,7 @@ import './UserPicture.css';
 import * as sessionActions from "../../store/session";
 import * as userActions from '../../store/users';
 
-function UserPicture({ imgSrc, setShowPictureModal, avatar_img}) {
+function UserPicture({ imgSrc, setShowPictureModal, avatar_img, toggle}) {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user)
@@ -44,6 +44,12 @@ function UserPicture({ imgSrc, setShowPictureModal, avatar_img}) {
         // }))
         dispatch(userActions.getUsers(userId.id))
         setShowPictureModal(false);
+        toggle();
+        // setToggleDisplay(false);
+        // const button = document.querySelector(".updateImage");
+        // if (opacity === false) {
+        //     button.classList.add("opacity1")
+        // }
     };
 
     return (

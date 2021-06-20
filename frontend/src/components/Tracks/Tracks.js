@@ -14,8 +14,9 @@ function Tracks() {
     // console.log('tracks', tracksBySelectedUser);
 
     useEffect(() => {
+        // dispatch(userActions.getUsers())
         dispatch(userActions.getTracksFromUser(userId.id))
-    }, [dispatch, userId.id]);
+    }, []);
 
     return (
         <div>

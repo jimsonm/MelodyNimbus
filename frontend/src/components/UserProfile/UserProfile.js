@@ -115,9 +115,9 @@ function UserProfilePage() {
                     </div>
                     {showPictureModal === true ?
                         <Modal onClose={() => setShowPictureModal(false)}>
-                            <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal} avatar_img={avatar_img}/>
+                            <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal} avatar_img={avatar_img} toggle={toggle}/>
                         </Modal> : null}
-                    <label>
+                    {/* <label>
                         {userProfile?.id === sessionUser?.id ?
                             <form onSubmit={handleSubmit}>
                                 <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
@@ -128,7 +128,7 @@ function UserProfilePage() {
                             </form>
                             : null
                         }
-                    </label>
+                    </label> */}
                 </div>
                 <div className='profileNameContainer'>
                     <div className='profileDisplayName'>
