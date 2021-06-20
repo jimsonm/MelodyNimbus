@@ -12,13 +12,16 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
+    const profileButton = document.querySelector(".profileButton");
     if (showMenu) return;
     setShowMenu(true);
+    profileButton.classList.add("active");
   };
 
   useEffect(() => {
-    if (!showMenu) return;
-
+    const profileButton = document.querySelector(".profileButton");
+    if (!showMenu) return profileButton.classList.remove("active");
+    
     const closeMenu = () => {
       setShowMenu(false);
     };
