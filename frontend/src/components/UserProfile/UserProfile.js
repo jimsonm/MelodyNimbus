@@ -92,12 +92,12 @@ function UserProfilePage() {
     return (
         <div>
             <div className='banner'>
-                        <img
-                            src={userProfile?.header_img}
-                            alt='banner'
-                            className='bannerImg'
-                        />
-                    </div>
+                <img
+                    src={userProfile?.header_img}
+                    alt='banner'
+                    className='bannerImg'
+                />
+            </div>
             <div className='profileHeader'>
                 <div>
                     <div className='profileHeaderImgDiv'>
@@ -125,18 +125,20 @@ function UserProfilePage() {
                         </Modal> : null}
                 </div>
                 <div className='profileNameContainer'>
-                    <div className='profileDisplayName'>
+                    <div>
+                        <div className='profileDisplayName'>
                         {userProfile?.display_name}
-                    </div>
-                    {(userProfile?.first_name || userProfile?.last_name) && (userProfile.first_name !== "null" && userProfile.last_name !== "null")
+                        </div>
+                        {(userProfile?.first_name || userProfile?.last_name) && (userProfile.first_name !== "null" && userProfile.last_name !== "null")
                         ? <div className='profileName'>
                             {userProfile?.first_name} {userProfile?.last_name}
                         </div>
                         : null
                     }
-                </div>
-                <div className='rightDiv'>
-                    {userProfile?.id === sessionUser?.id
+                    </div>
+                    {/* </div>
+                <div className='rightDiv'> */}
+                    {/* {userProfile?.id === sessionUser?.id
                         ? <form onSubmit={handleSubmit2} className='headerImgForm'>
                             <input type="file" onChange={updateFile2} className='imageInputs' />
                             <br></br>
@@ -144,7 +146,10 @@ function UserProfilePage() {
                             <button type="submit" onSubmit={handleSubmit2}>Save Changes</button>
                         </form>
                         : null
-                    }
+                    } */}
+                    <div>
+                        <button className='updateImage3'>Update Image</button>
+                    </div>
                 </div>
             </div>
             <div className='editButtonDiv'>

@@ -38,22 +38,24 @@
 .profileName {
   background-color: black;
   color: #ccc;
-  height: 40px;
+  height: 24px;
   font-size: 16px;
-  line-height: 37px;
+  line-height: 25px;
   padding: 2px 7px 3px;
   margin: 5px;
   width: max-content;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .profileNameContainer {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .imageInputs {
   position: absolute;
-  /* justify-self: end;
-    width: 100%; */
 }
 
 .editButtonDiv {
@@ -64,7 +66,7 @@
 
 .rightDiv {
   display: flex;
-  justify-self: flex-end;
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -82,9 +84,7 @@ input[type="file"] {
   display: none;
 }
 .imageUpload {
-  /* border: 1px solid #ccc; */
   display: inline-block;
-  /* padding: 6px 12px; */
   cursor: pointer;
   width: 100%;
   height: 100%;
@@ -107,8 +107,19 @@ input[type="file"] {
   opacity: 1;
 }
 
-.opacity1 {
+.updateImage3 {
+  width: 125px;
+  height: 26px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.profileNameContainer:hover .updateImage3 {
     opacity: 1;
+}
+
+.opacity1 {
+  opacity: 1;
 }
 
 .replaceDiv {
@@ -134,15 +145,15 @@ input[type="file"] {
 }
 
 .banner {
-    position: absolute;
-    height: 300px;
-    left: 8px;
-    right: 8px;
-    z-index: -1;
+  position: absolute;
+  height: 300px;
+  left: 8px;
+  right: 8px;
+  z-index: -1;
 }
 
 .bannerImg {
-    box-sizing: border-box;
-    height: 300px;
-    width: 100%;
+  box-sizing: border-box;
+  height: 300px;
+  width: 100%;
 }
