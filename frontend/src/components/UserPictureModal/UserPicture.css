@@ -33,7 +33,7 @@
     font-weight: 100;
     text-align: center;
     vertical-align: baseline;
-    -webkit-user-select: none;
+    /* -webkit-user-select: none; */
     box-sizing: border-box;
     border-style: none;
 }
@@ -55,7 +55,7 @@
     font-weight: 100;
     text-align: center;
     vertical-align: baseline;
-    -webkit-user-select: none;
+    /* -webkit-user-select: none; */
     box-sizing: border-box;
 }
 

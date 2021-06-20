@@ -3,7 +3,7 @@ import { csrfFetch } from './csrf';
 const SET_USER = 'session/setUser';
 const GET_USER = 'session/getUser';
 const REMOVE_USER = 'session/removeUser';
-// const GET_TRACKS = 'session/getTracks';
+// const UPDATE_AVATAR = 'session/updateAvatar';
 
 const setUser = (user) => {
   return {
@@ -25,12 +25,27 @@ const removeUser = () => {
   };
 };
 
-// const getTracks = (track) => {
+// const updateAvatar = (avatar_img, id) => {
 //   return {
-//     type: GET_TRACKS,
-//     payload: track,
-//   };
-// };
+//     type: UPDATE_AVATAR,
+//     payload: {avatar_img, id},
+//   }
+// }
+
+// export const changeAvatarImg = (payload) => async dispatch => {
+//   const { avatar_img, id } = payload;
+//   const formData = new FormData();
+//   formData.append('image', avatar_img);
+//   const res = await csrfFetch(`/api/users/${id}`, {
+//     method: 'PATCH',
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//     body: formData,
+//   });
+//   const data = await res.json();
+//   dispatch(setUser(data))
+// }
 
 export const restoreUser = () => async dispatch => {
   const response = await csrfFetch('/api/session');
@@ -53,13 +68,6 @@ export const login = (user) => async (dispatch) => {
   return response;
 };
 
-// export const getTracksFromUser = (id) => async (dispatch) => {
-//   const response = await csrfFetch(`api/${id}/tracks`);
-//   const resWithTracks = await response.json();
-//   dispatch(getTracks(resWithTracks))
-//   return resWithTracks;
-// }
-
 export const getProfile = (id) => async (dispatch) => {
   console.log('41 id', id)
   const response = await csrfFetch(`/api/users/${id}`)
@@ -69,10 +77,6 @@ export const getProfile = (id) => async (dispatch) => {
   dispatch(getUser(updatedProfile))
   return updatedProfile;
 }
-
-  // export const editAvatar = (payload) => async (dispatch) => {
-  //   const {}
-  // }
 
 export const editProfile = (payload) => async (dispatch) => {
 
@@ -92,11 +96,8 @@ export const editProfile = (payload) => async (dispatch) => {
   if (header_img) formData.append('header_img', header_img);
 
   // for single file
+  console.log('zzzz', image);
   if (image) formData.append("image", image);
-  // console.log('82, formData', formData);
-  // console.log('payload.id:', payload.id);
-  // console.log('payload:', payload);
-  // console.log('99, formData', formData);
   const res = await csrfFetch(`/api/users/${id}`, {
     method: "PUT",
     headers: {
@@ -120,7 +121,6 @@ export const signup = (user) => async dispatch => {
   const data = await res.json();
   console.log('data', data);
   dispatch(setUser(data.user));
-  // return response;
 };
 
 export const logout = () => async (dispatch) => {

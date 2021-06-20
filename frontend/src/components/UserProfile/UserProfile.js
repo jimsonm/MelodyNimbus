@@ -115,7 +115,7 @@ function UserProfilePage() {
                     </div>
                     {showPictureModal === true ?
                         <Modal onClose={() => setShowPictureModal(false)}>
-                            <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal}/>
+                            <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal} avatar_img={avatar_img}/>
                         </Modal> : null}
                     <label>
                         {userProfile?.id === sessionUser?.id ?

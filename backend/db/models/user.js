@@ -122,5 +122,14 @@ module.exports = (sequelize, DataTypes) => {
     }});
     return await User.scope('currentUser').findByPk(id);
   }
+
+  // User.editAvatar = async function ({ avatar_img}) {
+  //   const user = await User.update({
+  //     avatar_img,
+  //   }, { where: {
+  //     id: id
+  //   }});
+  //   return await User.scope('currentUser').findByPk(id);
+  // }
   return User;
 };

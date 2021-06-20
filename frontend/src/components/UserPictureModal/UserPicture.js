@@ -5,7 +5,7 @@ import './UserPicture.css';
 import * as sessionActions from "../../store/session";
 import * as userActions from '../../store/users';
 
-function UserPicture({ imgSrc, setShowPictureModal }) {
+function UserPicture({ imgSrc, setShowPictureModal, avatar_img}) {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user)
@@ -28,7 +28,7 @@ function UserPicture({ imgSrc, setShowPictureModal }) {
         console.log('zzzzzzzz', imgSrc)
         e.preventDefault();
         await dispatch(sessionActions.editProfile({
-            image: imgSrc,
+            image: avatar_img,
             id: userId.id,
             display_name: sessionUser.display_name,
             first_name: sessionUser.first_name,
@@ -37,7 +37,12 @@ function UserPicture({ imgSrc, setShowPictureModal }) {
             country: sessionUser.country,
             bio: sessionUser.bio,
         }))
-        // await dispatch(userActions.getUsers(userId.id))
+
+        // await dispatch(sessionActions.changeAvatarImg({
+        //     image: imgSrc,
+        //     id: userId.id
+        // }))
+        dispatch(userActions.getUsers(userId.id))
         setShowPictureModal(false);
     };
 

@@ -77,7 +77,9 @@ router.put(
         await User.getCurrentUserById(req.params.id);
         console.log('put route body', req.body);
         let avatar_img;
-        if (req.file) avatar_img = await singlePublicFileUpload(req.file);
+        if (req.file) {
+            avatar_img = await singlePublicFileUpload(req.file)
+        };
         // let header_img = 'http://placeimg.com/640/480/technics'
         // if(req.file) header_img = await singlePublicFileUpload(req.file);
         const { display_name, image, first_name, last_name, city, country, bio, id } = req.body
@@ -87,6 +89,21 @@ router.put(
         return res.json(updatedUser);
     })
 )
+
+// router.patch(
+//     '/:id',
+//     restoreUser,
+//     requireAuth,
+//     singleMulterUpload("image"),
+//     asyncHandler(async (req, res) => {
+//         await User.getCurrentUserById(req.params.id);
+//         let avatar_img;
+//         if (req.file) avatar_img = await singlePublicFileUpload(req.file);
+//         const { avatar_img } = req.body
+//         const updateAvatar = await User.editAvatar({avatar_img})
+//         return res.json(updateAvatar);
+//     })
+// )
 
 router.get(
     '/:id/tracks',
