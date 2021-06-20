@@ -104,3 +104,7 @@
 .active {
   background-color: black;
 }
+
+.whiteActive {
+  background-color: white;
+}

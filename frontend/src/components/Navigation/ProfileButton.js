@@ -50,7 +50,7 @@ function ProfileButton({ user }) {
       {showMenu && (
         <ul className="profile-dropdown">
           <li className="profile-dropdown-li">
-            <NavLink to={`/users/${sessionUser.id}`} className='ProfileNavLink'>
+            <NavLink to={`/users/${sessionUser.id}`} className='ProfileNavLink' activeClassName='whiteActive'>
               Profile
             </NavLink>
           </li>
