@@ -19,7 +19,9 @@ function EditUserProfile({ setShowModal }) {
     const [country, setCountry] = useState(sessionUser.country === "null" ? "" : sessionUser.country);
     const [bio, setBio] = useState(sessionUser.bio === "null" ? "" : sessionUser.bio);
     const { id } = useParams();
-    console.log('sessionUser', sessionUser)
+    const [imgSrc, setImgSrc] = useState();
+    const [toggleDisplay2, setToggleDisplay2] = useState(false);
+    // console.log('sessionUser', sessionUser)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,30 +39,61 @@ function EditUserProfile({ setShowModal }) {
         const file = e.target.files[0];
         console.log('file', file)
         if (file) setImage(file);
+        setImgSrc(window.URL.createObjectURL(file))
+        setToggleDisplay2(false);
+        const button = document.querySelector(".updateImage2");
+        if (button.classList.contains("opacity1")) {
+            button.classList.remove("opacity1")
+        } else {
+            button.classList.add("opacity1")
+        }
     };
+
+    const toggle2 = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setToggleDisplay2(hidden => !hidden)
+        const button = document.querySelector(".updateImage2");
+        if (button.classList.contains("opacity1")) {
+            button.classList.remove("opacity1")
+        } else {
+            button.classList.add("opacity1")
+        }
+    }
 
     return (
         <div className='editProfileContainer'>
             <div>
                 <div className='editProfileBanner'>
                     Edit Your Profile
-            </div>
+                </div>
             </div>
             <form onSubmit={handleSubmit}>
                 <div className='editProfileBody'>
                     <div className='editProfileImage'>
-                        <label>
+                        <div>
                             <img
                                 style={{ 'border-radius': '50%', 'object-fit': 'cover', height: '240px', width: '240px' }}
-                                src={sessionUser.avatar_img}
+                                src={imgSrc || sessionUser.avatar_img}
                                 alt="profile"
-                                // className='editProfileImage'
                             />
-                            <input type="file" onChange={updateFile} value="" title=" "/>
-                        </label>
+                            <button className='updateImage2' onClick={toggle2}>Update Image</button>
+                            {toggleDisplay2 && (
+                                <div className='replaceDiv2'>
+                                    <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
+                                    <label htmlFor='file' className='imageUpload'>Replace Image</label>
+                                    <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
+                                </div>
+                            )}
+                            {toggleDisplay2 && (
+                                <div className='deleteDiv2'>zzzzzzzz</div>
+                            )}
+                            {/* about to import the toggle for the button to display */}
+                            {/* <input type="file" onChange={updateFile} value="" title=" " /> */}
+                        </div>
                     </div>
                     <div className='editProfileDetails'>
-                        <div>
+                        <div className='input'>
                             <label>
                                 Display Name
                                 <input
@@ -72,11 +105,11 @@ function EditUserProfile({ setShowModal }) {
                                 />
                             </label>
                         </div>
-                        <div>
+                        <div className='input2'>
                             <div className='halfField'>
                                 <label>
                                     First Name
-                                <input
+                                    <input
                                         type="text"
                                         value={first_name}
                                         onChange={(e) => setFirst_Name(e.target.value)}
@@ -87,7 +120,7 @@ function EditUserProfile({ setShowModal }) {
                             <div className='halfField'>
                                 <label>
                                     Last Name
-                                <input
+                                    <input
                                         type="text"
                                         value={last_name}
                                         onChange={(e) => setLast_Name(e.target.value)}
@@ -96,11 +129,11 @@ function EditUserProfile({ setShowModal }) {
                                 </label>
                             </div>
                         </div>
-                        <div>
+                        <div className='input2'>
                             <div className='halfField'>
                                 <label>
                                     City
-                                <input
+                                    <input
                                         type="text"
                                         value={city}
                                         onChange={(e) => setCity(e.target.value)}
@@ -111,7 +144,7 @@ function EditUserProfile({ setShowModal }) {
                             <div className='halfField'>
                                 <label>
                                     Country
-                                <input
+                                    <input
                                         type="text"
                                         value={country}
                                         onChange={(e) => setCountry(e.target.value)}
@@ -120,7 +153,7 @@ function EditUserProfile({ setShowModal }) {
                                 </label>
                             </div>
                         </div>
-                        <div>
+                        <div className='input'>
                             <label>
                                 Bio
                                 <textarea

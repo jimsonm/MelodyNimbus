@@ -1,75 +1,100 @@
 .editProfileContainer {
-    width: 800px;
-    height: auto;
+  width: 800px;
+  height: auto;
 }
 
 .editProfileBanner {
-    font-size: 22px;
-    line-height: 1;
-    padding-bottom: 9px;
-    border-bottom: 1px solid #f2f2f2;
-    margin-bottom: 24px;
-    -webkit-font-smoothing: antialiased;
+  font-size: 22px;
+  line-height: 1;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 24px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .editProfileImage {
-    display: flex;
-    height: 260px;
-    width: 260px;
+  display: flex;
+  height: 260px;
+  width: 260px;
 }
 
 .editProfileDetails {
-    display: block;
-    flex-wrap: wrap;
-    width: 100%;
+  display: block;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .editProfileBody {
-    display: flex;
+  display: flex;
 }
 
 .editProfileButtonsDiv {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 #cancelButton {
-    margin: 0px 10px;
+  margin: 0px 10px;
 }
 
 .textfield {
-    width: 100%;
+  width: 100%;
 }
 
 .textfield2 {
-    width: 50%;
+  width: 50%;
 }
 
 .halfField {
-    width: 50%;
+  width: 48%;
 }
 
-/* .custom-file-input::-webkit-file-upload-button {
-    visibility: hidden;
-  }
-  .custom-file-input::before {
-    content: 'Update Image';
-    display: inline-block;
-    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-    border: 1px solid #999;
-    border-radius: 3px;
-    padding: 5px 8px;
-    outline: none;
-    white-space: nowrap;
-    -webkit-user-select: none;
-    cursor: pointer;
-    text-shadow: 1px 1px #fff;
-    font-weight: 700;
-    font-size: 10pt;
-  }
-  .custom-file-input:hover::before {
-    border-color: black;
-  }
-  .custom-file-input:active::before {
-    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-} */
+.updateImage2 {
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  height: 26px;
+  top: 270px;
+  left: 85px;
+  opacity: .7;
+}
+
+.updateImage2:hover {
+    opacity: 1;
+}
+
+.replaceDiv2 {
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  height: 26px;
+  top: 296px;
+  left: 85px;
+  color: white;
+  background-color: red;
+}
+
+.deleteDiv2 {
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  height: 26px;
+  top: 322px;
+  left: 85px;
+  color: white;
+  background-color: blue;
+}
+
+.opacity1 {
+    opacity: 1;
+}
+
+.input {
+    margin: 10px 0px 10px 10px;
+}
+
+.input2 {
+    display:flex;
+    justify-content: space-between;
+    margin: 10px 0px 10px 10px;
+}

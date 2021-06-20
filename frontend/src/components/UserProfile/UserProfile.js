@@ -162,7 +162,7 @@ function UserProfilePage() {
                 }
                 {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                        <EditUserProfile setShowModal={setShowModal} />
+                        <EditUserProfile setShowModal={setShowModal} toggle={toggle}/>
                     </Modal>
                 )}
             </div>
