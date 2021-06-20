@@ -132,3 +132,17 @@ input[type="file"] {
   color: white;
   background-color: blue;
 }
+
+.banner {
+    position: absolute;
+    height: 300px;
+    left: 8px;
+    right: 8px;
+    z-index: -1;
+}
+
+.bannerImg {
+    box-sizing: border-box;
+    height: 300px;
+    width: 100%;
+}

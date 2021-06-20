@@ -91,7 +91,14 @@ function UserProfilePage() {
 
     return (
         <div>
-            <div className='profileHeader' style={{ backgroundImage: `url(${userProfile?.header_img})`, backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}>
+            <div className='banner'>
+                        <img
+                            src={userProfile?.header_img}
+                            alt='banner'
+                            className='bannerImg'
+                        />
+                    </div>
+            <div className='profileHeader'>
                 <div>
                     <div className='profileHeaderImgDiv'>
                         <img
@@ -114,7 +121,7 @@ function UserProfilePage() {
                     </div>
                     {showPictureModal === true ?
                         <Modal onClose={() => setShowPictureModal(false)}>
-                            <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal} avatar_img={avatar_img} toggle={toggle}/>
+                            <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal} avatar_img={avatar_img} toggle={toggle} />
                         </Modal> : null}
                 </div>
                 <div className='profileNameContainer'>
@@ -147,7 +154,7 @@ function UserProfilePage() {
                 }
                 {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                        <EditUserProfile setShowModal={setShowModal} toggle={toggle}/>
+                        <EditUserProfile setShowModal={setShowModal} toggle={toggle} />
                     </Modal>
                 )}
             </div>
