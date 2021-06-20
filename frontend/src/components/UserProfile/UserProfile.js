@@ -16,7 +16,6 @@ function UserProfilePage() {
     const userProfile = useSelector((state) => state.user[userId.id]);
     const [avatar_img, setAvatar_Img] = useState(userProfile?.avatar_img);
     const [header_img, setHeader_Img] = useState(userProfile?.header_img);
-    // const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showPictureModal, setShowPictureModal] = useState(false);
     const [toggleDisplay, setToggleDisplay] = useState(false);
@@ -117,18 +116,6 @@ function UserProfilePage() {
                         <Modal onClose={() => setShowPictureModal(false)}>
                             <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal} avatar_img={avatar_img} toggle={toggle}/>
                         </Modal> : null}
-                    {/* <label>
-                        {userProfile?.id === sessionUser?.id ?
-                            <form onSubmit={handleSubmit}>
-                                <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
-                                <label htmlFor='file' className='imageUpload'>Update Image</label>
-                                <br></br>
-                                <br></br>
-                                <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
-                            </form>
-                            : null
-                        }
-                    </label> */}
                 </div>
                 <div className='profileNameContainer'>
                     <div className='profileDisplayName'>
@@ -142,7 +129,6 @@ function UserProfilePage() {
                     }
                 </div>
                 <div className='rightDiv'>
-                    {/* <label> */}
                     {userProfile?.id === sessionUser?.id
                         ? <form onSubmit={handleSubmit2} className='headerImgForm'>
                             <input type="file" onChange={updateFile2} className='imageInputs' />
@@ -152,7 +138,6 @@ function UserProfilePage() {
                         </form>
                         : null
                     }
-                    {/* </label> */}
                 </div>
             </div>
             <div className='editButtonDiv'>

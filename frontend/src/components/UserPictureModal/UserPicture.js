@@ -37,19 +37,9 @@ function UserPicture({ imgSrc, setShowPictureModal, avatar_img, toggle}) {
             country: sessionUser.country,
             bio: sessionUser.bio,
         }))
-
-        // await dispatch(sessionActions.changeAvatarImg({
-        //     image: imgSrc,
-        //     id: userId.id
-        // }))
         dispatch(userActions.getUsers(userId.id))
         setShowPictureModal(false);
         toggle();
-        // setToggleDisplay(false);
-        // const button = document.querySelector(".updateImage");
-        // if (opacity === false) {
-        //     button.classList.add("opacity1")
-        // }
     };
 
     return (
