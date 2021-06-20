@@ -16,7 +16,8 @@ function Tracks() {
     useEffect(() => {
         // dispatch(userActions.getUsers())
         dispatch(userActions.getTracksFromUser(userId.id))
-    }, []);
+    }, [selectedUser]);
+    //ask selectedUser in the array works correctly
 
     return (
         <div>
