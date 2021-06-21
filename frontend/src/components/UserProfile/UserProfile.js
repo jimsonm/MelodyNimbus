@@ -131,13 +131,15 @@ function UserProfilePage() {
                         )}
                         {toggleDisplay && (
                             <div className='replaceDiv'>
+                                <div>
                                 <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
                                 <label htmlFor='file' className='imageUpload'>Replace Image</label>
+                                </div>
                                 {/* <button type="submit" onSubmit={handleSubmit}>Save Changes</button> */}
                             </div>
                         )}
                         {toggleDisplay && (
-                            <div className='deleteDiv'>zzzzzzzz</div>
+                            <div className='deleteDiv'>Delete Image</div>
                         )}
                     </div>
                     {showPictureModal === true ?
@@ -169,7 +171,7 @@ function UserProfilePage() {
                             </div>
                         )}
                         {toggleDisplay3 && (
-                            <div className='deleteDiv3'>zzzzzzzz</div>
+                            <div className='deleteDiv3'>Delete Image</div>
                         )}
                         {showBannerModal === true ?
                             <Modal>

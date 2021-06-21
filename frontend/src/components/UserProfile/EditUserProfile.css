@@ -57,32 +57,49 @@
   top: 270px;
   left: 85px;
   opacity: .7;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  background-color: #FFF;
+  border-style: none;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .updateImage2:hover {
     opacity: 1;
 }
 
-.replaceDiv2 {
+.replaceDiv2, .deleteDiv2 {
   position: absolute;
   z-index: 1;
-  width: 125px;
+  width: 123px;
   height: 26px;
-  top: 296px;
+  background-color: #FFF;
+  font-size: 14px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.replaceDiv2 {
+  top: 297px;
   left: 85px;
-  color: white;
-  background-color: red;
 }
 
 .deleteDiv2 {
-  position: absolute;
-  z-index: 1;
-  width: 125px;
-  height: 26px;
-  top: 322px;
+  top: 323px;
   left: 85px;
-  color: white;
-  background-color: blue;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .opacity1 {

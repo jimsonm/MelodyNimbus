@@ -92,76 +92,75 @@ input[type="file"] {
 }
 
 .updateImage {
-  /* display: none; */
   position: absolute;
   z-index: 1;
-  width: 125px;
-  height: 26px;
   top: 150px;
   left: 35px;
-  opacity: 0;
-  transition: opacity 0.35s ease;
 }
 
-.profileHeaderImgDiv:hover .updateImage {
+/* .profileHeaderImgDiv:hover .updateImage {
   opacity: 1;
-}
+} */
 
-.updateImage3 {
+.updateImage, .updateImage3 {
   width: 125px;
   height: 26px;
   opacity: 0;
   transition: opacity 0.35s ease;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  background-color: #FFF;
+  border-style: none;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.profileNameContainer:hover .updateImage3 {
+.profileNameContainer:hover .updateImage3, .opacity1, .profileHeaderImgDiv:hover .updateImage {
   opacity: 1;
 }
 
-.opacity1 {
-  opacity: 1;
+.replaceDiv, .replaceDiv3, .deleteDiv, .deleteDiv3 {
+  position: absolute;
+  z-index: 1;
+  width: 123px;
+  height: 26px;
+  background-color: #FFF;
+  font-size: 14px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .replaceDiv {
-  position: absolute;
-  z-index: 1;
-  width: 125px;
-  height: 26px;
-  top: 176px;
+  top: 177px;
   left: 35px;
-  color: white;
-  background-color: red;
+}
+
+.deleteDiv, .deleteDiv3 {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .deleteDiv {
-  position: absolute;
-  z-index: 1;
-  width: 125px;
-  height: 26px;
-  top: 202px;
+  top: 203px;
   left: 35px;
-  color: white;
-  background-color: blue;
 }
 
 .replaceDiv3 {
-  position: absolute;
-  z-index: 1;
-  width: 125px;
-  height: 26px;
-  top: 56px;
-  color: white;
-  background-color: red;
+  top: 57px;
 }
 
 .deleteDiv3 {
-  position: absolute;
-  z-index: 1;
-  width: 125px;
-  height: 26px;
-  top: 82px;
-  color: white;
-  background-color: blue;
+  top: 83px;
 }
 
 .banner {

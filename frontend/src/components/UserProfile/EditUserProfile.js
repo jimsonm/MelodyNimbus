@@ -80,13 +80,15 @@ function EditUserProfile({ setShowModal }) {
                             <button className='updateImage2' onClick={toggle2}>Update Image</button>
                             {toggleDisplay2 && (
                                 <div className='replaceDiv2'>
+                                    <div>
                                     <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
                                     <label htmlFor='file' className='imageUpload'>Replace Image</label>
-                                    <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
+                                    </div>
+                                    {/* <button type="submit" onSubmit={handleSubmit}>Save Changes</button> */}
                                 </div>
                             )}
                             {toggleDisplay2 && (
-                                <div className='deleteDiv2'>zzzzzzzz</div>
+                                <div className='deleteDiv2'>Delete Image</div>
                             )}
                             {/* about to import the toggle for the button to display */}
                             {/* <input type="file" onChange={updateFile} value="" title=" " /> */}
@@ -167,8 +169,8 @@ function EditUserProfile({ setShowModal }) {
                     </div>
                 </div>
                 <div className='editProfileButtonsDiv'>
-                    <button onClick={() => setShowModal(false)} id='cancelButton'>Cancel</button>
-                    <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
+                    <button onClick={() => setShowModal(false)} id='cancelButton' className='cancelButton'>Cancel</button>
+                    <button type="submit" onSubmit={handleSubmit} className='saveButton'>Save Changes</button>
                 </div>
             </form>
         </div>
