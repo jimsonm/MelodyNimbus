@@ -19,12 +19,15 @@ function UserProfilePage() {
     const [showModal, setShowModal] = useState(false);
     const [showPictureModal, setShowPictureModal] = useState(false);
     const [toggleDisplay, setToggleDisplay] = useState(false);
+    const [toggleDisplay3, setToggleDisplay3] = useState(false);
     const [opacity, setOpacity] = useState(false);
     const [imgSrc, setImgSrc] = useState();
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
     }, []);
+
+    const correctUser = (sessionUser?.id === userProfile?.id)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -60,17 +63,18 @@ function UserProfilePage() {
     };
 
     const updateFile = (e) => {
-        console.log('64 made it here')
+        // console.log('64 made it here')
         const file = e.target.files[0];
         if (file) setAvatar_Img(file);
-        console.log('69 made it here', file);
+        // console.log('69 made it here', file);
         setImgSrc(window.URL.createObjectURL(file))
-        console.log(imgSrc, 'sdsfzzzzzzzsd')
+        // console.log(imgSrc, 'sdsfzzzzzzzsd') 
         setShowPictureModal(true)
     };
     const updateFile2 = (e) => {
-        const file = e.target.files[0];
-        if (file) setHeader_Img(file);
+        console.log('testing');
+        // const file = e.target.files[0];
+        // if (file) setHeader_Img(file);
     };
 
     const expandImage = () => {
@@ -86,6 +90,16 @@ function UserProfilePage() {
             button.classList.add("opacity1")
         } else {
             button.classList.remove("opacity1")
+        }
+    }
+
+    const toggle3 = () => {
+        setToggleDisplay3(hidden => !hidden)
+        const button = document.querySelector(".updateImage3");
+        if (button.classList.contains("opacity1")) {
+            button.classList.remove("opacity1")
+        } else {
+            button.classList.add("opacity1")
         }
     }
 
@@ -107,12 +121,14 @@ function UserProfilePage() {
                             className="profileHeaderImg"
                             onClick={expandImage}
                         />
-                        <button className='updateImage' onClick={toggle}>Update Image</button>
+                        {correctUser && (
+                            <button className='updateImage' onClick={toggle}>Update Image</button>
+                        )}
                         {toggleDisplay && (
                             <div className='replaceDiv'>
                                 <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
                                 <label htmlFor='file' className='imageUpload'>Replace Image</label>
-                                <button type="submit" onSubmit={handleSubmit}>Save Changes</button>
+                                {/* <button type="submit" onSubmit={handleSubmit}>Save Changes</button> */}
                             </div>
                         )}
                         {toggleDisplay && (
@@ -127,28 +143,29 @@ function UserProfilePage() {
                 <div className='profileNameContainer'>
                     <div>
                         <div className='profileDisplayName'>
-                        {userProfile?.display_name}
+                            {userProfile?.display_name}
                         </div>
                         {(userProfile?.first_name || userProfile?.last_name) && (userProfile.first_name !== "null" && userProfile.last_name !== "null")
-                        ? <div className='profileName'>
-                            {userProfile?.first_name} {userProfile?.last_name}
-                        </div>
-                        : null
-                    }
+                            ? <div className='profileName'>
+                                {userProfile?.first_name} {userProfile?.last_name}
+                            </div>
+                            : null
+                        }
                     </div>
-                    {/* </div>
-                <div className='rightDiv'> */}
-                    {/* {userProfile?.id === sessionUser?.id
-                        ? <form onSubmit={handleSubmit2} className='headerImgForm'>
-                            <input type="file" onChange={updateFile2} className='imageInputs' />
-                            <br></br>
-                            <br></br>
-                            <button type="submit" onSubmit={handleSubmit2}>Save Changes</button>
-                        </form>
-                        : null
-                    } */}
                     <div>
-                        <button className='updateImage3'>Update Image</button>
+                        {correctUser && (
+                            <button className='updateImage3' onClick={toggle3}>Update Image</button>
+                        )}
+                        {toggleDisplay3 && (
+                            <div className='replaceDiv3'>
+                                <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
+                                <label htmlFor='file2' className='imageUpload'>Replace Image</label>
+                                {/* <button type="submit" onSubmit={handleSubmit}>Save Changes</button> */}
+                            </div>
+                        )}
+                        {toggleDisplay3 && (
+                            <div className='deleteDiv3'>zzzzzzzz</div>
+                        )}
                     </div>
                 </div>
             </div>

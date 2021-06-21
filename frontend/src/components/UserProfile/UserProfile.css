@@ -115,7 +115,7 @@ input[type="file"] {
 }
 
 .profileNameContainer:hover .updateImage3 {
-    opacity: 1;
+  opacity: 1;
 }
 
 .opacity1 {
@@ -140,6 +140,26 @@ input[type="file"] {
   height: 26px;
   top: 202px;
   left: 35px;
+  color: white;
+  background-color: blue;
+}
+
+.replaceDiv3 {
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  height: 26px;
+  top: 56px;
+  color: white;
+  background-color: red;
+}
+
+.deleteDiv3 {
+  position: absolute;
+  z-index: 1;
+  width: 125px;
+  height: 26px;
+  top: 82px;
   color: white;
   background-color: blue;
 }
