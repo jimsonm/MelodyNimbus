@@ -53,12 +53,19 @@ function DeleteImage({ toggle, toggle3, img, setShowDeleteModal }) {
     };
 
     return (
-        <div>
-            <div>Are you sure?</div>
-            <form onSubmit={deleteImg}>
-            <button className='cancelButton'>Cancel</button>
-            <button type='submit' onSubmit={deleteImg} className='saveButton'>Delete</button>
-            </form>
+        <div className='deleteModalDiv'>
+            <div className='confirmation'>Are you sure?</div>
+            <div className='confirmationText'>
+                Please confirm that you want to delete this image.
+                <br />
+                This action cannot be reversed.
+            </div>
+            <div className='buttonDiv'>
+                <form onSubmit={deleteImg}>
+                    <button className='cancelButton'>Cancel</button>
+                    <button type='submit' onSubmit={deleteImg} className='saveButton'>Delete</button>
+                </form>
+            </div>
         </div>
     )
 }

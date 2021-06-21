@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import * as sessionActions from "../../store/session";
 import * as userActions from '../../store/users';
 import './EditUserProfile.css';
-// import { Modal } from '../../context/Modal';
 
 function EditUserProfile({ setShowModal }) {
     const userId = useParams();
@@ -21,7 +20,6 @@ function EditUserProfile({ setShowModal }) {
     const { id } = useParams();
     const [imgSrc, setImgSrc] = useState();
     const [toggleDisplay2, setToggleDisplay2] = useState(false);
-    // console.log('sessionUser', sessionUser)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,6 +59,22 @@ function EditUserProfile({ setShowModal }) {
         }
     }
 
+    const deleteAvatar = async (e) => {
+        e.preventDefault();
+        await dispatch(sessionActions.editProfileAvatar({
+            image: "",
+            id: userId.id,
+            display_name: sessionUser.display_name,
+            first_name: sessionUser.first_name,
+            last_name: sessionUser.last_name,
+            city: sessionUser.city,
+            country: sessionUser.country,
+            bio: sessionUser.bio,
+        }))
+        dispatch(userActions.getUsers(userId.id))
+        setToggleDisplay2(false);
+    }
+
     return (
         <div className='editProfileContainer'>
             <div>
@@ -84,14 +98,13 @@ function EditUserProfile({ setShowModal }) {
                                     <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
                                     <label htmlFor='file' className='imageUpload'>Replace Image</label>
                                     </div>
-                                    {/* <button type="submit" onSubmit={handleSubmit}>Save Changes</button> */}
                                 </div>
                             )}
                             {toggleDisplay2 && (
-                                <div className='deleteDiv2'>Delete Image</div>
+                                <div className='deleteDiv2' onClick={deleteAvatar}>
+                                    Delete Image
+                                </div>
                             )}
-                            {/* about to import the toggle for the button to display */}
-                            {/* <input type="file" onChange={updateFile} value="" title=" " /> */}
                         </div>
                     </div>
                     <div className='editProfileDetails'>
