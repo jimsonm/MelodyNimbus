@@ -82,10 +82,8 @@ router.put(
         };
         // let header_img = 'http://placeimg.com/640/480/technics'
         // if(req.file) header_img = await singlePublicFileUpload(req.file);
-        const { display_name, image, first_name, last_name, city, country, bio, id } = req.body
+        const { display_name, image, first_name, last_name, city, country, bio, id} = req.body
         const updatedUser = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, avatar_img });
-        // const {display_name, id, avatar_img} = req.body;
-        // const updatedUser = await User.edit({ display_name, id, avatar_img});
         return res.json(updatedUser);
     })
 )
@@ -106,8 +104,36 @@ router.put(
         // if(req.file) header_img = await singlePublicFileUpload(req.file);
         const { display_name, image, first_name, last_name, city, country, bio, id } = req.body
         const updatedUser = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, header_img });
-        // const {display_name, id, avatar_img} = req.body;
-        // const updatedUser = await User.edit({ display_name, id, avatar_img});
+        return res.json(updatedUser);
+    })
+)
+
+router.put(
+    '/:id/defaultAvatar',
+    restoreUser,
+    requireAuth,
+    singleMulterUpload("image"),
+    asyncHandler(async (req, res) => {
+        await User.getCurrentUserById(req.params.id);
+        console.log('put route body', req.body);
+        const avatar_img = 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'
+        const { display_name, image, first_name, last_name, city, country, bio, id} = req.body
+        const updatedUser = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, avatar_img });
+        return res.json(updatedUser);
+    })
+)
+
+router.put(
+    '/:id/defaultHeader',
+    restoreUser,
+    requireAuth,
+    singleMulterUpload("image"),
+    asyncHandler(async (req, res) => {
+        await User.getCurrentUserById(req.params.id);
+        console.log('put route body', req.body);
+        const header_img = 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-background-image.jpeg'
+        const { display_name, image, first_name, last_name, city, country, bio, id} = req.body
+        const updatedUser = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, header_img });
         return res.json(updatedUser);
     })
 )

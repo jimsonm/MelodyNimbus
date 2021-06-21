@@ -25,28 +25,6 @@ const removeUser = () => {
   };
 };
 
-// const updateAvatar = (avatar_img, id) => {
-//   return {
-//     type: UPDATE_AVATAR,
-//     payload: {avatar_img, id},
-//   }
-// }
-
-// export const changeAvatarImg = (payload) => async dispatch => {
-//   const { avatar_img, id } = payload;
-//   const formData = new FormData();
-//   formData.append('image', avatar_img);
-//   const res = await csrfFetch(`/api/users/${id}`, {
-//     method: 'PATCH',
-//     headers: {
-//       "Content-Type": "multipart/form-data",
-//     },
-//     body: formData,
-//   });
-//   const data = await res.json();
-//   dispatch(setUser(data))
-// }
-
 export const restoreUser = () => async dispatch => {
   const response = await csrfFetch('/api/session');
   const data = await response.json();
@@ -81,8 +59,6 @@ export const getProfile = (id) => async (dispatch) => {
 export const editProfile = (payload) => async (dispatch) => {
 
   const { display_name, image, first_name, last_name, city, country, bio, id, avatar_img, header_img } = payload;
-  // const { display_name, id, avatar_img } = payload;
-  // console.log('payload', payload)
   const formData = new FormData();
   formData.append("display_name", display_name);
   formData.append("first_name", first_name);
@@ -91,7 +67,6 @@ export const editProfile = (payload) => async (dispatch) => {
   formData.append("country", country);
   formData.append("bio", bio);
   formData.append("id", id);
-  // console.log('this is id', id)
   if (avatar_img) formData.append('avatar_img', avatar_img);
   if (header_img) formData.append('header_img', header_img);
 
@@ -113,8 +88,6 @@ export const editProfile = (payload) => async (dispatch) => {
 
 export const editProfile2 = (payload) => async (dispatch) => {
   const { display_name, image, first_name, last_name, city, country, bio, id, avatar_img, header_img } = payload;
-  // const { display_name, id, avatar_img } = payload;
-  // console.log('payload', payload)
   const formData = new FormData();
   formData.append("display_name", display_name);
   formData.append("first_name", first_name);
@@ -123,7 +96,6 @@ export const editProfile2 = (payload) => async (dispatch) => {
   formData.append("country", country);
   formData.append("bio", bio);
   formData.append("id", id);
-  // console.log('this is id', id)
   if (avatar_img) formData.append('avatar_img', avatar_img);
   if (header_img) formData.append('header_img', header_img);
 
@@ -131,6 +103,64 @@ export const editProfile2 = (payload) => async (dispatch) => {
   console.log('zzzz', image);
   if (image) formData.append("image", image);
   const res = await csrfFetch(`/api/users/${id}/header`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
+  });
+  console.log('res', res);
+  const data = await res.json();
+  console.log('data', data);
+  dispatch(setUser(data));
+}
+
+export const editProfileAvatar = (payload) => async (dispatch) => {
+  const { display_name, image, first_name, last_name, city, country, bio, id, avatar_img, header_img } = payload;
+  const formData = new FormData();
+  formData.append("display_name", display_name);
+  formData.append("first_name", first_name);
+  formData.append("last_name", last_name);
+  formData.append("city", city);
+  formData.append("country", country);
+  formData.append("bio", bio);
+  formData.append("id", id);
+  if (avatar_img) formData.append('avatar_img', avatar_img);
+  if (header_img) formData.append('header_img', header_img);
+
+  // for single file
+  console.log('zzzz', image);
+  if (image) formData.append("image", image);
+  const res = await csrfFetch(`/api/users/${id}/defaultAvatar`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
+  });
+  console.log('res', res);
+  const data = await res.json();
+  console.log('data', data);
+  dispatch(setUser(data));
+}
+
+export const editProfileHeader = (payload) => async (dispatch) => {
+  const { display_name, image, first_name, last_name, city, country, bio, id, avatar_img, header_img } = payload;
+  const formData = new FormData();
+  formData.append("display_name", display_name);
+  formData.append("first_name", first_name);
+  formData.append("last_name", last_name);
+  formData.append("city", city);
+  formData.append("country", country);
+  formData.append("bio", bio);
+  formData.append("id", id);
+  if (avatar_img) formData.append('avatar_img', avatar_img);
+  if (header_img) formData.append('header_img', header_img);
+
+  // for single file
+  console.log('zzzz', image);
+  if (image) formData.append("image", image);
+  const res = await csrfFetch(`/api/users/${id}/defaultHeader`, {
     method: "PUT",
     headers: {
       "Content-Type": "multipart/form-data",

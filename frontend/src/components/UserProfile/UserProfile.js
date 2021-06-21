@@ -7,6 +7,7 @@ import { Modal } from '../../context/Modal';
 import EditUserProfile from './EditUserProfile';
 import UserPictureModal from '../UserPictureModal';
 import UserBannerModal from "../UserBannerModal";
+import DeleteImageModal from "../DeleteImageModal";
 import { useParams } from 'react-router-dom';
 import Tracks from '../Tracks/Tracks';
 
@@ -20,11 +21,16 @@ function UserProfilePage() {
     const [showModal, setShowModal] = useState(false);
     const [showPictureModal, setShowPictureModal] = useState(false);
     const [showBannerModal, setShowBannerModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteImgType, setDeleteImgType] = useState();
     const [toggleDisplay, setToggleDisplay] = useState(false);
     const [toggleDisplay3, setToggleDisplay3] = useState(false);
     const [opacity, setOpacity] = useState(false);
     const [imgSrc, setImgSrc] = useState();
     const [bannerSrc, setBannerSrc] = useState();
+
+    //avatar linear-gradient(135deg,#e6846e,#846170
+    //bg image linear-gradient(315deg, rgb(230, 132, 110) 0%, rgb(132, 97, 112) 100%)
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
@@ -32,11 +38,11 @@ function UserProfilePage() {
 
     const correctUser = (sessionUser?.id === userProfile?.id)
 
-    const handleSubmit = async (e) => {
+    const deleteAvatar = async (e) => {
+        console.log('888888888 test')
         e.preventDefault();
-        await dispatch(sessionActions.editProfile({
-            // sessionUser
-            image: avatar_img,
+        await dispatch(sessionActions.editProfileAvatar({
+            image: "",
             id: userId.id,
             display_name: sessionUser.display_name,
             first_name: sessionUser.first_name,
@@ -44,16 +50,15 @@ function UserProfilePage() {
             city: sessionUser.city,
             country: sessionUser.country,
             bio: sessionUser.bio,
-            // avatar_img
         }))
         dispatch(userActions.getUsers(userId.id))
+        toggle();
     };
 
-    const handleSubmit2 = async (e) => {
+    const deleteHeader = async (e) => {
         e.preventDefault();
-        await dispatch(sessionActions.editProfile({
-            // sessionUser
-            image: header_img,
+        await dispatch(sessionActions.editProfileHeader({
+            image: '',
             id: userId.id,
             display_name: sessionUser.display_name,
             first_name: sessionUser.first_name,
@@ -63,15 +68,13 @@ function UserProfilePage() {
             bio: sessionUser.bio,
         }))
         dispatch(userActions.getUsers(userId.id))
+        toggle3();
     };
 
     const updateFile = (e) => {
-        // console.log('64 made it here')
         const file = e.target.files[0];
         if (file) setAvatar_Img(file);
-        // console.log('69 made it here', file);
         setImgSrc(window.URL.createObjectURL(file))
-        // console.log(imgSrc, 'sdsfzzzzzzzsd') 
         setShowPictureModal(true)
     };
     const updateFile2 = (e) => {
@@ -85,6 +88,16 @@ function UserProfilePage() {
     const expandImage = () => {
         setImgSrc()
         setShowPictureModal(true)
+    }
+
+    const showDelete = () => {
+        setDeleteImgType('avatar');
+        setShowDeleteModal(true);
+    }
+
+    const showDelete2 = () => {
+        setDeleteImgType('header');
+        setShowDeleteModal(true);
     }
 
     const toggle = () => {
@@ -132,15 +145,21 @@ function UserProfilePage() {
                         {toggleDisplay && (
                             <div className='replaceDiv'>
                                 <div>
-                                <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
-                                <label htmlFor='file' className='imageUpload'>Replace Image</label>
+                                    <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
+                                    <label htmlFor='file' className='imageUpload'>Replace Image</label>
                                 </div>
-                                {/* <button type="submit" onSubmit={handleSubmit}>Save Changes</button> */}
                             </div>
                         )}
                         {toggleDisplay && (
-                            <div className='deleteDiv'>Delete Image</div>
+                            <div className='deleteDiv' onClick={showDelete}>
+                                Delete Image
+                            </div>
                         )}
+                        {showDeleteModal === true ?
+                            <Modal>
+                                <DeleteImageModal toggle={toggle} img={deleteImgType} setShowDeleteModal={setShowDeleteModal} toggle3={toggle3}/>
+                            </Modal> : null
+                        }
                     </div>
                     {showPictureModal === true ?
                         <Modal onClose={() => setShowPictureModal(false)}>
@@ -165,17 +184,20 @@ function UserProfilePage() {
                         )}
                         {toggleDisplay3 && (
                             <div className='replaceDiv3'>
+                                <div>
                                 <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
                                 <label htmlFor='file2' className='imageUpload'>Replace Image</label>
-                                {/* <button type="submit" onSubmit={handleSubmit}>Save Changes</button> */}
+                                </div>
                             </div>
                         )}
                         {toggleDisplay3 && (
-                            <div className='deleteDiv3'>Delete Image</div>
+                            <div className='deleteDiv3' onClick={showDelete2}>
+                                Delete Image
+                            </div>
                         )}
                         {showBannerModal === true ?
                             <Modal>
-                                <UserBannerModal bannerSrc={bannerSrc} setShowBannerModal={setShowBannerModal} header_img={header_img} toggle3={toggle3}/>
+                                <UserBannerModal bannerSrc={bannerSrc} setShowBannerModal={setShowBannerModal} header_img={header_img} toggle3={toggle3} />
                             </Modal> : null
                         }
                     </div>
