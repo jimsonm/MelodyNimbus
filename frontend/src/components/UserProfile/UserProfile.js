@@ -157,7 +157,7 @@ function UserProfilePage() {
                         )}
                         {showDeleteModal === true ?
                             <Modal>
-                                <DeleteImageModal toggle={toggle} img={deleteImgType} setShowDeleteModal={setShowDeleteModal} toggle3={toggle3}/>
+                                <DeleteImageModal toggle={toggle} img={deleteImgType} setShowDeleteModal={setShowDeleteModal} toggle3={toggle3} />
                             </Modal> : null
                         }
                     </div>
@@ -185,8 +185,8 @@ function UserProfilePage() {
                         {toggleDisplay3 && (
                             <div className='replaceDiv3'>
                                 <div>
-                                <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
-                                <label htmlFor='file2' className='imageUpload'>Replace Image</label>
+                                    <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
+                                    <label htmlFor='file2' className='imageUpload'>Replace Image</label>
                                 </div>
                             </div>
                         )}
@@ -214,10 +214,15 @@ function UserProfilePage() {
                     </Modal>
                 )}
             </div>
-            <div className='allTracksDiv'>
-                All Tracks
-                <div>
-                    <Tracks />
+            <div className='profileBodyContainer'>
+                <div className='allTracksDiv'>
+                    All Tracks
+                    <div>
+                        <Tracks />
+                    </div>
+                </div>
+                <div className='aboutMe'>
+                    {userProfile?.bio}
                 </div>
             </div>
         </div>

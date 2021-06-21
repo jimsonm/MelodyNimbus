@@ -1,28 +1,28 @@
-import { csrfFetch } from './csrf';
+// import { csrfFetch } from './csrf';
 
-const GET_UPLOAD = 'users/getUpload'
+// const GET_UPLOAD = 'users/getUpload'
 
-const getUploadPage = (userId) => ({
-    type: GET_UPLOAD,
-    userId,
-});
+// const getUploadPage = (userId) => ({
+//     type: GET_UPLOAD,
+//     userId,
+// });
 
-export const getPage = () => async (dispatch) => {
-    const res = await csrfFetch('/api/upload');
-    const page = await res.json();
-    dispatch(getUploadPage(page))
-    console.loge(page);
-}
+// export const getPage = () => async (dispatch) => {
+//     const res = await csrfFetch('/api/upload');
+//     const page = await res.json();
+//     dispatch(getUploadPage(page))
+//     console.loge(page);
+// }
 
-const initialState = {};
+// const initialState = {};
 
-const uploadReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_UPLOAD:
+// const uploadReducer = (state = initialState, action) => {
+//     switch (action.type) {
+//         case GET_UPLOAD:
             
-        default:
-            return state;
-    }
-}
+//         default:
+//             return state;
+//     }
+// }
 
-export default uploadReducer;
+// export default uploadReducer;

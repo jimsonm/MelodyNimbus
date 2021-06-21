@@ -62,7 +62,7 @@
 .editButtonDiv {
   display: flex;
   justify-content: flex-end;
-  padding-right: 30px;
+  margin-bottom: 10px;
 }
 
 .rightDiv {
@@ -74,11 +74,6 @@
 .headerImgForm {
   width: 100%;
   justify-self: flex-end;
-}
-
-.allTracksDiv {
-  font-size: 18px;
-  padding-left: 30px;
 }
 
 input[type="file"] {
@@ -98,10 +93,6 @@ input[type="file"] {
   top: 150px;
   left: 35px;
 }
-
-/* .profileHeaderImgDiv:hover .updateImage {
-  opacity: 1;
-} */
 
 .updateImage, .updateImage3 {
   width: 125px;
@@ -176,4 +167,23 @@ input[type="file"] {
   box-sizing: border-box;
   height: 300px;
   width: 100%;
+}
+
+.profileBodyContainer {
+  display: flex;
+}
+
+.allTracksDiv {
+  font-size: 18px;
+  padding-left: 30px;
+  width: 70%;
+  border-top: 0.5px solid gray;
+  /* border-right: 0.5px solid gray; */
+}
+
+.aboutMe {
+  width: 30%;
+  padding: 25px;
+  border-top: 0.5px solid gray;
+  border-left: 0.5px solid gray;
 }
