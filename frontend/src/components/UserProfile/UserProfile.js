@@ -6,6 +6,7 @@ import './UserProfile.css';
 import { Modal } from '../../context/Modal';
 import EditUserProfile from './EditUserProfile';
 import UserPictureModal from '../UserPictureModal';
+import UserBannerModal from "../UserBannerModal";
 import { useParams } from 'react-router-dom';
 import Tracks from '../Tracks/Tracks';
 
@@ -18,10 +19,12 @@ function UserProfilePage() {
     const [header_img, setHeader_Img] = useState(userProfile?.header_img);
     const [showModal, setShowModal] = useState(false);
     const [showPictureModal, setShowPictureModal] = useState(false);
+    const [showBannerModal, setShowBannerModal] = useState(false);
     const [toggleDisplay, setToggleDisplay] = useState(false);
     const [toggleDisplay3, setToggleDisplay3] = useState(false);
     const [opacity, setOpacity] = useState(false);
     const [imgSrc, setImgSrc] = useState();
+    const [bannerSrc, setBannerSrc] = useState();
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
@@ -73,8 +76,10 @@ function UserProfilePage() {
     };
     const updateFile2 = (e) => {
         console.log('testing');
-        // const file = e.target.files[0];
-        // if (file) setHeader_Img(file);
+        const file = e.target.files[0];
+        if (file) setHeader_Img(file);
+        setBannerSrc(window.URL.createObjectURL(file))
+        setShowBannerModal(true)
     };
 
     const expandImage = () => {
@@ -166,6 +171,11 @@ function UserProfilePage() {
                         {toggleDisplay3 && (
                             <div className='deleteDiv3'>zzzzzzzz</div>
                         )}
+                        {showBannerModal === true ?
+                            <Modal>
+                                <UserBannerModal bannerSrc={bannerSrc} setShowBannerModal={setShowBannerModal} header_img={header_img} toggle3={toggle3}/>
+                            </Modal> : null
+                        }
                     </div>
                 </div>
             </div>

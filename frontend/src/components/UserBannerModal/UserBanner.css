@@ -1,0 +1,69 @@
+.bannerModal {
+  height: 260px;
+  width: 850px;
+}
+
+.bannerText {
+  font-size: 22px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.previewDiv {
+    display: flex;
+    height: 178px;
+    width: 850px;
+    margin-bottom: 10px;
+}
+
+.bannerImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avaImg {
+    position: absolute;
+    z-index: 1;
+    height: 165px;
+    width: 165px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.nameDiv {
+    position: absolute;
+    z-index: 1;
+    left: 200px;
+    top: 100px;
+}
+
+.profileDisplayName2 {
+    background-color: black;
+    color: white;
+    height: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 4px 7px;
+    margin: 5px;
+    width: max-content;
+}
+
+.profileName2 {
+    background-color: black;
+    color: #ccc;
+    height: 16px;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 2px 7px 3px;
+    margin: 5px;
+    width: max-content;
+    text-align: center;
+    vertical-align: middle;
+}

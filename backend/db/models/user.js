@@ -107,9 +107,10 @@ module.exports = (sequelize, DataTypes) => {
     return await User.scope('currentUser').findByPk(user.id);
   };
 
-  User.edit = async function ({ avatar_img, display_name, image, first_name, last_name, city, country, bio, id }) {
+  User.edit = async function ({ avatar_img, header_img, display_name, image, first_name, last_name, city, country, bio, id }) {
     const user = await User.update({
       avatar_img,
+      header_img,
       display_name,
       image,
       first_name,
@@ -123,13 +124,5 @@ module.exports = (sequelize, DataTypes) => {
     return await User.scope('currentUser').findByPk(id);
   }
 
-  // User.editAvatar = async function ({ avatar_img}) {
-  //   const user = await User.update({
-  //     avatar_img,
-  //   }, { where: {
-  //     id: id
-  //   }});
-  //   return await User.scope('currentUser').findByPk(id);
-  // }
   return User;
 };
