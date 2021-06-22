@@ -1,0 +1,69 @@
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  height: 388px;
+  border: 1px solid #f2f2f2;
+  margin-top: 50px;
+}
+
+.uploadTitle {
+  font-size: 22px;
+  font-family: "Lucida Grande";
+  margin-top: 120px;
+}
+
+.uploadButtonDiv {
+  margin-top: 30px;
+}
+
+.uploadInput {
+  width: 300px;
+  height: 40px;
+}
+
+.uploadContainer2 {
+  border: 1px solid #f2f2f2;
+  width: 770px;
+  height: 837x;
+  margin-top: 50px;
+  padding: 14px;
+}
+
+.flexBox {
+  display: flex;
+}
+
+.trackImgContainer {
+  width: 260px;
+  height: 260px;
+  border: 1px solid #f2f2f2;
+  margin: 5px;
+}
+
+.basicInfo {
+  font-size: 24px;
+  line-height: 1;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 24px;
+  -webkit-font-smoothing: antialiased;
+  color: #f50;
+  font-family: "Lucida Grande";
+}
+
+.albumImg {
+  height: 260px;
+  width: 260px;
+  object-fit: cover;
+}
+
+.trackTextField {
+    height: 75px;
+}

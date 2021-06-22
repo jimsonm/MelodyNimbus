@@ -95,8 +95,8 @@ function EditUserProfile({ setShowModal }) {
                             {toggleDisplay2 && (
                                 <div className='replaceDiv2'>
                                     <div>
-                                    <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
-                                    <label htmlFor='file' className='imageUpload'>Replace Image</label>
+                                        <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
+                                        <label htmlFor='file' className='imageUpload'>Replace Image</label>
                                     </div>
                                 </div>
                             )}
@@ -175,7 +175,7 @@ function EditUserProfile({ setShowModal }) {
                                     value={bio}
                                     placeholder='Tell the world a little bit about yourself. The shorter the better.'
                                     onChange={(e) => setBio(e.target.value)}
-                                    className='textfield'
+                                    className='textfield bioTextField'
                                 />
                             </label>
                         </div>

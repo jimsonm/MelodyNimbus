@@ -44,3 +44,7 @@
 .smallMargin {
     margin: 5px 0px;
 }
+
+.maxWidth {
+  width: 100%;
+}

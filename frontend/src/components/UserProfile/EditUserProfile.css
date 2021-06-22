@@ -41,8 +41,8 @@
   width: 100%;
 }
 
-.textfield2 {
-  width: 50%;
+.bioTextField {
+  height: 60px;
 }
 
 .halfField {

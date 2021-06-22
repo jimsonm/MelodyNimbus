@@ -9,12 +9,13 @@ function Tracks() {
     const dispatch = useDispatch();
     const users = useSelector((state) => Object.values(state.user));
     const selectedUser = users[userId.id - 1];
-    // console.log('current user', selectedUser);
     const tracksBySelectedUser = selectedUser?.tracks;
-    // console.log('tracks', tracksBySelectedUser);
 
     useEffect(() => {
-        // dispatch(userActions.getUsers())
+        dispatch(userActions.getUsers())
+    }, []);
+
+    useEffect(() => {
         dispatch(userActions.getTracksFromUser(userId.id))
     }, [selectedUser]);
     //ask selectedUser in the array works correctly
