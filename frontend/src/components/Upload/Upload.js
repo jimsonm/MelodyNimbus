@@ -7,8 +7,9 @@ import { useState } from 'react';
 function Upload () {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    const id = sessionUser.id
+    const id = sessionUser?.id
     const users = useSelector((state) => Object.values(state.user));
+    console.log('test1', users)
     const selectedUser = users[id - 1];
     console.log('test', selectedUser);
     // dispatch(sessionActions.getProfile(sessionUser.id))
