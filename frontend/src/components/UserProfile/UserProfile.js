@@ -29,9 +29,6 @@ function UserProfilePage() {
     const [imgSrc, setImgSrc] = useState();
     const [bannerSrc, setBannerSrc] = useState();
 
-    //avatar linear-gradient(135deg,#e6846e,#846170
-    //bg image linear-gradient(315deg, rgb(230, 132, 110) 0%, rgb(132, 97, 112) 100%)
-
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
     }, []);

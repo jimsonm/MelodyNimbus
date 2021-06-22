@@ -31,12 +31,13 @@ function Navigation({ isLoaded }) {
   }
 
   return (
+    <div className='sticky'>
     <header className='navigationBar'>
       <div className='NavBarNavLinkDiv'>
         <NavLink exact to="/" className='NavBarNavLink' activeClassName="active">Home</NavLink>
       </div>
       <div className='NavBarNavLinkDiv'>
-        <NavLink exact to='/Upload' className='NavBarNavLink' user={sessionUser} activeClassName="active">
+        <NavLink exact to='/upload' className='NavBarNavLink' user={sessionUser} activeClassName="active">
           Upload
         </NavLink>
       </div>
@@ -44,6 +45,7 @@ function Navigation({ isLoaded }) {
         {isLoaded && sessionLinks}
       </div>
     </header>
+    </div>
   );
 }
 

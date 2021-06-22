@@ -1,17 +1,29 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import * as userActions from '../../store/users';
 import { useState } from 'react';
 
-function Upload ({users}) {
+function Upload () {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    console.log(sessionUser);
-    dispatch(sessionActions.getProfile(sessionUser.id))
-    console.log('sessionUser', sessionUser);
-    dispatch(userActions.getTracksFromUser(sessionUser.id));
+    const id = sessionUser.id
+    const users = useSelector((state) => Object.values(state.user));
+    const selectedUser = users[id - 1];
+    console.log('test', selectedUser);
+    // dispatch(sessionActions.getProfile(sessionUser.id))
+    // dispatch(userActions.getTracksFromUser(sessionUser.id));
+    const userProfile = useSelector((state) => state.user[id]);
+    // console.log(userProfile);
     const [track, setTrack] = useState("");
 
+    // useEffect(() => {
+    //     dispatch(userActions.getUsers(id))
+    // }, []);
+    useEffect(() => {
+        // dispatch(userActions.getUsers())
+        dispatch(userActions.getTracksFromUser(id))
+    }, [selectedUser]);
 
     const updateFile = (e) => {
         const file = e.target.files[0];
