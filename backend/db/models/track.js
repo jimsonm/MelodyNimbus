@@ -18,5 +18,17 @@ module.exports = (sequelize, DataTypes) => {
   Track.getTrackById = async function (id) {
     return await Track.findByPk(id);
   };
+
+  Track.addTrack = async function({ track_name, track_src, description, cover_art, user_id}) {
+    const track = await Track.create({
+      track_name,
+      track_src,
+      description,
+      user_id,
+      cover_art
+    })
+    return await Track.findByPk(track.id);
+  }
+
   return Track;
 };

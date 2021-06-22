@@ -1,21 +1,25 @@
-// const express = require('express')
-// const asyncHandler = require('express-async-handler');
+const express = require('express');
+const asyncHandler = require('express-async-handler');
 
-// const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-// const { User, Track } = require('../../db/models');
-// const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
+const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
+const { User, Track } = require('../../db/models');
+const { multiplePublicFileUpload, multipleMulterUpload } = require('../../awsS3');
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get(
-//     '/',
-//     restoreUser,
-//     requireAuth,
-//     asyncHandler(async (req, res) => {
-//         console.log('14', req.body);
-//         const user = await User.getCurrentUserById()
-//         res.json(user);
-//     })
-// )
+router.post(
+    '/',
+    restoreUser,
+    requireAuth,
+    multipleMulterUpload(['track', 'cover']),
+    asyncHandler(async (req, res) => {
+        let track_src;
+        if (req.file) {
+            track_src = await multiplePublicFileUpload(req.file)
+        }
+        const track = await Track.addTrack({ track_name, track_src, description, cover_art, user_id});
+        
+    })
+)
 
-// module.exports = router;
+module.exports = router;
