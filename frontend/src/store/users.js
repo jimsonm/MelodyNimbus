@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const SET_USERS = 'users/SET_USERS';
 const GET_TRACKS = 'users/GET_TRACKS';
+const ADD_TRACK = 'users/ADD_TRACK';
 
 const setUsers = (users) => ({
     type: SET_USERS,
@@ -15,6 +16,35 @@ const getTracks = (tracks, userId) => {
         userId,
     };
 };
+
+export const addTrack = (track) => async (dispatch) => {
+    const { files, track_name, description, user_id } = track;
+    // debugger
+    console.log('track', track);
+    const formData = new FormData();
+    formData.append("description", description);
+    formData.append("track_name", track_name);
+    formData.append("user_id", user_id);
+
+    // for multiple files
+    if (files && files.length !== 0) {
+        for (var i = 0; i < files.length; i++) {
+            formData.append("files", files[i]);
+        }
+    }
+    console.log('formdata', formData);
+    const res = await csrfFetch(`/api/upload`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    })
+    //breaks in the post
+    console.log('res', res);
+    const data = await res.json();
+    console.log('trackData?', data);
+}
 
 export const getUsers = () => async (dispatch) => {
     const res = await csrfFetch('/api/users');
@@ -51,10 +81,10 @@ const usersReducer = (state = initialState, action) => {
             // action.tracks.forEach((track) => {
             //     newState[action.userId] = {
             //         ...state[action.userId],
-                    // tracks: state[action.userId].tracks !== undefined
-                    //     ? [...state[action.userId].tracks, ...track]
-                    //     : [track]
-                // };
+            // tracks: state[action.userId].tracks !== undefined
+            //     ? [...state[action.userId].tracks, ...track]
+            //     : [track]
+            // };
             // })
             return newState;
         default:

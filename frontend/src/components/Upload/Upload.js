@@ -15,7 +15,7 @@ function Upload() {
     console.log('track stuff', selectedUser?.tracks);
     // const userProfile = useSelector((state) => state.user[id]);
     // console.log(userProfile);
-    const [trackUploaded, setTrackUploaded] = useState(true);
+    const [trackUploaded, setTrackUploaded] = useState(false);
     //change this trackUploaded back to false when done testing
     const [track_name, setTrack_name] = useState();
     const [description, setDescription] = useState();
@@ -36,7 +36,18 @@ function Upload() {
     // };
 
     const handleUpload = async (e) => {
+        console.log('handleUpload working?')
         e.preventDefault();
+        const track = {
+            // track_src,
+            // cover_art,
+            files: [track_src, cover_art],
+            track_name,
+            description,
+            user_id: id,
+        };
+        console.log(track);
+        dispatch(userActions.addTrack(track))
     }
 
     const uploadImg = (e) => {
@@ -108,7 +119,7 @@ function Upload() {
                         </div>
                         <div className='editProfileButtonsDiv'>
                             <button id='cancelButton' className='cancelButton'>Cancel</button>
-                            <button type="submit" onSubmit={handleUpload} className='saveButton'>Save</button>
+                            <button type="submit" onSubmit={handleUpload} className='saveButton'>Upload</button>
                         </div>
                     </div>
                 )}
