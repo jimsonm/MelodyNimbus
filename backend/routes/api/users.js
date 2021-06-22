@@ -32,11 +32,9 @@ const validateSignup = [
 // Sign up
 router.post(
     '/',
-    // singleMulterUpload("image"),
     validateSignup,
     asyncHandler(async (req, res) => {
         const { email, password, display_name } = req.body;
-        // const avatar_img = await singlePublicFileUpload(req.file);
         const user = await User.signup({ email, display_name, password });
 
         await setTokenCookie(res, user);
@@ -80,8 +78,6 @@ router.put(
         if (req.file) {
             avatar_img = await singlePublicFileUpload(req.file)
         };
-        // let header_img = 'http://placeimg.com/640/480/technics'
-        // if(req.file) header_img = await singlePublicFileUpload(req.file);
         const { display_name, image, first_name, last_name, city, country, bio, id} = req.body
         const updatedUser = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, avatar_img });
         return res.json(updatedUser);
@@ -100,8 +96,6 @@ router.put(
         if (req.file) {
             header_img = await singlePublicFileUpload(req.file)
         };
-        // let header_img = 'http://placeimg.com/640/480/technics'
-        // if(req.file) header_img = await singlePublicFileUpload(req.file);
         const { display_name, image, first_name, last_name, city, country, bio, id } = req.body
         const updatedUser = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, header_img });
         return res.json(updatedUser);
@@ -143,15 +137,11 @@ router.get(
     restoreUser,
     asyncHandler(async (req, res) => {
         const userId = req.params.id
-        // console.log('=========', req.params.id)
-        // const user = await User.findByPk(id);
         const tracks = await Track.findAll({
             where: {
                 'user_id': userId
             }
         });
-        // console.log('95', user)
-        console.log('96', tracks)
         return res.json(tracks);
     })
 )

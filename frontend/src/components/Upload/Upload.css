@@ -69,14 +69,15 @@
 }
 
 .imageInput {
-  position: absolute;
-  top: 400px;
-  left: 290px;
+  position: relative;
+  width: 125px;
+  height: 26px;
+  left: 65px;
+  bottom: 55px;
   z-index: 1;
   background-color: #fff;
   font-size: 14px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;

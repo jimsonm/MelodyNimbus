@@ -13,8 +13,6 @@ function Upload() {
     const selectedUser = users[id - 1];
     console.log('selectedUser', selectedUser);
     console.log('track stuff', selectedUser?.tracks);
-    // const userProfile = useSelector((state) => state.user[id]);
-    // console.log(userProfile);
     const [trackUploaded, setTrackUploaded] = useState(false);
     //change this trackUploaded back to false when done testing
     const [track_name, setTrack_name] = useState();
@@ -30,17 +28,10 @@ function Upload() {
         dispatch(userActions.getTracksFromUser(id))
     }, [id])
 
-    // const updateFile = (e) => {
-    //     const file = e.target.files[0];
-    //     if (file) setTrack(file);
-    // };
-
     const handleUpload = async (e) => {
         console.log('handleUpload working?')
         e.preventDefault();
         const track = {
-            // track_src,
-            // cover_art,
             files: [track_src, cover_art],
             track_name,
             description,
@@ -71,7 +62,7 @@ function Upload() {
                         </div>
                         <div className='uploadButtonDiv flexCenter'>
                             <input type='file' name='track' id='track' onChange={uploadTrack} />
-                            <label htmlFor='track' className='uploadInput saveButton flexCenter'>Choose file to upload</label>
+                            <label htmlFor='track' className='uploadInput saveButton flexCenter'>Choose a file to upload</label>
                         </div>
                     </div>
                 )}
@@ -81,7 +72,7 @@ function Upload() {
                             Basic info
                         </div>
                         <div className='flexBox'>
-                            <div className='trackImgContainer flexCenter'>
+                            <div className='trackImgContainer'>
                                 <img
                                     src='https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'
                                     className='albumImg'
