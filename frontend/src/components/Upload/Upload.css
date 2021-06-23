@@ -86,3 +86,35 @@
   border-radius: 3px;
   padding: 3px;
 }
+
+.uploadContainer3 {
+  display: flex;
+  width: 748px;
+  height: 64px;
+  border: 2px dashed #e5e5e5;
+  margin-top: 50px;
+  justify-content: space-between;
+  padding: 10px 24px;
+}
+
+.uploadTitle3 {
+  font-size: 18px;
+  font-family: "Lucida Grande";
+}
+
+.uploadInput3 {
+  width: 170px;
+  height: 40px;
+}
+
+.uploadedTrack {
+  width: 798px;
+  height: 178px;
+  border: 1px solid gray;
+  margin-top: 40px;
+}
+
+.lastTrackCoverArt {
+  height: 120px;
+  width: 120px;
+}

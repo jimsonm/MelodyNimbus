@@ -2,7 +2,7 @@ import { csrfFetch } from './csrf';
 
 const SET_USERS = 'users/SET_USERS';
 const GET_TRACKS = 'users/GET_TRACKS';
-const ADD_TRACK = 'users/ADD_TRACK';
+// const GET_UPLOAD = 'users/GET_UPLOAD';
 
 const setUsers = (users) => ({
     type: SET_USERS,
@@ -12,10 +12,18 @@ const setUsers = (users) => ({
 const getTracks = (tracks, userId) => {
     return {
         type: GET_TRACKS,
+        payload: {
         tracks,
         userId,
+        }
     };
 };
+
+// const getUpload = () => {
+//     return {
+//         type: GET_UPLOAD,
+//     }
+// }
 
 export const addTrack = (track) => async (dispatch) => {
     const { files, track_name, description, user_id } = track;
@@ -74,18 +82,10 @@ const usersReducer = (state = initialState, action) => {
             newState = { ...state };
             for (let key in newState) {
                 newState[key].tracks = [];
-                if (key === action.userId) {
-                    newState[key].tracks = [...action.tracks];
+                if (Number(key) === action.payload.userId) {
+                    newState[key].tracks = [...action.payload.tracks];
                 }
             }
-            // action.tracks.forEach((track) => {
-            //     newState[action.userId] = {
-            //         ...state[action.userId],
-            // tracks: state[action.userId].tracks !== undefined
-            //     ? [...state[action.userId].tracks, ...track]
-            //     : [track]
-            // };
-            // })
             return newState;
         default:
             return state;
