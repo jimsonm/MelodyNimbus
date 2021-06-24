@@ -10,6 +10,8 @@ function EditTrack({ setShowTrackModal, track }) {
     const track_src = track.track_src;
     const [cover_art_src, setCover_art_src] = useState(track.cover_art);
     const user_id = track.user_id;
+    const track_id = track.id;
+    console.log('14', track_id);
     // console.log(user_id);
     // console.log(cover_art_src);
     // console.log('qqqqqq', track);
@@ -33,6 +35,7 @@ function EditTrack({ setShowTrackModal, track }) {
             description,
             track_src,
             user_id,
+            track_id
         }
         console.log('step 1');
         await dispatch(userActions.editTrack(track));

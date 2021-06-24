@@ -47,7 +47,7 @@ export const addTrack = (track) => async (dispatch) => {
 }
 
 export const editTrack = (track) => async (dispatch) => {
-    const { file, track_name, description, user_id, track_src } = track;
+    const { file, track_name, description, user_id, track_src, track_id } = track;
     const formData = new FormData();
     formData.append("description", description);
     formData.append("track_name", track_name);
@@ -56,7 +56,7 @@ export const editTrack = (track) => async (dispatch) => {
     console.log(track);
     if (file) formData.append('file', file);
     console.log('step 2');
-    const res = await csrfFetch(`/api/users/${user_id}/${track_name}`, {
+    const res = await csrfFetch(`/api/users/${user_id}/${track_id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "multipart/form-data",
@@ -106,6 +106,8 @@ const usersReducer = (state = initialState, action) => {
             // return newState;
         case UPDATE_TRACK:
             newState = { ...state };
+            // newState[tracks]
+            // need to rest the other tracks and get current track to update
             console.log(action.track)
             return newState;
         default:
