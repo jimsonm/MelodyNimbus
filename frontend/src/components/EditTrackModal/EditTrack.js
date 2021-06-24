@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import * as userActions from '../../store/users';
 
 function EditTrack({ setShowTrackModal, track }) {
+    const dispatch = useDispatch();
     const [track_name, setTrack_name] = useState(track.track_name);
     const [description, setDescription] = useState(track.description);
     const [cover_art, setCover_art] = useState();
+    const track_src = track.track_src;
     const [cover_art_src, setCover_art_src] = useState(track.cover_art);
+    const user_id = track.user_id;
+    // console.log(user_id);
     // console.log(cover_art_src);
     // console.log('qqqqqq', track);
 
@@ -21,6 +27,15 @@ function EditTrack({ setShowTrackModal, track }) {
 
     const handleUpload = async (e) => {
         e.preventDefault();
+        const track = {
+            file: cover_art || cover_art_src,
+            track_name,
+            description,
+            track_src,
+            user_id,
+        }
+        console.log('step 1');
+        await dispatch(userActions.editTrack(track));
         await setShowTrackModal(false);
     }
 
@@ -36,6 +51,7 @@ function EditTrack({ setShowTrackModal, track }) {
                             <img
                                 src={cover_art_src}
                                 className='albumImg'
+                                alt=''
                             />
                             <div>
                                 <input type="file" name="cover" id="cover" onChange={uploadImg} className='imageInputs' />

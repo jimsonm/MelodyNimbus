@@ -12,6 +12,7 @@ function Tracks() {
     const sessionUser = useSelector((state) => state.session.user);
     const userProfile = useSelector((state) => state.user[userId.id]);
     const users = useSelector((state) => Object.values(state.user));
+    const userTracks = useSelector((state) => state.user['tracks']);
     const selectedUser = users[userId.id - 1];
     const tracksBySelectedUser = users[users.length - 1];
     // console.log(tracksBySelectedUser);
@@ -31,7 +32,7 @@ function Tracks() {
     useEffect(() => {
         dispatch(userActions.getTracksFromUser(userId.id))
         dispatch(userActions.getUsers())
-    }, [dispatch]);
+    }, [dispatch, userId.id]);
 
     return (
         <div>

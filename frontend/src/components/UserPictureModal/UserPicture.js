@@ -11,18 +11,18 @@ function UserPicture({ imgSrc, setShowPictureModal, avatar_img, toggle}) {
     const sessionUser = useSelector((state) => state.session.user)
     const userProfile = useSelector((state) => state.user[userId.id]);
 
-    useEffect(() => {
-        if (imgSrc) {
-            imgCheck()
-        }
-    }, [imgSrc])
-
     const imgCheck = () => {
         if (imgSrc) {
             let image = document.querySelector(".expandedImg")
             image.classList.add("addBorderRadius");
         }
     }
+
+    useEffect(() => {
+        if (imgSrc) {
+            imgCheck()
+        }
+    }, [imgSrc])
 
     const handleSubmit = async (e) => {
         console.log('zzzzzzzz', imgSrc)

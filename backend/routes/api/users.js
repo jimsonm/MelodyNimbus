@@ -132,6 +132,24 @@ router.put(
     })
 )
 
+router.put(
+    '/:id/:track_name',
+    restoreUser,
+    requireAuth,
+    singleMulterUpload('file'),
+    asyncHandler(async (req, res) => {
+        console.log('step 3');
+        const { track_src, track_name, description, user_id } = req.body
+        let cover_art;
+        if(req.file) {
+            cover_art = await singlePublicFileUpload(req.file);
+        }
+        await Track.getTrackByName(req.params.track_name)
+        const updatedTrack = await Track.edit({ track_src, track_name, description, user_id, cover_art });
+        return res.json(updatedTrack);
+    })
+)
+
 router.get(
     '/:id/tracks',
     restoreUser,

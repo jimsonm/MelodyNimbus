@@ -31,7 +31,7 @@ function EditUserProfile({ setShowModal }) {
 
     useEffect(() => {
         dispatch(sessionActions.getProfile(id))
-    }, [])
+    }, [dispatch, id])
 
     const updateFile = (e) => {
         const file = e.target.files[0];

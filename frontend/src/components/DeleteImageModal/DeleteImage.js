@@ -8,7 +8,6 @@ function DeleteImage({ toggle, toggle3, img, setShowDeleteModal }) {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user)
-    const userProfile = useSelector((state) => state.user[userId.id]);
 
     const deleteImg = async (e) => {
         console.log('sdada', img);
