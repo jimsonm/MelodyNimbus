@@ -32,7 +32,6 @@ function Upload() {
     }, [selectedUser, trackUploaded])
 
     const handleUpload = async (e) => {
-        console.log('handleUpload working?')
         e.preventDefault();
         const track = {
             files: [track_src, cover_art],
@@ -40,7 +39,6 @@ function Upload() {
             description,
             user_id: id,
         };
-        console.log('56', track);
         await dispatch(userActions.addTrack(track));
         await setTrackUploaded(false);
         await setUploadAnother(true);

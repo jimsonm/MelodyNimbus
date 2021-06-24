@@ -1,9 +1,9 @@
 import EditTrack from './EditTrack';
 import './EditTrack.css';
 
-function EditTrackModal({setShowTrackModal}) {
+function EditTrackModal({setShowTrackModal, track}) {
     return (
-        <EditTrack setShowTrackModal={setShowTrackModal}/>
+        <EditTrack setShowTrackModal={setShowTrackModal} track={track}/>
     )
 }
 

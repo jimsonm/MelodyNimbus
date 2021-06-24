@@ -14,10 +14,17 @@ function Tracks() {
     const users = useSelector((state) => Object.values(state.user));
     const selectedUser = users[userId.id - 1];
     const tracksBySelectedUser = users[users.length - 1];
-
+    // console.log(tracksBySelectedUser);
     const [showTrackModal, setShowTrackModal] = useState(false);
+    const [editTrack, setEditTrack] = useState();
+    // console.log(editTrack)
 
-    const showEditTrack = () => {
+    const showEditTrack = (e) => {
+        // console.log(e.target.parentElement.parentElement.parentElement)
+        // console.log(e.target.value);
+        // console.log('test!', tracksBySelectedUser?.[e.target.value])
+        const selectedTrack = tracksBySelectedUser?.find(track => track.id === +e.target.value)
+        setEditTrack(selectedTrack)
         setShowTrackModal(true);
     }
 
@@ -54,7 +61,7 @@ function Tracks() {
                         </div>
                         <div>
                             {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showEditTrack}>
+                                <button onClick={showEditTrack} value={track.id}>
                                     Edit
                                 </button>) : null
                             }
@@ -64,7 +71,7 @@ function Tracks() {
             ) : null}
             {showTrackModal && (
                 <Modal onClose={() => setShowTrackModal(false)}>
-                    <EditTrackModal setShowTrackModal={setShowTrackModal} />
+                    <EditTrackModal setShowTrackModal={setShowTrackModal} track={editTrack}/>
                 </Modal>
             )}
             {tracksBySelectedUser?.length === 0 && userProfile.id === sessionUser.id ?
