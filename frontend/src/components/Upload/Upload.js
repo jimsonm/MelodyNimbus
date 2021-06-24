@@ -8,11 +8,8 @@ function Upload() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const id = sessionUser?.id
-    // const userProfile = useSelector((state) => state.user[id]);
     const users = useSelector((state) => Object.values(state.user));
     const selectedUser = users[id - 1];
-    // console.log('selectedUser', selectedUser);
-    // console.log('track stuff', selectedUser?.tracks);
     const [trackUploaded, setTrackUploaded] = useState(false);
     const [track_name, setTrack_name] = useState();
     const [description, setDescription] = useState();
@@ -20,19 +17,12 @@ function Upload() {
     const [cover_art, setCover_art] = useState();
     const [cover_art_src, setCover_art_src] = useState();
     const [uploadAnother, setUploadAnother] = useState(false);
-    const [lastUpload, setLastUpload] = useState();
-
-    let tracksBySelectedUser = selectedUser?.tracks;
-    // setLastUpload(tracksBySelectedUser?.[tracksBySelectedUser.length - 1]);
+    const tracksBySelectedUser = users[users.length-1];
+    const lastUpload = tracksBySelectedUser?.[tracksBySelectedUser.length - 1]
     console.log('27', lastUpload)
-
-    // const tracksBySelectedUser = selectedUser?.tracks;
-    // const lastTrack = tracksBySelectedUser?.[tracksBySelectedUser.length - 1];
-    // console.log('27', lastTrack)
 
     useEffect(() => {
         dispatch(userActions.getUsers())
-        setLastUpload(tracksBySelectedUser?.[tracksBySelectedUser.length - 1]);
     }, [dispatch]);
 
     useEffect(() => {
@@ -40,14 +30,6 @@ function Upload() {
             dispatch(userActions.getTracksFromUser(id))
         }
     }, [selectedUser, trackUploaded])
-
-    // useEffect(() => {
-    //     const tracksBySelectedUser = selectedUser?.tracks;
-    //     const lastTrack = tracksBySelectedUser?.[tracksBySelectedUser.length - 1];
-    //     // console.log('45', lastTrack)
-    //     setLastUpload(lastTrack)
-    //     console.log('last upload', lastUpload)
-    // }, [uploadAnother])
 
     const handleUpload = async (e) => {
         console.log('handleUpload working?')
@@ -61,9 +43,6 @@ function Upload() {
         console.log('56', track);
         await dispatch(userActions.addTrack(track));
         await setTrackUploaded(false);
-        // console.log('61', lastTrack);
-        // await setLastUpload(lastTrack);
-        // console.log('checking');
         await setUploadAnother(true);
     }
 

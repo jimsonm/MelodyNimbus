@@ -2,32 +2,21 @@ import { csrfFetch } from './csrf';
 
 const SET_USERS = 'users/SET_USERS';
 const GET_TRACKS = 'users/GET_TRACKS';
-// const GET_UPLOAD = 'users/GET_UPLOAD';
 
 const setUsers = (users) => ({
     type: SET_USERS,
     users,
 });
 
-const getTracks = (tracks, userId) => {
+const getTracks = (tracks) => {
     return {
         type: GET_TRACKS,
-        payload: {
         tracks,
-        userId,
-        }
     };
 };
 
-// const getUpload = () => {
-//     return {
-//         type: GET_UPLOAD,
-//     }
-// }
-
 export const addTrack = (track) => async (dispatch) => {
     const { files, track_name, description, user_id } = track;
-    // debugger
     console.log('track', track);
     const formData = new FormData();
     formData.append("description", description);
@@ -48,7 +37,6 @@ export const addTrack = (track) => async (dispatch) => {
         },
         body: formData,
     })
-    //breaks in the post
     console.log('res', res);
     const data = await res.json();
     console.log('trackData?', data);
@@ -62,8 +50,10 @@ export const getUsers = () => async (dispatch) => {
 
 export const getTracksFromUser = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/users/${id}/tracks`);
+    console.log('response', response)
     const tracks = await response.json();
-    dispatch(getTracks(tracks, id))
+    console.log('tracks', tracks)
+    dispatch(getTracks(tracks))
     return tracks;
 }
 
@@ -79,14 +69,7 @@ const usersReducer = (state = initialState, action) => {
             });
             return newState;
         case GET_TRACKS:
-            newState = { ...state };
-            for (let key in newState) {
-                newState[key].tracks = [];
-                if (Number(key) === action.payload.userId) {
-                    newState[key].tracks = [...action.payload.tracks];
-                }
-            }
-            return newState;
+            return { ...state, tracks: action.tracks };
         default:
             return state;
     }
