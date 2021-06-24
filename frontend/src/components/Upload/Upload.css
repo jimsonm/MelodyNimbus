@@ -64,6 +64,10 @@
   object-fit: cover;
 }
 
+.objContain {
+  object-fit: contain;
+}
+
 .trackTextField {
   height: 75px;
 }
@@ -110,11 +114,79 @@
 .uploadedTrack {
   width: 798px;
   height: 178px;
-  border: 1px solid gray;
+  border: 1px solid #f2f2f2;
   margin-top: 40px;
+  box-shadow: 0 2px 12px -5px rgb(0 0 0 / 10%);
 }
 
 .lastTrackCoverArt {
   height: 120px;
   width: 120px;
+  object-fit: cover;
+}
+
+.uploadedTrackImgDiv {
+  margin: 25px;
+}
+
+.flexbox {
+  display: flex;
+}
+
+.uploadedTrackTextDiv {
+  margin: 25px 5px;
+  height: 40%;
+  width: 70%;  
+}
+
+.shareTrackDiv {
+  width:30%
+}
+
+.shareTrackText {
+  padding-top: 50px;
+  font-size: 14px;
+  font-family: 'Lucida Grande';
+  color: #999;
+  margin: 3px 0px;
+  font-weight: 500;
+}
+
+.shareTrackTextbox {
+  margin: 20px 0px;
+}
+
+.uploadedTrackUser {
+  font-size: 14px;
+  font-family: 'Lucida Grande';
+  color: #999;
+  margin: 3px 0px;
+}
+
+.uploadedTrackName, .uploadedTrackDescription, .uploadedTrackComplete {
+  font-family: 'Lucida Grande';
+  margin: 4px 0px;
+}
+
+.uploadedTrackName {
+  font-size: 16px;
+}
+
+.uploadedTrackDescription {
+  font-size: 14px;
+  overflow:hidden;
+  height: 25%;
+  width: 100%;
+  padding-top: 20px;
+  color:#999;
+}
+
+.uploadedTrackComplete {
+  font-size: 14px;
+}
+
+.trackNavLink {
+  font-size: 14px;
+  font-family: 'Lucida Grande';
+  color: #38d;
 }

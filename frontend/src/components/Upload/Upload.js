@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import * as sessionActions from "../../store/session";
 import * as userActions from '../../store/users';
+import { NavLink } from 'react-router-dom';
 import './Upload.css';
 
 function Upload() {
@@ -17,9 +17,9 @@ function Upload() {
     const [cover_art, setCover_art] = useState();
     const [cover_art_src, setCover_art_src] = useState();
     const [uploadAnother, setUploadAnother] = useState(false);
-    const tracksBySelectedUser = users[users.length-1];
+    // change back to false
+    const tracksBySelectedUser = users[users.length - 1];
     const lastUpload = tracksBySelectedUser?.[tracksBySelectedUser.length - 1]
-    console.log('27', lastUpload)
 
     useEffect(() => {
         dispatch(userActions.getUsers())
@@ -45,6 +45,17 @@ function Upload() {
         await setTrackUploaded(false);
         await setUploadAnother(true);
     }
+
+    const albumImg = document.querySelector('.albumImg')
+    if (albumImg?.src === 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-track-cover-img.png') {
+        albumImg?.classList.add('objContain');
+    }
+
+    useEffect(() => {
+        if (albumImg?.src !== 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-track-cover-img.png') {
+            albumImg?.classList.remove('objContain');
+        }
+    }, [cover_art_src])
 
     const uploadImg = (e) => {
         const file = e.target.files[0];
@@ -74,6 +85,10 @@ function Upload() {
         setCover_art_src();
     }
 
+    const highlight = (event) => {
+        event.target.select();
+    }
+
     return (
         <div className='flexCenter'>
             <form onSubmit={handleUpload}>
@@ -96,7 +111,7 @@ function Upload() {
                         <div className='flexBox'>
                             <div className='trackImgContainer'>
                                 <img
-                                    src={cover_art_src || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
+                                    src={cover_art_src || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-track-cover-img.png'}
                                     className='albumImg'
                                 />
                                 <div>
@@ -148,16 +163,42 @@ function Upload() {
                             <label htmlFor='track' className='uploadInput3 saveButton flexCenter'>Upload a file</label>
                         </div>
                     </div>
-                    <div className='uploadedTrack'>
-                        <div>
+                    <div className='uploadedTrack flexbox'>
+                        <div className='flexCenter uploadedTrackImgDiv'>
                             <img
                                 src={lastUpload?.cover_art || sessionUser?.avatar_img}
                                 alt="coverArt"
                                 className='lastTrackCoverArt'
                             />
                         </div>
-                        <div>
-                            test text
+                        <div className='block uploadedTrackTextDiv'>
+                            <div className='uploadedTrackUser'>
+                                {sessionUser.first_name} {sessionUser.last_name}
+                            </div>
+                            <div className='uploadedTrackName'>
+                                {lastUpload.track_name}
+                            </div>
+                            <div className='uploadedTrackDescription'>
+                                {lastUpload.description}
+                            </div>
+                            <div className='uploadedTrackComplete'>
+                                Upload Complete.
+                            </div>
+                            <NavLink to={`/users/${sessionUser.id}/${lastUpload.track_name}`} className='trackNavLink'>
+                                Go to your track.
+                            </NavLink>
+                            {/* add functionality to go to the track's page */}
+                        </div>
+                        <div className='shareTrackDiv'>
+                            <div className='shareTrackText'>
+                                Share your track
+                            </div>
+                            <input
+                                type='text'
+                                value={`http://localhost:3000/users/${sessionUser.id}/${lastUpload.track_name}`}
+                                className='shareTrackTextbox'
+                                onClick={highlight}
+                            />
                         </div>
                     </div>
                 </div>

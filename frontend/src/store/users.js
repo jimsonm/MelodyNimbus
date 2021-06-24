@@ -17,7 +17,6 @@ const getTracks = (tracks) => {
 
 export const addTrack = (track) => async (dispatch) => {
     const { files, track_name, description, user_id } = track;
-    console.log('track', track);
     const formData = new FormData();
     formData.append("description", description);
     formData.append("track_name", track_name);
@@ -29,7 +28,6 @@ export const addTrack = (track) => async (dispatch) => {
             formData.append("files", files[i]);
         }
     }
-    console.log('formdata', formData);
     const res = await csrfFetch(`/api/upload`, {
         method: 'POST',
         headers: {
@@ -37,9 +35,7 @@ export const addTrack = (track) => async (dispatch) => {
         },
         body: formData,
     })
-    console.log('res', res);
     const data = await res.json();
-    console.log('trackData?', data);
 }
 
 export const getUsers = () => async (dispatch) => {
@@ -50,9 +46,7 @@ export const getUsers = () => async (dispatch) => {
 
 export const getTracksFromUser = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/users/${id}/tracks`);
-    console.log('response', response)
     const tracks = await response.json();
-    console.log('tracks', tracks)
     dispatch(getTracks(tracks))
     return tracks;
 }

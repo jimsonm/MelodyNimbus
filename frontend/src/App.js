@@ -27,6 +27,9 @@ function App() {
         <Route exact path='/users/:id/tracks'>
           <Tracks />
         </Route>
+        <Route exact path ='/users/:id/:track_name'>
+          <h1>your song link here</h1>
+        </Route>
         <Route exact path='/users/:id'> 
           <UserProfilePage />
         </Route>
