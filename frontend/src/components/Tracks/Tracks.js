@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, NavLink  } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useParams, NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import * as userActions from '../../store/users';
 import './Tracks.css';
+import { Modal } from '../../context/Modal';
+import EditTrackModal from '../EditTrackModal';
 
 function Tracks() {
     const userId = useParams();
@@ -10,8 +12,14 @@ function Tracks() {
     const sessionUser = useSelector((state) => state.session.user);
     const userProfile = useSelector((state) => state.user[userId.id]);
     const users = useSelector((state) => Object.values(state.user));
-    const selectedUser = users[userId.id - 1];  
-    const tracksBySelectedUser = users[users.length-1];
+    const selectedUser = users[userId.id - 1];
+    const tracksBySelectedUser = users[users.length - 1];
+
+    const [showTrackModal, setShowTrackModal] = useState(false);
+
+    const showEditTrack = () => {
+        setShowTrackModal(true);
+    }
 
     useEffect(() => {
         dispatch(userActions.getTracksFromUser(userId.id))
@@ -44,16 +52,28 @@ function Tracks() {
                                 <source src={track?.track_src} type="audio/mp3" />
                             </audio>
                         </div>
+                        <div>
+                            {sessionUser?.id === userProfile?.id ? (
+                                <button onClick={showEditTrack}>
+                                    Edit
+                                </button>) : null
+                            }
+                        </div>
                     </div>
                 </div>
             ) : null}
+            {showTrackModal && (
+                <Modal onClose={() => setShowTrackModal(false)}>
+                    <EditTrackModal setShowTrackModal={setShowTrackModal} />
+                </Modal>
+            )}
             {tracksBySelectedUser?.length === 0 && userProfile.id === sessionUser.id ?
                 <div className='noTrackContainer'>
                     <div className='quietDiv'>
                         Seems a little quiet over here
                     </div>
                     <div className='uploadNavLink'>
-                        <NavLink exact to='/Upload'>
+                        <NavLink exact to='/upload'>
                             Upload a track to share it with your followers.
                         </NavLink>
                     </div>
@@ -67,7 +87,7 @@ function Tracks() {
                         {/* change whats displayed here to something else */}
                     </div>
                     <div className='uploadNavLink'>
-                        <NavLink exact to='/Upload'>
+                        <NavLink exact to='/upload'>
                             Upload a track to share it with your followers.
                         </NavLink>
                     </div>

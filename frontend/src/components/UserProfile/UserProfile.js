@@ -31,42 +31,10 @@ function UserProfilePage() {
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
-    }, []);
+        dispatch(userActions.getTracksFromUser(userId.id))
+    }, [dispatch, userId]);
 
     const correctUser = (sessionUser?.id === userProfile?.id)
-
-    const deleteAvatar = async (e) => {
-        console.log('888888888 test')
-        e.preventDefault();
-        await dispatch(sessionActions.editProfileAvatar({
-            image: "",
-            id: userId.id,
-            display_name: sessionUser.display_name,
-            first_name: sessionUser.first_name,
-            last_name: sessionUser.last_name,
-            city: sessionUser.city,
-            country: sessionUser.country,
-            bio: sessionUser.bio,
-        }))
-        dispatch(userActions.getUsers(userId.id))
-        toggle();
-    };
-
-    const deleteHeader = async (e) => {
-        e.preventDefault();
-        await dispatch(sessionActions.editProfileHeader({
-            image: '',
-            id: userId.id,
-            display_name: sessionUser.display_name,
-            first_name: sessionUser.first_name,
-            last_name: sessionUser.last_name,
-            city: sessionUser.city,
-            country: sessionUser.country,
-            bio: sessionUser.bio,
-        }))
-        dispatch(userActions.getUsers(userId.id))
-        toggle3();
-    };
 
     const updateFile = (e) => {
         const file = e.target.files[0];
