@@ -12,18 +12,30 @@ function Tracks() {
     const sessionUser = useSelector((state) => state.session.user);
     const userProfile = useSelector((state) => state.user[userId.id]);
     const users = useSelector((state) => Object.values(state.user));
-    const userTracks = useSelector((state) => state.user['tracks']);
+    console.log(userProfile)
+    // const userTracks = useSelector((state) => state.user['tracks'])
+    // console.log(userTracks);
+    console.log(users);
+
     const selectedUser = users[userId.id - 1];
     const tracksBySelectedUser = users[users.length - 1];
+    console.log(tracksBySelectedUser);
+    console.log(selectedUser);
+    // const allTracks = Object.values(userTracks);
+
+    let allTracks = [];
+    if (tracksBySelectedUser) {
+        allTracks = Object.values(tracksBySelectedUser)
+    }
+    console.log(allTracks)
+
+    // console.log(allTracks);
     // console.log(tracksBySelectedUser);
     const [showTrackModal, setShowTrackModal] = useState(false);
     const [editTrack, setEditTrack] = useState();
-    // console.log(editTrack)
+    console.log(editTrack)
 
     const showEditTrack = (e) => {
-        // console.log(e.target.parentElement.parentElement.parentElement)
-        // console.log(e.target.value);
-        // console.log('test!', tracksBySelectedUser?.[e.target.value])
         const selectedTrack = tracksBySelectedUser?.find(track => track.id === +e.target.value)
         setEditTrack(selectedTrack)
         setShowTrackModal(true);
@@ -36,7 +48,8 @@ function Tracks() {
 
     return (
         <div>
-            {tracksBySelectedUser?.length > 0 ? tracksBySelectedUser?.map((track) =>
+            {console.log('asdf', allTracks)}
+            {allTracks?.length > 0 ? allTracks?.map((track) =>
                 <div key={track.id} className='trackDiv'>
                     <div>
                         <img
@@ -72,10 +85,10 @@ function Tracks() {
             ) : null}
             {showTrackModal && (
                 <Modal onClose={() => setShowTrackModal(false)}>
-                    <EditTrackModal setShowTrackModal={setShowTrackModal} track={editTrack}/>
+                    <EditTrackModal setShowTrackModal={setShowTrackModal} track={editTrack} />
                 </Modal>
             )}
-            {tracksBySelectedUser?.length === 0 && userProfile.id === sessionUser.id ?
+            {allTracks?.length === 0 && userProfile.id === sessionUser.id ?
                 <div className='noTrackContainer'>
                     <div className='quietDiv'>
                         Seems a little quiet over here
@@ -88,7 +101,7 @@ function Tracks() {
                 </div>
                 : null
             }
-            {tracksBySelectedUser?.length === 0 && userProfile.id !== sessionUser.id ?
+            {allTracks?.length === 0 && userProfile.id !== sessionUser.id ?
                 <div className='noTrackContainer'>
                     <div className='quietDiv'>
                         This user has no tracks

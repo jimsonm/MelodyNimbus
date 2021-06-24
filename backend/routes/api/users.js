@@ -57,11 +57,7 @@ router.get(
     '/:id',
     restoreUser,
     asyncHandler(async (req, res) => {
-        console.log('bodyyyyyyyyyyyyy', req.body);
         const user = await User.getCurrentUserById(req.params.id);
-        console.log('userrrrrrrrrrrrr', user)
-        // console.log('===========', res.json(user))
-        console.log('get /:id')
         return res.json(user);;
     }),
 );
@@ -73,7 +69,6 @@ router.put(
     singleMulterUpload("image"),
     asyncHandler(async (req, res) => {
         await User.getCurrentUserById(req.params.id);
-        console.log('put route body', req.body);
         let avatar_img;
         if (req.file) {
             avatar_img = await singlePublicFileUpload(req.file)

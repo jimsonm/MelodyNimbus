@@ -94,15 +94,15 @@ const usersReducer = (state = initialState, action) => {
             });
             return newState;
         case GET_TRACKS:
-            // newState = { ...state };
-            // newState[tracks] = action.tracks.forEach((track) => {
-            //     track.id = track
-            // })
-            console.log(action.tracks)
+            let trackState = { ...state, 'tracks': {}}
+            action.tracks.forEach((track) => {
+                trackState.tracks[track.id] = track
+            })
             // action.tracks.forEach((track => {
             //     newState[tracks] = { track.id: track}
             // }))
-            return { ...state, tracks: action.tracks };
+            return trackState;
+            // return { ...state, tracks: action.tracks };
             // return newState;
         case UPDATE_TRACK:
             newState = { ...state };

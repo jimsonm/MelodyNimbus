@@ -16,7 +16,6 @@ function UserProfilePage() {
     const sessionUser = useSelector((state) => state.session.user)
     const userProfile = useSelector((state) => state.user[userId.id]);
     const userTracks = useSelector((state) => state.user['tracks']);
-    console.log(userTracks);
     const [avatar_img, setAvatar_Img] = useState(userProfile?.avatar_img);
     const [header_img, setHeader_Img] = useState(userProfile?.header_img);
     const [showModal, setShowModal] = useState(false);
