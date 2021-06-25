@@ -171,6 +171,7 @@ input[type="file"] {
 
 .profileBodyContainer {
   display: flex;
+  height: 100%;
 }
 
 .allTracksDiv {
@@ -186,4 +187,8 @@ input[type="file"] {
   padding: 25px;
   border-top: 0.5px solid gray;
   border-left: 0.5px solid gray;
+}
+
+.profileLayoutDiv {
+  height: 100%;
 }

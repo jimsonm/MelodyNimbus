@@ -87,7 +87,7 @@ function UserProfilePage() {
     }
 
     return (
-        <div>
+        <div className='profileLayoutDiv'>
             <div className='banner'>
                 <img
                     src={userProfile?.header_img}

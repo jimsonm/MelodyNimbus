@@ -14,20 +14,24 @@ function Tracks() {
     const users = useSelector((state) => Object.values(state.user));
     const tracksBySelectedUser = useSelector((state) => state.user.tracks)
     const selectedUser = users[userId.id - 1];
+    const [showTrackModal, setShowTrackModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [editTrack, setEditTrack] = useState();
 
     let allTracks = null;
     if (users && tracksBySelectedUser) {
         allTracks = Object.values(tracksBySelectedUser)
     }
 
-    const [showTrackModal, setShowTrackModal] = useState(false);
-    const [editTrack, setEditTrack] = useState();
-    console.log(editTrack)
-
     const showEditTrack = (e) => {
         const selectedTrack = allTracks?.find(track => track.id === +e.target.value)
         setEditTrack(selectedTrack)
         setShowTrackModal(true);
+    }
+
+    const showConfirmDelete = (e) => {
+        const selectedTrack = allTracks?.find(track => track.id === +e.target.value)
+        setShowDeleteModal(true);
     }
 
     useEffect(() => {
@@ -37,7 +41,6 @@ function Tracks() {
 
     return (
         <div>
-            {/* {console.log('asdf', allTracks)} */}
             {allTracks?.map((track) =>
                 <div key={track.id} className='trackDiv'>
                     <div>
@@ -66,6 +69,11 @@ function Tracks() {
                             {sessionUser?.id === userProfile?.id ? (
                                 <button onClick={showEditTrack} value={track.id}>
                                     Edit
+                                </button>) : null
+                            }
+                            {sessionUser?.id === userProfile?.id ? (
+                                <button onClick={showConfirmDelete} value={track.id}>
+                                    Delete
                                 </button>) : null
                             }
                         </div>

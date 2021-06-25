@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import * as userActions from '../../store/users';
+import './EditTrack.css';
 
 function EditTrack({ setShowTrackModal, track }) {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function EditTrack({ setShowTrackModal, track }) {
     }
 
     return (
-        <div>
+        <div className='editTrackContainer'>
             <form onSubmit={handleUpload}>
                 <div className='uploadContainer2'>
                     <div className='basicInfo'>
@@ -88,7 +89,6 @@ function EditTrack({ setShowTrackModal, track }) {
                         <button type="submit" onSubmit={handleUpload} className='saveButton'>Upload</button>
                     </div>
                 </div>
-                <button onClick={() => setShowTrackModal(false)}>ok</button>
             </form>
         </div>
     )
