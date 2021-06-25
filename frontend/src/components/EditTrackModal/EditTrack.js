@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import * as userActions from '../../store/users';
 import './EditTrack.css';

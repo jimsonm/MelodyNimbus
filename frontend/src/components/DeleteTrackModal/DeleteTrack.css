@@ -1,0 +1,31 @@
+.deleteTrackContainer {
+    width: 500px;
+    height: 385px;
+}
+
+.permDeleteDiv {
+    font-size: 16px;
+    font-family: 'Lucida Grande';
+    margin: 20px 0px;
+}
+
+.permDeleteContainer {
+    margin-top: 80px;
+}
+
+.confirmDeleteTrack {
+    border-radius: 4px;
+    border: 1px solid #f2f2f2;
+}
+
+.irreversibleDiv {
+    margin: 15px;
+    font-size: 12px;
+    font-family: 'Lucida Grande';
+}
+
+.buttonsDiv {
+    display: flex;
+    margin: 15px;
+    justify-content: flex-end;
+}

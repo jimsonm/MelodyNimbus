@@ -5,6 +5,7 @@ import * as userActions from '../../store/users';
 import './Tracks.css';
 import { Modal } from '../../context/Modal';
 import EditTrackModal from '../EditTrackModal';
+import DeleteTrackModal from "../DeleteTrackModal";
 
 function Tracks() {
     const userId = useParams();
@@ -17,6 +18,7 @@ function Tracks() {
     const [showTrackModal, setShowTrackModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [editTrack, setEditTrack] = useState();
+    const [deleteTrackId, setDeleteTrackId] = useState();
 
     let allTracks = null;
     if (users && tracksBySelectedUser) {
@@ -30,7 +32,9 @@ function Tracks() {
     }
 
     const showConfirmDelete = (e) => {
-        const selectedTrack = allTracks?.find(track => track.id === +e.target.value)
+        // const selectedTrack = allTracks?.find(track => track.id === +e.target.value)
+        const id = e.target.value;
+        setDeleteTrackId(id);
         setShowDeleteModal(true);
     }
 
@@ -52,10 +56,10 @@ function Tracks() {
                     </div>
                     <div className='descriptionContainer'>
                         <div>
-                            {track?.track_name}
+                            {selectedUser.display_name}
                         </div>
                         <div>
-                            By: {selectedUser.display_name}
+                            {track?.track_name}
                         </div>
                         <div className='trackDescription'>
                             {track?.description}
@@ -73,7 +77,7 @@ function Tracks() {
                             }
                             {sessionUser?.id === userProfile?.id ? (
                                 <button onClick={showConfirmDelete} value={track.id}>
-                                    Delete
+                                    Delete Track
                                 </button>) : null
                             }
                         </div>
@@ -83,6 +87,11 @@ function Tracks() {
             {showTrackModal && (
                 <Modal onClose={() => setShowTrackModal(false)}>
                     <EditTrackModal setShowTrackModal={setShowTrackModal} track={editTrack} />
+                </Modal>
+            )}
+            {showDeleteModal && (
+                <Modal onClose={() => setShowDeleteModal(false)}>
+                    <DeleteTrackModal setShowDeleteModal={setShowDeleteModal} trackId={deleteTrackId} />
                 </Modal>
             )}
             {allTracks?.length === 0 && userProfile.id === sessionUser.id ?
