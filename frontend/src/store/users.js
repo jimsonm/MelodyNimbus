@@ -100,19 +100,11 @@ const usersReducer = (state = initialState, action) => {
             action.tracks.forEach((track) => {
                 trackState.tracks[track.id] = track
             })
-            // action.tracks.forEach((track => {
-            //     newState[tracks] = { track.id: track}
-            // }))
             return trackState;
-            // return { ...state, tracks: action.tracks };
-            // return newState;
         case UPDATE_TRACK:
             newState = { ...state };
             let id = action.track.id
-            console.log(newState.tracks[id]);
-            console.log(action.track.id)
             newState.tracks[id] = action.track
-            console.log(action.track)
             return newState;
         default:
             return state;
