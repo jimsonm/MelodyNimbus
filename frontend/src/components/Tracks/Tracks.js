@@ -12,31 +12,20 @@ function Tracks() {
     const sessionUser = useSelector((state) => state.session.user);
     const userProfile = useSelector((state) => state.user[userId.id]);
     const users = useSelector((state) => Object.values(state.user));
-    console.log(userProfile)
-    // const userTracks = useSelector((state) => state.user['tracks'])
-    // console.log(userTracks);
-    console.log(users);
-
+    const tracksBySelectedUser = useSelector((state) => state.user.tracks)
     const selectedUser = users[userId.id - 1];
-    const tracksBySelectedUser = users[users.length - 1];
-    console.log(tracksBySelectedUser);
-    console.log(selectedUser);
-    // const allTracks = Object.values(userTracks);
 
-    let allTracks = [];
-    if (tracksBySelectedUser) {
+    let allTracks = null;
+    if (users && tracksBySelectedUser) {
         allTracks = Object.values(tracksBySelectedUser)
     }
-    console.log(allTracks)
 
-    // console.log(allTracks);
-    // console.log(tracksBySelectedUser);
     const [showTrackModal, setShowTrackModal] = useState(false);
     const [editTrack, setEditTrack] = useState();
     console.log(editTrack)
 
     const showEditTrack = (e) => {
-        const selectedTrack = tracksBySelectedUser?.find(track => track.id === +e.target.value)
+        const selectedTrack = allTracks?.find(track => track.id === +e.target.value)
         setEditTrack(selectedTrack)
         setShowTrackModal(true);
     }
@@ -48,8 +37,8 @@ function Tracks() {
 
     return (
         <div>
-            {console.log('asdf', allTracks)}
-            {allTracks?.length > 0 ? allTracks?.map((track) =>
+            {/* {console.log('asdf', allTracks)} */}
+            {allTracks?.map((track) =>
                 <div key={track.id} className='trackDiv'>
                     <div>
                         <img
@@ -82,7 +71,7 @@ function Tracks() {
                         </div>
                     </div>
                 </div>
-            ) : null}
+            )}
             {showTrackModal && (
                 <Modal onClose={() => setShowTrackModal(false)}>
                     <EditTrackModal setShowTrackModal={setShowTrackModal} track={editTrack} />

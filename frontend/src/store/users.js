@@ -63,10 +63,11 @@ export const editTrack = (track) => async (dispatch) => {
         },
         body: formData,
     });
+    console.log(track)
     console.log('res', res);
     const data = await res.json();
-    console.log('data', data);
-    dispatch(getTracks(data))
+    console.log('data!', data);
+    dispatch(updateTrack(data))
 }
 
 export const getUsers = () => async (dispatch) => {
@@ -94,6 +95,7 @@ const usersReducer = (state = initialState, action) => {
             });
             return newState;
         case GET_TRACKS:
+            console.log(action.tracks)
             let trackState = { ...state, 'tracks': {}}
             action.tracks.forEach((track) => {
                 trackState.tracks[track.id] = track
@@ -106,8 +108,10 @@ const usersReducer = (state = initialState, action) => {
             // return newState;
         case UPDATE_TRACK:
             newState = { ...state };
-            // newState[tracks]
-            // need to rest the other tracks and get current track to update
+            let id = action.track.id
+            console.log(newState.tracks[id]);
+            console.log(action.track.id)
+            newState.tracks[id] = action.track
             console.log(action.track)
             return newState;
         default:

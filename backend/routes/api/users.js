@@ -142,7 +142,7 @@ router.put(
         // await Track.getTrackByName(req.params.track_name)
         await Track.getTrackById(req.params.track_id);
         const updatedTrack = await Track.edit({ track_src, track_name, description, user_id, cover_art });
-        console.log('150',updatedTrack)
+        console.log(updatedTrack)
         return res.json(updatedTrack);
     })
 )

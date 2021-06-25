@@ -11,10 +11,6 @@ function EditTrack({ setShowTrackModal, track }) {
     const [cover_art_src, setCover_art_src] = useState(track.cover_art);
     const user_id = track.user_id;
     const track_id = track.id;
-    console.log('14', track_id);
-    // console.log(user_id);
-    // console.log(cover_art_src);
-    // console.log('qqqqqq', track);
 
     const uploadImg = (e) => {
         const file = e.target.files[0];
