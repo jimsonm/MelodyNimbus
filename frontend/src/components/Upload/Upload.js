@@ -17,9 +17,15 @@ function Upload() {
     const [cover_art, setCover_art] = useState();
     const [cover_art_src, setCover_art_src] = useState();
     const [uploadAnother, setUploadAnother] = useState(false);
-    // change back to false
-    const tracksBySelectedUser = users[users.length - 1];
-    const lastUpload = tracksBySelectedUser?.[tracksBySelectedUser.length - 1]
+    // const tracksBySelectedUser = users[users.length - 1];
+    const tracksBySelectedUser = useSelector((state) => state.user.tracks)
+    console.log(tracksBySelectedUser)
+    let lastUpload = null;
+    if(tracksBySelectedUser) {
+    lastUpload = Object.values(tracksBySelectedUser);
+    lastUpload = lastUpload[lastUpload.length-1]
+    }
+    console.log('last up', lastUpload)
 
     useEffect(() => {
         dispatch(userActions.getUsers())
@@ -182,7 +188,7 @@ function Upload() {
                             <div className='uploadedTrackComplete'>
                                 Upload Complete.
                             </div>
-                            <NavLink to={`/users/${sessionUser.id}/${lastUpload.track_name}`} className='trackNavLink'>
+                            <NavLink to={`/users/${sessionUser.id}/${lastUpload.id}`} className='trackNavLink'>
                                 Go to your track.
                             </NavLink>
                             {/* add functionality to go to the track's page */}

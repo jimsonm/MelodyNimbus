@@ -1,23 +1,29 @@
 import './DeleteTrack.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
+import * as userActions from '../../store/users';
 
 function DeleteTrack({setShowDeleteModal, trackId }) {
+    const dispatch = useDispatch();
     // console.log(trackId);
     // const trackId = {trackId};
     const deleteTrackId = Number(trackId);
     // console.log(deleteTrackId)
     const { id } = useParams();
-    // console.log(id);
+    console.log(+id);
     const userProfile = useSelector((state) => state.user[id]);
     // console.log(userProfile);
     const tracksBySelectedUser = useSelector((state) => Object.values(state.user.tracks));
     // console.log(tracksBySelectedUser);
     const selectedTrack = tracksBySelectedUser?.find(track => track.id === deleteTrackId);
-    console.log(selectedTrack);
+    console.log(selectedTrack.id);
 
     const deleteTrack = async () => {
         //dispatch the delete
+        await dispatch(userActions.deleteTrack({
+            user_id: +id,
+            track_id: selectedTrack.id,
+        }))
         await setShowDeleteModal(false)
     }
 

@@ -19,6 +19,15 @@ module.exports = (sequelize, DataTypes) => {
     return await Track.findByPk(id);
   };
 
+  Track.deleteTrackById = async function(user_id, track_id) {
+    return await Track.destroy({
+      where: {
+        id: track_id,
+        user_id,
+      }
+    })
+  };
+
   Track.getTrackByName = async function (name) {
     return await Track.findOne({
       where: {

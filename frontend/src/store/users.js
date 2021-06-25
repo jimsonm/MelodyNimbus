@@ -1,3 +1,4 @@
+import { applyMiddleware } from 'redux';
 import { csrfFetch } from './csrf';
 
 const SET_USERS = 'users/SET_USERS';
@@ -81,6 +82,18 @@ export const getTracksFromUser = (id) => async (dispatch) => {
     const tracks = await response.json();
     dispatch(getTracks(tracks))
     return tracks;
+}
+
+export const deleteTrack = (track) => async (dispatch) => {
+    const { user_id, track_id } = track;
+    console.log(user_id, track_id)
+    console.log('test1')
+    const response = await csrfFetch(`/api/users/${user_id}/${track_id}`, {
+        method: 'DELETE',
+    });
+    const allTracks = await response.json();
+    console.log('test3')
+    dispatch(getTracks(allTracks))
 }
 
 const initialState = {};

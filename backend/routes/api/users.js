@@ -147,6 +147,20 @@ router.put(
     })
 )
 
+router.delete(
+    '/:id/:track_id',
+    restoreUser,
+    requireAuth,
+    asyncHandler( async (req, res) => {
+        console.log('testtest2test2test2test2test2test2test2test2test2test2test2test2test2test2test2test2test2test22')
+        const userId = req.params.id
+        const trackId = req.params.track_id
+
+        const result = await Track.deleteTrackById(userId, trackId);
+        // return res.json(result);
+    })
+)
+
 router.get(
     '/:id/tracks',
     restoreUser,
