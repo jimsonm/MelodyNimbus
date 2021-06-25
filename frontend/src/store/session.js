@@ -47,11 +47,8 @@ export const login = (user) => async (dispatch) => {
 };
 
 export const getProfile = (id) => async (dispatch) => {
-  console.log('41 id', id)
   const response = await csrfFetch(`/api/users/${id}`)
-  console.log('43 res', response);
   const updatedProfile = await response.json();
-  console.log('45 updatedProfile', updatedProfile);
   dispatch(getUser(updatedProfile))
   return updatedProfile;
 }
@@ -71,7 +68,6 @@ export const editProfile = (payload) => async (dispatch) => {
   if (header_img) formData.append('header_img', header_img);
 
   // for single file
-  console.log('zzzz', image);
   if (image) formData.append("image", image);
   const res = await csrfFetch(`/api/users/${id}`, {
     method: "PUT",
@@ -80,9 +76,7 @@ export const editProfile = (payload) => async (dispatch) => {
     },
     body: formData,
   });
-  console.log('res', res);
   const data = await res.json();
-  console.log('data', data);
   dispatch(setUser(data));
 }
 
@@ -100,7 +94,6 @@ export const editProfile2 = (payload) => async (dispatch) => {
   if (header_img) formData.append('header_img', header_img);
 
   // for single file
-  console.log('zzzz', image);
   if (image) formData.append("image", image);
   const res = await csrfFetch(`/api/users/${id}/header`, {
     method: "PUT",
@@ -109,9 +102,7 @@ export const editProfile2 = (payload) => async (dispatch) => {
     },
     body: formData,
   });
-  console.log('res', res);
   const data = await res.json();
-  console.log('data', data);
   dispatch(setUser(data));
 }
 
@@ -129,7 +120,6 @@ export const editProfileAvatar = (payload) => async (dispatch) => {
   if (header_img) formData.append('header_img', header_img);
 
   // for single file
-  console.log('zzzz', image);
   if (image) formData.append("image", image);
   const res = await csrfFetch(`/api/users/${id}/defaultAvatar`, {
     method: "PUT",
@@ -138,9 +128,7 @@ export const editProfileAvatar = (payload) => async (dispatch) => {
     },
     body: formData,
   });
-  console.log('res', res);
   const data = await res.json();
-  console.log('data', data);
   dispatch(setUser(data));
 }
 
@@ -158,7 +146,6 @@ export const editProfileHeader = (payload) => async (dispatch) => {
   if (header_img) formData.append('header_img', header_img);
 
   // for single file
-  console.log('zzzz', image);
   if (image) formData.append("image", image);
   const res = await csrfFetch(`/api/users/${id}/defaultHeader`, {
     method: "PUT",
@@ -167,9 +154,7 @@ export const editProfileHeader = (payload) => async (dispatch) => {
     },
     body: formData,
   });
-  console.log('res', res);
   const data = await res.json();
-  console.log('data', data);
   dispatch(setUser(data));
 }
 
@@ -181,7 +166,6 @@ export const signup = (user) => async dispatch => {
   });
 
   const data = await res.json();
-  console.log('data', data);
   dispatch(setUser(data.user));
 };
 

@@ -86,7 +86,6 @@ router.put(
     singleMulterUpload("image"),
     asyncHandler(async (req, res) => {
         await User.getCurrentUserById(req.params.id);
-        console.log('put route body', req.body);
         let header_img;
         if (req.file) {
             header_img = await singlePublicFileUpload(req.file)
@@ -104,7 +103,6 @@ router.put(
     singleMulterUpload("image"),
     asyncHandler(async (req, res) => {
         await User.getCurrentUserById(req.params.id);
-        console.log('put route body', req.body);
         const avatar_img = 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'
         const { display_name, image, first_name, last_name, city, country, bio, id} = req.body
         const updatedUser = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, avatar_img });
@@ -119,7 +117,6 @@ router.put(
     singleMulterUpload("image"),
     asyncHandler(async (req, res) => {
         await User.getCurrentUserById(req.params.id);
-        console.log('put route body', req.body);
         const header_img = 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-background-image.jpeg'
         const { display_name, image, first_name, last_name, city, country, bio, id} = req.body
         const updatedUser = await User.edit({ display_name, image, first_name, last_name, city, country, bio, id, header_img });
@@ -133,16 +130,13 @@ router.put(
     requireAuth,
     singleMulterUpload('file'),
     asyncHandler(async (req, res) => {
-        console.log('step 3');
         const { track_src, track_name, description, user_id } = req.body
         let cover_art;
         if(req.file) {
             cover_art = await singlePublicFileUpload(req.file);
         }
-        // await Track.getTrackByName(req.params.track_name)
         await Track.getTrackById(req.params.track_id);
         const updatedTrack = await Track.edit({ track_src, track_name, description, user_id, cover_art });
-        console.log(updatedTrack)
         return res.json(updatedTrack);
     })
 )
@@ -152,10 +146,8 @@ router.delete(
     restoreUser,
     requireAuth,
     asyncHandler( async (req, res) => {
-        console.log('testtest2test2test2test2test2test2test2test2test2test2test2test2test2test2test2test2test2test22')
         const userId = req.params.id
         const trackId = req.params.track_id
-
         const result = await Track.deleteTrackById(userId, trackId);
         const tracks = await Track.findAll({
             where: {

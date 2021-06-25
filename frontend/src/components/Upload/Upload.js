@@ -17,15 +17,13 @@ function Upload() {
     const [cover_art, setCover_art] = useState();
     const [cover_art_src, setCover_art_src] = useState();
     const [uploadAnother, setUploadAnother] = useState(false);
-    // const tracksBySelectedUser = users[users.length - 1];
     const tracksBySelectedUser = useSelector((state) => state.user.tracks)
-    console.log(tracksBySelectedUser)
     let lastUpload = null;
-    if(tracksBySelectedUser) {
-    lastUpload = Object.values(tracksBySelectedUser);
-    lastUpload = lastUpload[lastUpload.length-1]
+    if (tracksBySelectedUser) {
+        lastUpload = Object.values(tracksBySelectedUser);
+        lastUpload = lastUpload[lastUpload.length - 1]
     }
-    console.log('last up', lastUpload)
+
 
     useEffect(() => {
         dispatch(userActions.getUsers())
@@ -35,7 +33,7 @@ function Upload() {
         if (sessionUser) {
             dispatch(userActions.getTracksFromUser(id))
         }
-    }, [selectedUser, trackUploaded])
+    }, [selectedUser, trackUploaded, id, sessionUser])
 
     const handleUpload = async (e) => {
         e.preventDefault();

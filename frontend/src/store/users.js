@@ -1,4 +1,3 @@
-import { applyMiddleware } from 'redux';
 import { csrfFetch } from './csrf';
 
 const SET_USERS = 'users/SET_USERS';
@@ -37,14 +36,15 @@ export const addTrack = (track) => async (dispatch) => {
             formData.append("files", files[i]);
         }
     }
-    const res = await csrfFetch(`/api/upload`, {
+    await csrfFetch(`/api/upload`, {
         method: 'POST',
         headers: {
             "Content-Type": "multipart/form-data",
         },
         body: formData,
     })
-    const data = await res.json();
+    // const data = await res.json();
+    // dispatch(setUsers(data))
 }
 
 export const editTrack = (track) => async (dispatch) => {
@@ -54,9 +54,8 @@ export const editTrack = (track) => async (dispatch) => {
     formData.append("track_name", track_name);
     formData.append("user_id", user_id);
     formData.append("track_src", track_src);
-    console.log(track);
+
     if (file) formData.append('file', file);
-    console.log('step 2');
     const res = await csrfFetch(`/api/users/${user_id}/${track_id}`, {
         method: "PUT",
         headers: {
@@ -64,10 +63,7 @@ export const editTrack = (track) => async (dispatch) => {
         },
         body: formData,
     });
-    console.log(track)
-    console.log('res', res);
     const data = await res.json();
-    console.log('data!', data);
     dispatch(updateTrack(data))
 }
 
@@ -86,13 +82,10 @@ export const getTracksFromUser = (id) => async (dispatch) => {
 
 export const deleteTrack = (track) => async (dispatch) => {
     const { user_id, track_id } = track;
-    console.log(user_id, track_id)
-    console.log('test1')
     const response = await csrfFetch(`/api/users/${user_id}/${track_id}`, {
         method: 'DELETE',
     });
     const allTracks = await response.json();
-    console.log('test3')
     dispatch(getTracks(allTracks))
 }
 
@@ -108,7 +101,6 @@ const usersReducer = (state = initialState, action) => {
             });
             return newState;
         case GET_TRACKS:
-            console.log(action.tracks)
             let trackState = { ...state, 'tracks': {}}
             action.tracks.forEach((track) => {
                 trackState.tracks[track.id] = track

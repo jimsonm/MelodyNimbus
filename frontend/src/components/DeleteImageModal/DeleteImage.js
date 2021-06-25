@@ -10,7 +10,6 @@ function DeleteImage({ toggle, toggle3, img, setShowDeleteModal }) {
     const sessionUser = useSelector((state) => state.session.user)
 
     const deleteImg = async (e) => {
-        console.log('sdada', img);
         e.preventDefault();
         if (img === 'avatar') {
             deleteAvatar();

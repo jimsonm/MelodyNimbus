@@ -34,7 +34,6 @@ function EditTrack({ setShowTrackModal, track }) {
             user_id,
             track_id
         }
-        console.log('step 1');
         await dispatch(userActions.editTrack(track));
         await setShowTrackModal(false);
     }

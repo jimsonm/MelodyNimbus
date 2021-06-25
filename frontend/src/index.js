@@ -10,7 +10,6 @@ import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
 import * as userActions from './store/users';
-import * as uploadActions from './store/upload';
 
 const store = configureStore();
 
@@ -21,7 +20,6 @@ if (process.env.NODE_ENV !== "production") {
   window.store = store;
   window.sessionActions = sessionActions;
   window.userActions = userActions;
-  window.uploadActions = uploadActions;
 }
 
 function Root() {

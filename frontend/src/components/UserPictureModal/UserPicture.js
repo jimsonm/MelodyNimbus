@@ -25,7 +25,6 @@ function UserPicture({ imgSrc, setShowPictureModal, avatar_img, toggle}) {
     }, [imgSrc])
 
     const handleSubmit = async (e) => {
-        console.log('zzzzzzzz', imgSrc)
         e.preventDefault();
         await dispatch(sessionActions.editProfile({
             image: avatar_img,

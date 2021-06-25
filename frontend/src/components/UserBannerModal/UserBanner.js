@@ -11,8 +11,6 @@ function UserBanner({ setShowBannerModal, bannerSrc, header_img, toggle3 }) {
     const userProfile = useSelector((state) => state.user[userId.id]);
 
     const handleSubmit2 = async (e) => {
-        console.log('asdf', bannerSrc)
-        console.log('pppppp', header_img)
         e.preventDefault();
         await dispatch(sessionActions.editProfile2({
             image: header_img,

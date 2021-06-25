@@ -35,7 +35,6 @@ function EditUserProfile({ setShowModal }) {
 
     const updateFile = (e) => {
         const file = e.target.files[0];
-        console.log('file', file)
         if (file) setImage(file);
         setImgSrc(window.URL.createObjectURL(file))
         setToggleDisplay2(false);

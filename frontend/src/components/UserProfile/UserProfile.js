@@ -15,7 +15,6 @@ function UserProfilePage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user)
     const userProfile = useSelector((state) => state.user[userId.id]);
-    const userTracks = useSelector((state) => state.user['tracks']);
     const [avatar_img, setAvatar_Img] = useState(userProfile?.avatar_img);
     const [header_img, setHeader_Img] = useState(userProfile?.header_img);
     const [showModal, setShowModal] = useState(false);
@@ -43,7 +42,6 @@ function UserProfilePage() {
         setShowPictureModal(true)
     };
     const updateFile2 = (e) => {
-        console.log('testing');
         const file = e.target.files[0];
         if (file) setHeader_Img(file);
         setBannerSrc(window.URL.createObjectURL(file))
