@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import * as userActions from '../../store/users';
 import { NavLink } from 'react-router-dom';
+import { Modal } from '../../context/Modal';
 import './Upload.css';
+import LoginForm from '../LoginFormModal/LoginForm';
 
 function Upload() {
     const dispatch = useDispatch();
@@ -17,6 +19,7 @@ function Upload() {
     const [cover_art, setCover_art] = useState();
     const [cover_art_src, setCover_art_src] = useState();
     const [uploadAnother, setUploadAnother] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const tracksBySelectedUser = useSelector((state) => state.user.tracks)
     let lastUpload = null;
     if (tracksBySelectedUser) {
@@ -92,115 +95,174 @@ function Upload() {
     }
 
     return (
-        <div className='flexCenter'>
-            <form onSubmit={handleUpload}>
-                {trackUploaded === false && uploadAnother === false && (
-                    <div className='uploadContainer'>
-                        <div className='uploadTitle flexCenter'>
-                            Get started on uploading tracks
-                        </div>
-                        <div className='uploadButtonDiv flexCenter'>
-                            <input type='file' name='track' id='track' onChange={uploadTrack} />
-                            <label htmlFor='track' className='uploadInput saveButton flexCenter'>Choose a file to upload</label>
-                        </div>
-                    </div>
-                )}
-                {trackUploaded && (
-                    <div className='uploadContainer2'>
-                        <div className='basicInfo'>
-                            Basic info
-                        </div>
-                        <div className='flexBox'>
-                            <div className='trackImgContainer'>
-                                <img
-                                    src={cover_art_src || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-track-cover-img.png'}
-                                    className='albumImg'
-                                />
-                                <div>
-                                    <input type="file" name="cover" id="cover" onChange={uploadImg} className='imageInputs' />
-                                    <label htmlFor='cover' className='imageInput'>Upload Image</label>
+        <div>
+            {sessionUser && (
+                <div className='flexCenter'>
+                    <form onSubmit={handleUpload}>
+                        {trackUploaded === false && uploadAnother === false && (
+                            <div className='uploadContainer'>
+                                <div className='uploadTitle flexCenter'>
+                                    Get started on uploading tracks
+                                </div>
+                                <div className='uploadButtonDiv flexCenter'>
+                                    <input type='file' name='track' id='track' onChange={uploadTrack} />
+                                    <label htmlFor='track' className='uploadInput saveButton flexCenter'>Choose a file to upload</label>
                                 </div>
                             </div>
-                            <div className='block maxWidth'>
-                                <div className='input'>
-                                    <label>
-                                        Title
-                                        <input
-                                            type="text"
-                                            value={track_name}
-                                            onChange={(e) => setTrack_name(e.target.value)}
-                                            required
-                                            className='textfield'
-                                        />
-                                    </label>
+                        )}
+                        {trackUploaded && (
+                            <div className='uploadContainer2'>
+                                <div className='basicInfo'>
+                                    Basic info
                                 </div>
-                                <div className='input'>
-                                    <label>
-                                        Description
-                                        <textarea
-                                            value={description}
-                                            placeholder='Describe the track.'
-                                            onChange={(e) => setDescription(e.target.value)}
-                                            className='textfield trackTextField'
+                                <div className='flexBox'>
+                                    <div className='trackImgContainer'>
+                                        <img
+                                            src={cover_art_src || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-track-cover-img.png'}
+                                            className='albumImg'
                                         />
-                                    </label>
+                                        <div>
+                                            <input type="file" name="cover" id="cover" onChange={uploadImg} className='imageInputs' />
+                                            <label htmlFor='cover' className='imageInput'>Upload Image</label>
+                                        </div>
+                                    </div>
+                                    <div className='block maxWidth'>
+                                        <div className='input'>
+                                            <label>
+                                                Title
+                                                <input
+                                                    type="text"
+                                                    value={track_name}
+                                                    onChange={(e) => setTrack_name(e.target.value)}
+                                                    required
+                                                    className='textfield'
+                                                />
+                                            </label>
+                                        </div>
+                                        <div className='input'>
+                                            <label>
+                                                Description
+                                                <textarea
+                                                    value={description}
+                                                    placeholder='Describe the track.'
+                                                    onChange={(e) => setDescription(e.target.value)}
+                                                    className='textfield trackTextField'
+                                                />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='editProfileButtonsDiv'>
+                                    <button id='cancelButton' className='cancelButton' onClick={resetFields} >Cancel</button>
+                                    <button type="submit" onSubmit={handleUpload} className='saveButton'>Upload</button>
+                                </div>
+                            </div>
+                        )}
+                    </form>
+                    {uploadAnother && lastUpload && (
+                        <div>
+                            <div className='uploadContainer3'>
+                                <div className='uploadTitle3 flexCenter'>
+                                    Choose another file to upload
+                                </div>
+                                <div className='flexCenter'>
+                                    <input type='file' name='track' id='track' onChange={uploadTrack2} />
+                                    <label htmlFor='track' className='uploadInput3 saveButton flexCenter'>Upload a file</label>
+                                </div>
+                            </div>
+                            <div className='uploadedTrack flexbox'>
+                                <div className='flexCenter uploadedTrackImgDiv'>
+                                    <img
+                                        src={lastUpload?.cover_art || sessionUser?.avatar_img}
+                                        alt="coverArt"
+                                        className='lastTrackCoverArt'
+                                    />
+                                </div>
+                                <div className='block uploadedTrackTextDiv'>
+                                    <div className='uploadedTrackUser'>
+                                        {sessionUser.first_name} {sessionUser.last_name}
+                                    </div>
+                                    <div className='uploadedTrackName'>
+                                        {lastUpload.track_name}
+                                    </div>
+                                    <div className='uploadedTrackDescription'>
+                                        {lastUpload.description}
+                                    </div>
+                                    <div className='uploadedTrackComplete'>
+                                        Upload Complete.
+                                    </div>
+                                    <NavLink to={`/users/${sessionUser.id}/${lastUpload.id}`} className='trackNavLink'>
+                                        Go to your track.
+                                    </NavLink>
+                                    {/* add functionality to go to the track's page */}
+                                </div>
+                                <div className='shareTrackDiv'>
+                                    <div className='shareTrackText'>
+                                        Share your track
+                                    </div>
+                                    <input
+                                        type='text'
+                                        value={`http://localhost:3000/users/${sessionUser.id}/${lastUpload.track_name}`}
+                                        className='shareTrackTextbox'
+                                        onClick={highlight}
+                                    />
                                 </div>
                             </div>
                         </div>
-                        <div className='editProfileButtonsDiv'>
-                            <button id='cancelButton' className='cancelButton' onClick={resetFields} >Cancel</button>
-                            <button type="submit" onSubmit={handleUpload} className='saveButton'>Upload</button>
-                        </div>
-                    </div>
-                )}
-            </form>
-            {uploadAnother && lastUpload && (
+                    )}
+                </div>
+            )}
+            {!sessionUser && (
                 <div>
-                    <div className='uploadContainer3'>
-                        <div className='uploadTitle3 flexCenter'>
-                            Choose another file to upload
-                        </div>
-                        <div className='flexCenter'>
-                            <input type='file' name='track' id='track' onChange={uploadTrack2} />
-                            <label htmlFor='track' className='uploadInput3 saveButton flexCenter'>Upload a file</label>
+                    <div className='flexCenter'>
+                        <div className='getStarted'>
+                            Get Started
                         </div>
                     </div>
-                    <div className='uploadedTrack flexbox'>
-                        <div className='flexCenter uploadedTrackImgDiv'>
-                            <img
-                                src={lastUpload?.cover_art || sessionUser?.avatar_img}
-                                alt="coverArt"
-                                className='lastTrackCoverArt'
-                            />
+                    <div className='flexJustCenter'>
+                        <div className='uploadNoAuth'>
+                            <div className='uploadNoAuthText'>
+                                <div className='firstUpload'>
+                                    First upload to your profile
+                                </div>
+                                <div className='shareTracks'>
+                                    Share your tracks and access the tools you need to break through and build your legacy.
+                                </div>
+                                <button onClick={() => setShowLoginModal(true)} className='saveButton firstTrackUpload'>Upload your first track</button>
+                                {showLoginModal && (
+                                    <Modal onClose={() => setShowLoginModal(false)}>
+                                        <LoginForm />
+                                    </Modal>
+                                )}
+                            </div>
                         </div>
-                        <div className='block uploadedTrackTextDiv'>
-                            <div className='uploadedTrackUser'>
-                                {sessionUser.first_name} {sessionUser.last_name}
+                    </div>
+                    <div className='flexJustCenter'>
+                        <div className='infoContainer flexbox'>
+                            <div className='info1'>
+                                <div className='titleText'>
+                                    Real-time stats
+                                </div>
+                                <div className='bodyText'>
+                                    See how many people have listened to your tracks and how many people like your tracks, all in real-time.
+                                </div>
                             </div>
-                            <div className='uploadedTrackName'>
-                                {lastUpload.track_name}
+                            <div className='info2'>
+                                <div className='titleText'>
+                                    Find your community
+                                </div>
+                                <div className='bodyText'>
+                                    Find similar minded individuals with song preferences similar to your own.
+                                </div>
                             </div>
-                            <div className='uploadedTrackDescription'>
-                                {lastUpload.description}
+                            <div className='info3'>
+                                <div className='titleText'>
+                                    Connect with others
+                                </div>
+                                <div className='bodyText'>
+                                    Discover new songs uploaded by others, you can always find something that'll suit your tastes.
+                                </div>
                             </div>
-                            <div className='uploadedTrackComplete'>
-                                Upload Complete.
-                            </div>
-                            <NavLink to={`/users/${sessionUser.id}/${lastUpload.id}`} className='trackNavLink'>
-                                Go to your track.
-                            </NavLink>
-                            {/* add functionality to go to the track's page */}
-                        </div>
-                        <div className='shareTrackDiv'>
-                            <div className='shareTrackText'>
-                                Share your track
-                            </div>
-                            <input
-                                type='text'
-                                value={`http://localhost:3000/users/${sessionUser.id}/${lastUpload.track_name}`}
-                                className='shareTrackTextbox'
-                                onClick={highlight}
-                            />
                         </div>
                     </div>
                 </div>

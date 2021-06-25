@@ -81,7 +81,8 @@
   z-index: 1;
   background-color: #fff;
   font-size: 14px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,17 +137,17 @@
 .uploadedTrackTextDiv {
   margin: 25px 5px;
   height: 40%;
-  width: 70%;  
+  width: 70%;
 }
 
 .shareTrackDiv {
-  width:30%
+  width: 30%;
 }
 
 .shareTrackText {
   padding-top: 50px;
   font-size: 14px;
-  font-family: 'Lucida Grande';
+  font-family: "Lucida Grande";
   color: #999;
   margin: 3px 0px;
   font-weight: 500;
@@ -158,13 +159,15 @@
 
 .uploadedTrackUser {
   font-size: 14px;
-  font-family: 'Lucida Grande';
+  font-family: "Lucida Grande";
   color: #999;
   margin: 3px 0px;
 }
 
-.uploadedTrackName, .uploadedTrackDescription, .uploadedTrackComplete {
-  font-family: 'Lucida Grande';
+.uploadedTrackName,
+.uploadedTrackDescription,
+.uploadedTrackComplete {
+  font-family: "Lucida Grande";
   margin: 4px 0px;
 }
 
@@ -174,11 +177,11 @@
 
 .uploadedTrackDescription {
   font-size: 14px;
-  overflow:hidden;
+  overflow: hidden;
   height: 25%;
   width: 100%;
   padding-top: 20px;
-  color:#999;
+  color: #999;
 }
 
 .uploadedTrackComplete {
@@ -187,6 +190,103 @@
 
 .trackNavLink {
   font-size: 14px;
-  font-family: 'Lucida Grande';
+  font-family: "Lucida Grande";
   color: #38d;
+}
+
+.uploadNoAuth {
+  display: flex;
+  justify-content: center;
+  height: 460px;
+  width: 1240px;
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjQwIDYzIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZn08L3N0eWxlPjwvZGVmcz48cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTI0MCAwIDAgNjMgMTI0MCA2MyIvPjwvc3ZnPgo=)
+      100% 100%/1240px 63px no-repeat,
+    url(https://a-v2.sndcdn.com/assets/images/img-upload-hero@2x-464ed045.jpg)
+      100% 100%/1240px 460px no-repeat;
+}
+
+.flexJustCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.uploadNoAuthText {
+  padding-top: 100px;
+  padding-left: 65px;
+  padding-right: 620px;
+}
+
+.getStarted {
+  display: block;
+  /* text-align: center; */
+  height: 40px;
+  width: 1200px;
+  padding: 20px 20px 0px 20px;
+  font-size: 18px;
+  font-family: "Interstate";
+  color: #f50;
+}
+
+.firstUpload {
+  font-size: 36px;
+  font-family: "Interstate";
+  color: white;
+  margin: 10px 0px;
+}
+
+.shareTracks {
+  font-size: 18px;
+  font-family: "Interstate";
+  color: white;
+  font-weight: 100;
+  margin: 10px 0px 30px 0px;
+}
+
+.firstTrackUpload {
+  border: none;
+  min-width: 240px;
+  height: 46px;
+  font-size: 18px;
+}
+
+.info1,
+.info2,
+.info3 {
+  width: 33%;
+  flex-direction: column;
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: center;
+  height: 170px;
+  width: 1240px;
+  margin: 0;
+}
+
+.info1 {
+  margin-top: 50px;
+}
+
+.info2 {
+  margin-top: 25px;
+}
+
+.info3 {
+  margin-top: 0px;
+}
+
+.titleText,
+.bodyText {
+  font-family: "Interstate";
+  padding: 0px 60px;
+}
+
+.titleText {
+  font-size: 20px;
+}
+
+.bodyText {
+  margin-top: 10px;
+  font-size: 16px;
 }
