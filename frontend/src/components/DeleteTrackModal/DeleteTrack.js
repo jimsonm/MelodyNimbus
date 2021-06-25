@@ -16,7 +16,6 @@ function DeleteTrack({setShowDeleteModal, trackId }) {
     const tracksBySelectedUser = useSelector((state) => Object.values(state.user.tracks));
     // console.log(tracksBySelectedUser);
     const selectedTrack = tracksBySelectedUser?.find(track => track.id === deleteTrackId);
-    console.log(selectedTrack.id);
 
     const deleteTrack = async () => {
         //dispatch the delete

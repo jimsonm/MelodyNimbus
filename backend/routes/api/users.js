@@ -157,7 +157,12 @@ router.delete(
         const trackId = req.params.track_id
 
         const result = await Track.deleteTrackById(userId, trackId);
-        // return res.json(result);
+        const tracks = await Track.findAll({
+            where: {
+                'user_id': userId
+            }
+        });
+        return res.json(tracks);
     })
 )
 
