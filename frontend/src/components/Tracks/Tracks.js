@@ -94,7 +94,7 @@ function Tracks() {
                     <DeleteTrackModal setShowDeleteModal={setShowDeleteModal} trackId={deleteTrackId} />
                 </Modal>
             )}
-            {allTracks?.length === 0 && userProfile.id === sessionUser.id ?
+            {allTracks?.length === 0 && userProfile?.id === sessionUser?.id ?
                 <div className='noTrackContainer'>
                     <div className='quietDiv'>
                         Seems a little quiet over here
@@ -107,7 +107,7 @@ function Tracks() {
                 </div>
                 : null
             }
-            {allTracks?.length === 0 && userProfile.id !== sessionUser.id ?
+            {allTracks?.length === 0 && userProfile?.id !== sessionUser?.id ?
                 <div className='noTrackContainer'>
                     <div className='quietDiv'>
                         This user has no tracks
