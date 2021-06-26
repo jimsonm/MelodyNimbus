@@ -9,11 +9,15 @@ const UserList = ({ user }) => {
             </div> */}
             <div className='userDivs'>
                 <div>
-                    <img
-                        style={{ width: "150px", height: "150px", borderRadius: "50%", objectFit: "cover" }}
-                        src={user?.avatar_img}
-                        alt="profile"
-                    />
+                    <div className='userAvatar'>
+                        <NavLink to={`/users/${user.id}`}>
+                            <img
+                                style={{ width: "150px", height: "150px", borderRadius: "50%", objectFit: "cover" }}
+                                src={user?.avatar_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
+                                alt="profile"
+                            />
+                        </NavLink>
+                    </div>
                 </div>
                 <div className='profileLink'>
                     <NavLink to={`/users/${user.id}`}>

@@ -88,7 +88,7 @@ function UserProfilePage() {
         <div className='profileLayoutDiv'>
             <div className='banner'>
                 <img
-                    src={userProfile?.header_img}
+                    src={userProfile?.header_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-background-image.jpeg'}
                     alt='banner'
                     className='bannerImg'
                 />
@@ -96,12 +96,14 @@ function UserProfilePage() {
             <div className='profileHeader'>
                 <div>
                     <div className='profileHeaderImgDiv'>
+                        <div className='profileAvatar'>
                         <img
-                            src={userProfile?.avatar_img}
+                            src={userProfile?.avatar_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
                             alt="profile"
                             className="profileHeaderImg"
                             onClick={expandImage}
                         />
+                        </div>
                         {correctUser && (
                             <button className='updateImage' onClick={toggle}>Update Image</button>
                         )}

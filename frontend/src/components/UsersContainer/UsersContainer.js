@@ -10,17 +10,19 @@ const UsersContainer = () => {
     const users = useSelector((state) => {
         return Object.values(state.user);
     })
-
+    const userList = users.filter(users => users.id !== undefined)
     useEffect(() => {
         dispatch(getUsers());
     }, [dispatch]);
 
     return (
-        <div className='container'>
-            {users.map((user) => {
-                return <UserList key={user.id} user={user} />
-            })}
+        <div>
+            <div className='container'>
+                {userList.map((user) => {
+                    return <UserList key={user.id} user={user} />
+                })}
 
+            </div>
         </div>
     )
 }

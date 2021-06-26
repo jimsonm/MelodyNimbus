@@ -17,6 +17,11 @@
   object-fit: cover;
 }
 
+.profileAvatar {
+  height: 200px;
+  width: 200px;
+}
+
 .profileHeaderImgDiv {
   position: relative;
   border-radius: 50%;

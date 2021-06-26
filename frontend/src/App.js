@@ -34,7 +34,6 @@ function App() {
           <UserProfilePage />
         </Route>
         <Route exact path ='/users'>
-          <h1>users</h1>
           <UsersContainer />
         </Route>
         <Route exact path ='/upload'>

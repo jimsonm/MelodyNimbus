@@ -49,7 +49,7 @@ function Tracks() {
                 <div key={track.id} className='trackDiv'>
                     <div>
                         <img
-                            src={track?.cover_art}
+                            src={track?.cover_art || userProfile.avatar_img}
                             alt="coverArt"
                             className='trackCoverArt'
                         />
@@ -109,13 +109,17 @@ function Tracks() {
             }
             {allTracks?.length === 0 && userProfile?.id !== sessionUser?.id ?
                 <div className='noTrackContainer'>
+                    <img
+                        alt='no tracks image'
+                        className='noTracksImage'
+                        src='https://melody-nimbus.s3.us-west-1.amazonaws.com/no-tracks.png'
+                    />
                     <div className='quietDiv'>
-                        This user has no tracks
-                        {/* change whats displayed here to something else */}
+                        Nothing to hear here
                     </div>
                     <div className='uploadNavLink'>
                         <NavLink exact to='/upload'>
-                            Upload a track to share it with your followers.
+                            Stay tuned and check back later to see if they share tracks in the future.
                         </NavLink>
                     </div>
                 </div>
