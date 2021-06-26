@@ -7,6 +7,7 @@ import EditUserProfile from './EditUserProfile';
 import UserPictureModal from '../UserPictureModal';
 import UserBannerModal from "../UserBannerModal";
 import DeleteImageModal from "../DeleteImageModal";
+import DeleteProfileModal from "../DeleteProfileModal";
 import { useParams } from 'react-router-dom';
 import Tracks from '../Tracks/Tracks';
 
@@ -21,6 +22,7 @@ function UserProfilePage() {
     const [showPictureModal, setShowPictureModal] = useState(false);
     const [showBannerModal, setShowBannerModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showDeleteProfileModal, setShowDeleteProfileModal] = useState(false);
     const [deleteImgType, setDeleteImgType] = useState();
     const [toggleDisplay, setToggleDisplay] = useState(false);
     const [toggleDisplay3, setToggleDisplay3] = useState(false);
@@ -175,7 +177,16 @@ function UserProfilePage() {
                 }
                 {showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                        <EditUserProfile setShowModal={setShowModal} toggle={toggle} />
+                        <EditUserProfile setShowModal={setShowModal}/>
+                    </Modal>
+                )}
+                {userProfile?.id === sessionUser?.id
+                    ? <button onClick={() => setShowDeleteProfileModal(true)}>Delete Profile</button>
+                    : null
+                }
+                {showDeleteProfileModal && (
+                    <Modal onClose={() => setShowDeleteProfileModal(false)}>
+                        <DeleteProfileModal setShowDeleteProfileModal={setShowDeleteProfileModal} />
                     </Modal>
                 )}
             </div>
@@ -187,7 +198,7 @@ function UserProfilePage() {
                     </div>
                 </div>
                 <div className='aboutMe'>
-                    {userProfile?.bio}
+                    {userProfile?.bio === "null" ? "" : userProfile?.bio}
                 </div>
             </div>
         </div>

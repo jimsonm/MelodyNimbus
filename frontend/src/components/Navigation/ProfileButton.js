@@ -40,7 +40,7 @@ function ProfileButton({ user }) {
     <>
       <button onClick={openMenu} className='profileButton'>
         <img
-          src={sessionUser.avatar_img}
+          src={sessionUser.avatar_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
           alt="profile"
           className="profileButtonImg"
         />

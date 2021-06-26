@@ -87,7 +87,7 @@ function EditUserProfile({ setShowModal }) {
                         <div>
                             <img
                                 style={{ 'border-radius': '50%', 'object-fit': 'cover', height: '240px', width: '240px' }}
-                                src={imgSrc || sessionUser.avatar_img}
+                                src={imgSrc || sessionUser.avatar_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
                                 alt="profile"
                             />
                             <button className='updateImage2' onClick={toggle2}>Update Image</button>

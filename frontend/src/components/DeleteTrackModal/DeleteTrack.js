@@ -1,4 +1,4 @@
-import './DeleteTrack.css'
+import './DeleteTrack.css';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import * as userActions from '../../store/users';
