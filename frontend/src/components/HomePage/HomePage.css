@@ -1,0 +1,71 @@
+.homeBannerContainer {
+  display: flex;
+  justify-content: center;
+  height: 460px;
+  width: 1240px;
+  background: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists@2x-00444712.jpg) 100% 100%/1240px 460px no-repeat;
+  color: white;
+}
+
+.homeBannerLinks {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.block {
+    display: block;
+}
+
+.secondContainer, .thirdContainer {
+    height: 460px;
+    width: 1240px;
+}
+
+.textContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homeText1, .homeText2, .homeText3 {
+    display: flex;
+    justify-content: center;
+}
+
+.homeText1 {
+    margin-top: 70px;
+    font-size: 36px;
+    font-family: 'Interstate';
+}
+
+.homeText2 {
+    margin-top: 20px;
+    max-width: 530px;
+    font-size: 18px;
+    font-family: 'Interstate';
+}
+
+.homeText3 {
+    margin-top: 20px;
+}
+
+.startUploadButton {
+    border: none;
+    width: 210px;
+    height: 46px;
+    font-size: 18px;
+    font-family: 'Interstate';
+}
+
+.buttonSpacing {
+    width: 25px;
+}
+
+.trendingText {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-size: 24px;
+    font-family: 'Interstate';
+}

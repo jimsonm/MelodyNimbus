@@ -202,7 +202,7 @@ function Upload() {
                                     </div>
                                     <input
                                         type='text'
-                                        value={`http://localhost:3000/users/${sessionUser.id}/${lastUpload.track_name}`}
+                                        value={`https://melodynimbus.herokuapp.com/users/${sessionUser.id}/${lastUpload.track_name}`}
                                         className='shareTrackTextbox'
                                         onClick={highlight}
                                     />

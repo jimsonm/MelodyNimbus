@@ -19,25 +19,28 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
       <Switch>
         <Route exact path='/'>
-          <h1>Discover New Songs</h1>
-          <HomePage />
+          <HomePage isLoaded={isLoaded}/>
         </Route>
         <Route exact path='/users/:id/tracks'>
+          <Navigation isLoaded={isLoaded} />
           <Tracks />
         </Route>
-        <Route exact path ='/users/:id/:track_id'>
+        <Route exact path='/users/:id/:track_id'>
+          <Navigation isLoaded={isLoaded} />
           <h1>your song link here</h1>
         </Route>
-        <Route exact path='/users/:id'> 
+        <Route exact path='/users/:id'>
+          <Navigation isLoaded={isLoaded} />
           <UserProfilePage />
         </Route>
-        <Route exact path ='/users'>
+        <Route exact path='/users'>
+          <Navigation isLoaded={isLoaded} />
           <UsersContainer />
         </Route>
-        <Route exact path ='/upload'>
+        <Route exact path='/upload'>
+          <Navigation isLoaded={isLoaded} />
           <Upload />
         </Route>
       </Switch>
