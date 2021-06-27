@@ -17,7 +17,7 @@ const UsersContainer = () => {
 
     return (
         <div>
-            <div className='container'>
+            <div className='container flexCenter'>
                 {userList.map((user) => {
                     return <UserList key={user.id} user={user} />
                 })}

@@ -24,8 +24,8 @@ function HomePage({ isLoaded }) {
                         <div className='homeBannerContainer'>
                             <div className='block secondContainer'>
                                 <div className='homeBannerLinks'>
-                                    <div>
-                                        MelodyNimbus
+                                    <div className='logoText'>
+                                            MELODYNIMBUS
                                     </div>
                                     <div>
                                         <div className='flexbox homeButtonContainer'>
