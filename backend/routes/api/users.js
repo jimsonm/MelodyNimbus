@@ -29,7 +29,6 @@ const validateSignup = [
     handleValidationErrors,
 ];
 
-// Sign up
 router.post(
     '/',
     validateSignup,
@@ -148,13 +147,24 @@ router.delete(
     asyncHandler( async (req, res) => {
         const userId = req.params.id
         const trackId = req.params.track_id
-        const result = await Track.deleteTrackById(userId, trackId);
+        await Track.deleteTrackById(userId, trackId);
         const tracks = await Track.findAll({
             where: {
                 'user_id': userId
             }
         });
         return res.json(tracks);
+    })
+)
+
+router.delete(
+    '/:id',
+    restoreUser,
+    requireAuth,
+    asyncHandler( async (req, res) => {
+        await User.deleteCurrentUserById(req.params.id);
+        const users = await User.findAll();
+        return res.json(users);
     })
 )
 

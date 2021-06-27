@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import UserProfilePage from "./components/UserProfile/UserProfile";
 import UsersContainer from "./components/UsersContainer/UsersContainer";
+import HomePage from "./components/HomePage/HomePage";
 import Tracks from "./components/Tracks/Tracks";
 import Upload from './components/Upload/Upload';
 
@@ -22,7 +23,7 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <h1>Discover New Songs</h1>
-          <UsersContainer />
+          <HomePage />
         </Route>
         <Route exact path='/users/:id/tracks'>
           <Tracks />

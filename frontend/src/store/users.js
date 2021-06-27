@@ -2,7 +2,7 @@ import { csrfFetch } from './csrf';
 
 const SET_USERS = 'users/SET_USERS';
 const GET_TRACKS = 'users/GET_TRACKS';
-const UPDATE_TRACK = 'users/UPDATE_TRACK'
+const UPDATE_TRACK = 'users/UPDATE_TRACK';
 
 const setUsers = (users) => ({
     type: SET_USERS,
@@ -87,6 +87,15 @@ export const deleteTrack = (track) => async (dispatch) => {
     });
     const allTracks = await response.json();
     dispatch(getTracks(allTracks))
+}
+
+export const deleteUser = (user) => async (dispatch) => {
+    const { user_id } = user;
+    const response = await csrfFetch(`/api/users/${user_id}`, {
+        method: 'DELETE',
+    });
+    const allUsers = await response.json();
+    dispatch(setUsers(allUsers));
 }
 
 const initialState = {};

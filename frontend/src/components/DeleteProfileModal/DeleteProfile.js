@@ -11,7 +11,9 @@ function DeleteProfile({setShowDeleteProfileModal}) {
     console.log(userProfile);
 
     const deleteAccount = async () => {
-        //dispatch to delete here
+        await dispatch(userActions.deleteUser({
+            user_id: +id
+        }))
         await setShowDeleteProfileModal(false)
         await history.push('/');
     }

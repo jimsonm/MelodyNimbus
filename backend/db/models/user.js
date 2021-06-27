@@ -84,6 +84,14 @@ module.exports = (sequelize, DataTypes) => {
     return await User.scope('currentUser').findByPk(id);
   };
 
+  User.deleteCurrentUserById = async function (id) {
+    return await User.destroy({
+      where: {
+        id
+      }
+    })
+  };
+
   User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
     const user = await User.scope('loginUser').findOne({
