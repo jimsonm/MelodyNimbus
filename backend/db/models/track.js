@@ -47,17 +47,18 @@ module.exports = (sequelize, DataTypes) => {
     return await Track.findByPk(track.id);
   }
 
-  Track.edit = async function ({ track_src, track_name, description, user_id, cover_art }) {
+  Track.edit = async function ({ track_src, track_name, description, user_id, cover_art, track_id }) {
     const track = await Track.update({
       track_src,
       track_name,
       description,
       user_id,
-      cover_art
+      cover_art,
+      track_id
     }, { where : {
-      track_name: track_name
+      id: track_id
     }});
-    return await Track.getTrackByName(track_name);
+    return await Track.getTrackById(track_id);
   }
 
   return Track;

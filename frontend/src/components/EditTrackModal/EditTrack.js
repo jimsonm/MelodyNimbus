@@ -85,7 +85,7 @@ function EditTrack({ setShowTrackModal, track }) {
                     </div>
                     <div className='editProfileButtonsDiv'>
                         <button id='cancelButton' className='cancelButton' onClick={closeModal} >Cancel</button>
-                        <button type="submit" onSubmit={handleUpload} className='saveButton'>Upload</button>
+                        <button type="submit" onSubmit={handleUpload} className='saveButton'>Save Changes</button>
                     </div>
                 </div>
             </form>

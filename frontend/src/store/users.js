@@ -54,6 +54,7 @@ export const editTrack = (track) => async (dispatch) => {
     formData.append("track_name", track_name);
     formData.append("user_id", user_id);
     formData.append("track_src", track_src);
+    formData.append("track_id", track_id);
 
     if (file) formData.append('file', file);
     const res = await csrfFetch(`/api/users/${user_id}/${track_id}`, {

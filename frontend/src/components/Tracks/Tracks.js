@@ -49,17 +49,19 @@ function Tracks() {
                 <div key={track.id} className='trackDiv'>
                     <div>
                         <img
-                            src={track?.cover_art || userProfile.avatar_img}
+                            src={track?.cover_art || userProfile?.avatar_img}
                             alt="coverArt"
                             className='trackCoverArt'
                         />
                     </div>
                     <div className='descriptionContainer'>
                         <div>
-                            {selectedUser.display_name}
+                            {selectedUser?.display_name}
                         </div>
                         <div>
-                            {track?.track_name}
+                            <NavLink to={`/users/${userId.id}/${track.id}`}>
+                                {track?.track_name}
+                            </NavLink>
                         </div>
                         <div className='trackDescription'>
                             {track?.description}

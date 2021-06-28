@@ -129,13 +129,13 @@ router.put(
     requireAuth,
     singleMulterUpload('file'),
     asyncHandler(async (req, res) => {
-        const { track_src, track_name, description, user_id } = req.body
+        const { track_src, track_name, description, user_id, track_id } = req.body
         let cover_art;
         if(req.file) {
             cover_art = await singlePublicFileUpload(req.file);
         }
         await Track.getTrackById(req.params.track_id);
-        const updatedTrack = await Track.edit({ track_src, track_name, description, user_id, cover_art });
+        const updatedTrack = await Track.edit({ track_src, track_name, description, user_id, cover_art, track_id });
         return res.json(updatedTrack);
     })
 )

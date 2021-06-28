@@ -8,6 +8,7 @@ import UsersContainer from "./components/UsersContainer/UsersContainer";
 import HomePage from "./components/HomePage/HomePage";
 import Tracks from "./components/Tracks/Tracks";
 import Upload from './components/Upload/Upload';
+import TrackPage from './components/TrackPage/TrackPage';
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         </Route>
         <Route exact path='/users/:id/:track_id'>
           <Navigation isLoaded={isLoaded} />
-          <h1>your song link here</h1>
+          <TrackPage />
         </Route>
         <Route exact path='/users/:id'>
           <Navigation isLoaded={isLoaded} />
