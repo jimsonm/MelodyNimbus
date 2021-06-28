@@ -6,6 +6,7 @@ import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
 import Navigation from "../Navigation";
 import './HomePage.css';
+import { NavLink } from 'react-router-dom';
 
 function HomePage({ isLoaded }) {
     const dispatch = useDispatch();
@@ -43,7 +44,9 @@ function HomePage({ isLoaded }) {
                                         Upload your first track and begin your journey. MelodyNimbus gives you space to create, find your fans, and connect with other artists.
                                     </div>
                                     <div className='homeText3'>
+                                        <NavLink to={`/upload`}>
                                         <button className='saveButton startUploadButton'>Start uploading today</button>
+                                        </NavLink>
                                     </div>
                                 </div>
                             </div>
