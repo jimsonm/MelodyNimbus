@@ -56,10 +56,11 @@
   height: 26px;
   top: 270px;
   left: 85px;
-  opacity: .7;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  opacity: 0.7;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 14px;
-  background-color: #FFF;
+  background-color: #fff;
   border-style: none;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -68,17 +69,20 @@
 }
 
 .updateImage2:hover {
-    opacity: 1;
+  cursor: pointer;
+  opacity: 1;
 }
 
-.replaceDiv2, .deleteDiv2 {
+.replaceDiv2,
+.deleteDiv2 {
   position: absolute;
   z-index: 1;
   width: 123px;
   height: 26px;
-  background-color: #FFF;
+  background-color: #fff;
   font-size: 14px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,15 +107,15 @@
 }
 
 .opacity1 {
-    opacity: 1;
+  opacity: 1;
 }
 
 .input {
-    margin: 10px 0px 10px 10px;
+  margin: 10px 0px 10px 10px;
 }
 
 .input2 {
-    display:flex;
-    justify-content: space-between;
-    margin: 10px 0px 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0px 10px 10px;
 }

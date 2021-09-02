@@ -119,10 +119,10 @@ function Tracks() {
                     <div className='quietDiv'>
                         Nothing to hear here
                     </div>
-                    <div className='uploadNavLink'>
-                        <NavLink exact to='/upload'>
+                    <div className='uploadNavLink'> 
+                        {/* <NavLink exact to='/upload'> */}
                             Stay tuned and check back later to see if they share tracks in the future.
-                        </NavLink>
+                        {/* </NavLink> */}
                     </div>
                 </div>
                 : null

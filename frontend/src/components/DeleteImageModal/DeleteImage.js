@@ -19,6 +19,10 @@ function DeleteImage({ toggle, toggle3, img, setShowDeleteModal }) {
         setShowDeleteModal(false);
     }
 
+    const cancel = () => {
+        setShowDeleteModal(false)
+    }
+
     const deleteAvatar = async (e) => {
         await dispatch(sessionActions.editProfileAvatar({
             image: "",
@@ -59,7 +63,7 @@ function DeleteImage({ toggle, toggle3, img, setShowDeleteModal }) {
             </div>
             <div className='buttonDiv'>
                 <form onSubmit={deleteImg}>
-                    <button className='cancelButton'>Cancel</button>
+                    <button className='cancelButton' onClick={cancel}>Cancel</button>
                     <button type='submit' onSubmit={deleteImg} className='saveButton'>Delete</button>
                 </form>
             </div>

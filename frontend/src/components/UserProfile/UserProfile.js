@@ -111,10 +111,10 @@ function UserProfilePage() {
                         )}
                         {toggleDisplay && (
                             <div className='replaceDiv'>
-                                <div>
+                                {/* <div className='innerReplace'> */}
                                     <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
                                     <label htmlFor='file' className='imageUpload'>Replace Image</label>
-                                </div>
+                                {/* </div> */}
                             </div>
                         )}
                         {toggleDisplay && (
@@ -151,10 +151,10 @@ function UserProfilePage() {
                         )}
                         {toggleDisplay3 && (
                             <div className='replaceDiv3'>
-                                <div>
+                                {/* <div> */}
                                     <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
                                     <label htmlFor='file2' className='imageUpload'>Replace Image</label>
-                                </div>
+                                {/* </div> */}
                             </div>
                         )}
                         {toggleDisplay3 && (

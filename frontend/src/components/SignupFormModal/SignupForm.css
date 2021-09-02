@@ -2,6 +2,10 @@
   width: 500px;
 }
 
+.updateImage:hover {
+  cursor: pointer;
+}
+
 .SignupButton {
   display: flex;
   font-size: 14px;
