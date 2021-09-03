@@ -73,12 +73,12 @@ function Tracks() {
                         </div>
                         <div>
                             {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showEditTrack} value={track.id}>
+                                <button onClick={showEditTrack} value={track.id} className='editTrackButton'>
                                     Edit
                                 </button>) : null
                             }
                             {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showConfirmDelete} value={track.id}>
+                                <button onClick={showConfirmDelete} value={track.id} className='deleteTrackButton'>
                                     Delete Track
                                 </button>) : null
                             }

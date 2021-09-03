@@ -78,12 +78,12 @@ function TrackPage() {
                         </div>
                         <div>
                             {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showEditTrack} value={selectedTrack.id}>
+                                <button onClick={showEditTrack} value={selectedTrack.id} className='editButton'>
                                     Edit
                                 </button>) : null
                             }
                             {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showConfirmDelete} value={selectedTrack.id}>
+                                <button onClick={showConfirmDelete} value={selectedTrack.id} className='deleteButton'>
                                     Delete Track
                                 </button>) : null
                             }

@@ -92,6 +92,10 @@
   padding: 3px;
 }
 
+.imageInput:hover {
+  cursor: pointer;
+}
+
 .uploadContainer3 {
   display: flex;
   width: 748px;

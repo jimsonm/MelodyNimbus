@@ -21,7 +21,7 @@ function ProfileButton({ user }) {
   useEffect(() => {
     const profileButton = document.querySelector(".profileButton");
     if (!showMenu) return profileButton.classList.remove("active");
-    
+
     const closeMenu = () => {
       setShowMenu(false);
     };
@@ -49,13 +49,16 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li className="profile-dropdown-li">
+          <li className="profile-dropdown-li1">
             <NavLink to={`/users/${sessionUser.id}`} className='ProfileNavLink' activeClassName='whiteActive'>
-              Profile
+              <div className='ProfileLinkDiv'>
+                Profile
+              </div>
             </NavLink>
           </li>
-          <li className="profile-dropdown-li">
-            <button onClick={logout} className='logoutButton'>Log Out</button>
+          <li className="profile-dropdown-li2" onClick={logout}>
+            {/* <button onClick={logout} className='logoutButton'>Log Out</button> */}
+            Log Out
           </li>
         </ul>
       )

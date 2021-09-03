@@ -99,12 +99,12 @@ function UserProfilePage() {
                 <div>
                     <div className='profileHeaderImgDiv'>
                         <div className='profileAvatar'>
-                        <img
-                            src={userProfile?.avatar_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
-                            alt="profile"
-                            className="profileHeaderImg"
-                            onClick={expandImage}
-                        />
+                            <img
+                                src={userProfile?.avatar_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
+                                alt="profile"
+                                className="profileHeaderImg"
+                                onClick={expandImage}
+                            />
                         </div>
                         {correctUser && (
                             <button className='updateImage' onClick={toggle}>Update Image</button>
@@ -112,8 +112,8 @@ function UserProfilePage() {
                         {toggleDisplay && (
                             <div className='replaceDiv'>
                                 {/* <div className='innerReplace'> */}
-                                    <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
-                                    <label htmlFor='file' className='imageUpload'>Replace Image</label>
+                                <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
+                                <label htmlFor='file' className='imageUpload'>Replace Image</label>
                                 {/* </div> */}
                             </div>
                         )}
@@ -152,8 +152,8 @@ function UserProfilePage() {
                         {toggleDisplay3 && (
                             <div className='replaceDiv3'>
                                 {/* <div> */}
-                                    <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
-                                    <label htmlFor='file2' className='imageUpload'>Replace Image</label>
+                                <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
+                                <label htmlFor='file2' className='imageUpload'>Replace Image</label>
                                 {/* </div> */}
                             </div>
                         )}
@@ -170,32 +170,37 @@ function UserProfilePage() {
                     </div>
                 </div>
             </div>
-            <div className='editButtonDiv'>
-                {userProfile?.id === sessionUser?.id
-                    ? <button onClick={() => setShowModal(true)}>Edit</button>
-                    : null
-                }
-                {showModal && (
-                    <Modal onClose={() => setShowModal(false)}>
-                        <EditUserProfile setShowModal={setShowModal}/>
-                    </Modal>
-                )}
-                {userProfile?.id === sessionUser?.id
-                    ? <button onClick={() => setShowDeleteProfileModal(true)}>Delete Profile</button>
-                    : null
-                }
-                {showDeleteProfileModal && (
-                    <Modal onClose={() => setShowDeleteProfileModal(false)}>
-                        <DeleteProfileModal setShowDeleteProfileModal={setShowDeleteProfileModal} />
-                    </Modal>
-                )}
+            <div className='bodyHeader'>
+                <div className='allTrackDiv'>
+                        All Tracks
+                </div>
+                <div className='editButtonDiv'>
+                    {userProfile?.id === sessionUser?.id
+                        ? <button onClick={() => setShowModal(true)} className='editButton'>Edit</button>
+                        : null
+                    }
+                    {showModal && (
+                        <Modal onClose={() => setShowModal(false)}>
+                            <EditUserProfile setShowModal={setShowModal} />
+                        </Modal>
+                    )}
+                    {userProfile?.id === sessionUser?.id
+                        ? <button onClick={() => setShowDeleteProfileModal(true)} className='deleteButton'>Delete Profile</button>
+                        : null
+                    }
+                    {showDeleteProfileModal && (
+                        <Modal onClose={() => setShowDeleteProfileModal(false)}>
+                            <DeleteProfileModal setShowDeleteProfileModal={setShowDeleteProfileModal} />
+                        </Modal>
+                    )}
+                </div>
             </div>
             <div className='profileBodyContainer'>
                 <div className='allTracksDiv'>
-                    All Tracks
-                    <div>
+                    {/* All Tracks */}
+                    {/* <div> */}
                         <Tracks />
-                    </div>
+                    {/* </div> */}
                 </div>
                 <div className='aboutMe'>
                     {userProfile?.bio === "null" ? "" : userProfile?.bio}
