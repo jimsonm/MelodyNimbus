@@ -56,7 +56,9 @@ function Tracks() {
                     </div>
                     <div className='descriptionContainer'>
                         <div>
-                            {selectedUser?.display_name}
+                            <NavLink to={`/users/${userId.id}`} activeClassName='whiteActive2'>
+                                {selectedUser?.display_name}
+                            </NavLink>
                         </div>
                         <div>
                             <NavLink to={`/users/${userId.id}/${track.id}`}>
@@ -119,9 +121,9 @@ function Tracks() {
                     <div className='quietDiv'>
                         Nothing to hear here
                     </div>
-                    <div className='uploadNavLink'> 
+                    <div className='uploadNavLink'>
                         {/* <NavLink exact to='/upload'> */}
-                            Stay tuned and check back later to see if they share tracks in the future.
+                        Stay tuned and check back later to see if they share tracks in the future.
                         {/* </NavLink> */}
                     </div>
                 </div>
