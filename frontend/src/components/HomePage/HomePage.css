@@ -3,84 +3,124 @@
   justify-content: center;
   height: 460px;
   width: 1240px;
-  background: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists@2x-00444712.jpg) 100% 100%/1240px 460px no-repeat;
+  background: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists@2x-00444712.jpg)
+    100% 100%/1240px 460px no-repeat;
   color: white;
 }
 
 .homeBannerLinks {
-    display: flex;
-    justify-content: space-between;
-    padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
 }
 
 .block {
-    display: block;
+  display: block;
 }
 
-.secondContainer, .thirdContainer {
-    height: 460px;
-    width: 1240px;
+.secondContainer,
+.thirdContainer {
+  height: 460px;
+  width: 1240px;
 }
 
 .textContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.homeText1, .homeText2, .homeText3 {
-    display: flex;
-    justify-content: center;
+.homeText1,
+.homeText2,
+.homeText3 {
+  display: flex;
+  justify-content: center;
 }
 
 .homeText1 {
-    margin-top: 70px;
-    font-size: 36px;
-    font-family: 'Interstate';
+  margin-top: 70px;
+  font-size: 36px;
+  font-family: "Interstate";
 }
 
 .homeText2 {
-    margin-top: 20px;
-    max-width: 530px;
-    font-size: 18px;
-    font-family: 'Interstate';
+  margin-top: 20px;
+  max-width: 530px;
+  font-size: 18px;
+  font-family: "Interstate";
 }
 
 .homeText3 {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .startUploadButton {
-    border: none;
-    width: 210px;
-    height: 46px;
-    font-size: 18px;
-    font-family: 'Interstate';
+  border: none;
+  width: 210px;
+  height: 46px;
+  font-size: 18px;
+  font-family: "Interstate";
 }
 
 .buttonSpacing {
-    width: 25px;
+  width: 25px;
 }
 
 .trendingText {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    font-size: 24px;
-    font-family: 'Interstate';
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  font-size: 24px;
+  font-family: "Interstate";
 }
 
 .logoText {
-    font-family: 'Roboto';
-    font-size: 18px;
-    font-weight: bolder;
+  font-family: "Roboto";
+  font-size: 18px;
+  font-weight: bolder;
 }
 
 * {
-margin: 0;
-padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 button:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.carouselDiv,
+.userDiv {
+  margin: 0% 5%;
+  padding: 20px 0px;
+}
+
+.userTextDiv {
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.carouselTextDiv,
+.userTextDiv {
+  font-size: 26px;
+  /* border-bottom: 1px solid black; */
 }

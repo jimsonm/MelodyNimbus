@@ -56,9 +56,9 @@ function Tracks() {
                     </div>
                     <div className='descriptionContainer'>
                         <div>
-                            <NavLink to={`/users/${userId.id}`} activeClassName='whiteActive2'>
+                            {/* <NavLink to={`/users/${userId.id}`} activeClassName='whiteActive2'> */}
                                 {selectedUser?.display_name}
-                            </NavLink>
+                            {/* </NavLink> */}
                         </div>
                         <div>
                             <NavLink to={`/users/${userId.id}/${track.id}`}>

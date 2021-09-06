@@ -81,6 +81,13 @@ export const getTracksFromUser = (id) => async (dispatch) => {
     return tracks;
 }
 
+export const getAllTracks = () => async (dispatch) => {
+    const response = await csrfFetch('/api/users/tracks/all');
+    const tracks = await response.json();
+    dispatch(getTracks(tracks))
+    return tracks;
+}
+
 export const deleteTrack = (track) => async (dispatch) => {
     const { user_id, track_id } = track;
     const response = await csrfFetch(`/api/users/${user_id}/${track_id}`, {

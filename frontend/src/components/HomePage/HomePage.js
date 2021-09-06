@@ -2,18 +2,23 @@ import UsersContainer from "../UsersContainer/UsersContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import * as sessionActions from "../../store/session";
+import * as userActions from '../../store/users';
 import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
-import Navigation from "../Navigation";
+import Navigation2 from "../Navigation";
 import './HomePage.css';
 import { NavLink } from 'react-router-dom';
+import Carousel from "./Carousel";
 
 function HomePage({ isLoaded }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    // const users = useSelector((state) => (state.user));
 
-    useEffect(() => {
-        dispatch(sessionActions.restoreUser());
+    useEffect(async () => {
+        await dispatch(sessionActions.restoreUser());
+        await dispatch(userActions.getUsers());
+        await dispatch(userActions.getAllTracks());
     }, [])
 
     return (
@@ -26,7 +31,7 @@ function HomePage({ isLoaded }) {
                             <div className='block secondContainer'>
                                 <div className='homeBannerLinks'>
                                     <div className='logoText'>
-                                            MELODYNIMBUS
+                                        MELODYNIMBUS
                                     </div>
                                     <div>
                                         <div className='flexbox homeButtonContainer'>
@@ -45,7 +50,7 @@ function HomePage({ isLoaded }) {
                                     </div>
                                     <div className='homeText3'>
                                         <NavLink to={`/upload`}>
-                                        <button className='saveButton startUploadButton'>Start uploading today</button>
+                                            <button className='saveButton startUploadButton'>Start uploading today</button>
                                         </NavLink>
                                     </div>
                                 </div>
@@ -66,8 +71,19 @@ function HomePage({ isLoaded }) {
             )}
             {sessionUser && (
                 <>
-                    <Navigation isLoaded={isLoaded} />
-                    <UsersContainer />
+                    <Navigation2 isLoaded={isLoaded} />
+                    <div className='carouselDiv'>
+                        <div className='carouselTextDiv'>
+                            Trending tracks produced by MelodyNimbus users.
+                        </div>
+                        <Carousel />
+                    </div>
+                    <div className='userDiv'>
+                        <div className='userTextDiv'>
+                            Check out other artists in the MelodyNimbus community.
+                        </div>
+                        <UsersContainer />
+                    </div>
                 </>
             )}
         </div>

@@ -1,0 +1,25 @@
+.carouselCoverArt {
+    width: 200px;
+    height: 200px;
+    padding-top: 50px;
+    /* padding-bottom: 50px; */
+    object-fit: cover;
+}
+
+.songSlide {
+    display: flex;
+    flex-direction: column;
+}
+
+.carouselTrackName {
+    padding-top: 10px;
+    padding-bottom: 40px;
+    font-family: 'Carter One', cursive;
+}
+
+.swiperContainer {
+    margin-top: 5px;
+    border: 1px solid #d3d3d3;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #edf2f7;
+}
