@@ -191,4 +191,19 @@ router.get(
         return res.json(tracks);
     })
 )
+
+router.get(
+    '/track/:track_id',
+    restoreUser,
+    asyncHandler(async (req, res) => {
+        const songId = req.params.track_id
+        const track = await Track.findOne({
+            where: {
+                'id': songId
+            }
+        })
+        return res.json(track);
+    })
+)
+
 module.exports = router;

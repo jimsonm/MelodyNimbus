@@ -7,7 +7,7 @@ import './Carousel.css';
 
 SwiperCore.use([EffectCoverflow, Navigation, Pagination])
 
-function Carousel() {
+function Carousel({setCurrentSongId}) {
     const users = useSelector((state) => (state.user));
 
     let songs;
@@ -24,7 +24,7 @@ function Carousel() {
                 slides.push(
                     <div>
                         <SwiperSlide key={i} className='songSlide'>
-                            <img src={song.cover_art} className='carouselCoverArt' />
+                            <img src={song.cover_art} className='carouselCoverArt' onClick={() => setCurrentSongId(song.id)}/>
                             <div className='carouselTrackName'>
                             {song.track_name}
                             </div>

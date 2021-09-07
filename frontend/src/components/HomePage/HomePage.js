@@ -1,6 +1,6 @@
 import UsersContainer from "../UsersContainer/UsersContainer";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as sessionActions from "../../store/session";
 import * as userActions from '../../store/users';
 import SignupFormModal from "../SignupFormModal";
@@ -9,11 +9,18 @@ import Navigation2 from "../Navigation";
 import './HomePage.css';
 import { NavLink } from 'react-router-dom';
 import Carousel from "./Carousel";
+import { setCurrentSong } from "../../store/current";
+
 
 function HomePage({ isLoaded }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
+    const [currentSongId, setCurrentSongId] = useState();
     // const users = useSelector((state) => (state.user));
+
+    useEffect(() => {
+        dispatch(setCurrentSong(currentSongId))
+    }, [currentSongId])
 
     useEffect(async () => {
         await dispatch(sessionActions.restoreUser());
@@ -76,7 +83,7 @@ function HomePage({ isLoaded }) {
                         <div className='carouselTextDiv'>
                             Trending tracks produced by MelodyNimbus users.
                         </div>
-                        <Carousel />
+                        <Carousel setCurrentSongId={setCurrentSongId}/>
                     </div>
                     <div className='userDiv'>
                         <div className='userTextDiv'>

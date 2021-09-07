@@ -73,6 +73,7 @@ function Tracks({setTrackCount}) {
                             {track?.description}
                         </div>
                         <div>
+                            {/* audio player */}
                             <audio controls>
                                 <source src={track?.track_src} type="audio/mp3" />
                             </audio>
