@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as userActions from '../../store/users';
+import * as sessionActions from '../../store/session';
 import './UserProfile.css';
 import { Modal } from '../../context/Modal';
 import EditUserProfile from './EditUserProfile';
@@ -29,6 +30,7 @@ function UserProfilePage() {
     const [opacity, setOpacity] = useState(false);
     const [imgSrc, setImgSrc] = useState();
     const [bannerSrc, setBannerSrc] = useState();
+    const [trackCount, setTrackCount] = useState();
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
@@ -172,7 +174,7 @@ function UserProfilePage() {
             </div>
             <div className='bodyHeader'>
                 <div className='allTrackDiv'>
-                        All Tracks
+                    All Tracks
                 </div>
                 <div className='editButtonDiv'>
                     {userProfile?.id === sessionUser?.id
@@ -199,11 +201,16 @@ function UserProfilePage() {
                 <div className='allTracksDiv'>
                     {/* All Tracks */}
                     {/* <div> */}
-                        <Tracks />
+                    <Tracks setTrackCount={setTrackCount}/>
                     {/* </div> */}
                 </div>
                 <div className='aboutMe'>
-                    {userProfile?.bio === "null" ? "" : userProfile?.bio}
+                    <div className='trackCounterDiv'>
+                        Tracks : {trackCount}
+                    </div>
+                    <div>
+                        {userProfile?.bio === "null" ? "" : userProfile?.bio}
+                    </div>
                 </div>
             </div>
         </div>

@@ -238,3 +238,8 @@ input[type="file"] {
   justify-content: space-between;
   padding: 0px 30px;
 }
+
+.trackCounterDiv {
+  font-size: 20px;
+  margin-bottom: 20px;
+}

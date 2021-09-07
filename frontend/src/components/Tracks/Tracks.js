@@ -7,7 +7,7 @@ import { Modal } from '../../context/Modal';
 import EditTrackModal from '../EditTrackModal';
 import DeleteTrackModal from "../DeleteTrackModal";
 
-function Tracks() {
+function Tracks({setTrackCount}) {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -37,6 +37,10 @@ function Tracks() {
         setDeleteTrackId(id);
         setShowDeleteModal(true);
     }
+
+    useEffect(() => {
+        setTrackCount(allTracks?.length);
+    }, [tracksBySelectedUser])
 
     useEffect(() => {
         dispatch(userActions.getTracksFromUser(userId.id))
