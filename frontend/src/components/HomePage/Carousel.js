@@ -22,7 +22,7 @@ function Carousel({setCurrentSongId}) {
             const src = song.cover_art
             if (src !== null) {
                 slides.push(
-                    <div>
+                    <div key={i}>
                         <SwiperSlide key={i} className='songSlide'>
                             <img src={song.cover_art} className='carouselCoverArt' onClick={() => setCurrentSongId(song.id)}/>
                             <div className='carouselTrackName'>

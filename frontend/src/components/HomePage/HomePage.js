@@ -10,6 +10,7 @@ import './HomePage.css';
 import { NavLink } from 'react-router-dom';
 import Carousel from "./Carousel";
 import { setCurrentSong } from "../../store/current";
+import BottomAudioPlayer from "../AudioPlayer/AudioPlayer";
 
 
 function HomePage({ isLoaded }) {
@@ -91,6 +92,7 @@ function HomePage({ isLoaded }) {
                         </div>
                         <UsersContainer />
                     </div>
+                    <BottomAudioPlayer />
                 </>
             )}
         </div>

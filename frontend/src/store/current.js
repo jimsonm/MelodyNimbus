@@ -8,9 +8,11 @@ const setSong = (song) => ({
 });
 
 export const setCurrentSong = (songId) => async (dispatch) => {
+    if(!songId) return;
     const response = await csrfFetch(`/api/users/track/${songId}`)
     const song = await response.json();
     dispatch(setSong(song));
+    return song;
 }
 
 const initialState = {}
