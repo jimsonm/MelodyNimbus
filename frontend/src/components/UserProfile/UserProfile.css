@@ -212,13 +212,18 @@ input[type="file"] {
   height: 100%;
 }
 
-.allTracksDiv {
-  font-size: 18px;
+.allTracksDivContainer {
   margin-left: 30px;
   width: 70%;
+}
+
+.allTracksDiv {
+  font-size: 18px;
+  /* margin-left: 30px;
+  width: 70%; */
   border-top: 0.5px solid gray;
   /* height: calc(100vh - 342px); */
-  /* border-right: 0.5px solid gray; */
+  border-right: 0.5px solid gray;
 }
 
 .aboutMe {
@@ -226,7 +231,7 @@ input[type="file"] {
   margin-right: 30px;
   padding: 30px 0px 0px 20px;
   border-top: 0.5px solid gray;
-  border-left: 0.5px solid gray;
+  /* border-left: 0.5px solid gray; */
 }
 
 .profileLayoutDiv {
@@ -242,4 +247,9 @@ input[type="file"] {
 .trackCounterDiv {
   font-size: 20px;
   margin-bottom: 20px;
+}
+
+.bottomFiller {
+  height: 60px;
+  border: none;
 }

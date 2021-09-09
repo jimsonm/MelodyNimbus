@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 
 
 function ProfileButton({ user }) {
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const history = useHistory();
+  const currState = useSelector(state => state.session.user);
+  // console.log(currState);
+
+  const toProfile = () => {
+    history.push(`/users/${sessionUser.id}`, currState)
+  }
 
   const openMenu = () => {
     const profileButton = document.querySelector(".profileButton");
@@ -50,11 +56,11 @@ function ProfileButton({ user }) {
       {showMenu && (
         <ul className="profile-dropdown">
           <li className="profile-dropdown-li1">
-            <NavLink to={`/users/${sessionUser.id}`} className='ProfileNavLink' activeClassName='whiteActive'>
-              <div className='ProfileLinkDiv'>
+            {/* <NavLink to={`/users/${sessionUser.id}`} className='ProfileNavLink' activeClassName='whiteActive'> */}
+              <div className='ProfileLinkDiv' onClick={() => toProfile()}>
                 Profile
               </div>
-            </NavLink>
+            {/* </NavLink> */}
           </li>
           <li className="profile-dropdown-li2" onClick={logout}>
             {/* <button onClick={logout} className='logoutButton'>Log Out</button> */}

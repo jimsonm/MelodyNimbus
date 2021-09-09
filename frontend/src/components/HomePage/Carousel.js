@@ -19,8 +19,8 @@ function Carousel({setCurrentSongId}) {
     let i = 0;
     if (songs) {
         songs.forEach(song => {
-            const src = song.cover_art
-            if (src !== null) {
+            const art = song.cover_art
+            if (art !== null) {
                 slides.push(
                     <div key={i}>
                         <SwiperSlide key={i} className='songSlide'>

@@ -11,6 +11,7 @@ import DeleteImageModal from "../DeleteImageModal";
 import DeleteProfileModal from "../DeleteProfileModal";
 import { useParams } from 'react-router-dom';
 import Tracks from '../Tracks/Tracks';
+import BottomAudioPlayer from "../AudioPlayer/AudioPlayer";
 
 function UserProfilePage() {
     const userId = useParams();
@@ -31,6 +32,7 @@ function UserProfilePage() {
     const [imgSrc, setImgSrc] = useState();
     const [bannerSrc, setBannerSrc] = useState();
     const [trackCount, setTrackCount] = useState();
+    const playingSong = useSelector((state) => state.current.song);
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
@@ -89,130 +91,136 @@ function UserProfilePage() {
     }
 
     return (
-        <div className='profileLayoutDiv'>
-            <div className='banner'>
-                <img
-                    src={userProfile?.header_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-background-image.jpeg'}
-                    alt='banner'
-                    className='bannerImg'
-                />
-            </div>
-            <div className='profileHeader'>
-                <div>
-                    <div className='profileHeaderImgDiv'>
-                        <div className='profileAvatar'>
-                            <img
-                                src={userProfile?.avatar_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
-                                alt="profile"
-                                className="profileHeaderImg"
-                                onClick={expandImage}
-                            />
-                        </div>
-                        {correctUser && (
-                            <button className='updateImage' onClick={toggle}>Update Image</button>
-                        )}
-                        {toggleDisplay && (
-                            <div className='replaceDiv'>
-                                {/* <div className='innerReplace'> */}
-                                <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
-                                <label htmlFor='file' className='imageUpload'>Replace Image</label>
-                                {/* </div> */}
-                            </div>
-                        )}
-                        {toggleDisplay && (
-                            <div className='deleteDiv' onClick={showDelete}>
-                                Delete Image
-                            </div>
-                        )}
-                        {showDeleteModal === true ?
-                            <Modal>
-                                <DeleteImageModal toggle={toggle} img={deleteImgType} setShowDeleteModal={setShowDeleteModal} toggle3={toggle3} />
-                            </Modal> : null
-                        }
-                    </div>
-                    {showPictureModal === true ?
-                        <Modal onClose={() => setShowPictureModal(false)}>
-                            <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal} avatar_img={avatar_img} toggle={toggle} />
-                        </Modal> : null}
+        <div className='profilepage'>
+            <div className='profileLayoutDiv'>
+                <div className='banner'>
+                    <img
+                        src={userProfile?.header_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-background-image.jpeg'}
+                        alt='banner'
+                        className='bannerImg'
+                    />
                 </div>
-                <div className='profileNameContainer'>
+                <div className='profileHeader'>
                     <div>
-                        <div className='profileDisplayName'>
-                            {userProfile?.display_name}
-                        </div>
-                        {(userProfile?.first_name || userProfile?.last_name) && (userProfile.first_name !== "null" && userProfile.last_name !== "null")
-                            ? <div className='profileName'>
-                                {userProfile?.first_name} {userProfile?.last_name}
+                        <div className='profileHeaderImgDiv'>
+                            <div className='profileAvatar'>
+                                <img
+                                    src={userProfile?.avatar_img || 'https://melody-nimbus.s3.us-west-1.amazonaws.com/default-avatar-image.webp'}
+                                    alt="profile"
+                                    className="profileHeaderImg"
+                                    onClick={expandImage}
+                                />
                             </div>
+                            {correctUser && (
+                                <button className='updateImage' onClick={toggle}>Update Image</button>
+                            )}
+                            {toggleDisplay && (
+                                <div className='replaceDiv'>
+                                    {/* <div className='innerReplace'> */}
+                                    <input type="file" name="file" id="file" onChange={updateFile} className='imageInputs' />
+                                    <label htmlFor='file' className='imageUpload'>Replace Image</label>
+                                    {/* </div> */}
+                                </div>
+                            )}
+                            {toggleDisplay && (
+                                <div className='deleteDiv' onClick={showDelete}>
+                                    Delete Image
+                                </div>
+                            )}
+                            {showDeleteModal === true ?
+                                <Modal>
+                                    <DeleteImageModal toggle={toggle} img={deleteImgType} setShowDeleteModal={setShowDeleteModal} toggle3={toggle3} />
+                                </Modal> : null
+                            }
+                        </div>
+                        {showPictureModal === true ?
+                            <Modal onClose={() => setShowPictureModal(false)}>
+                                <UserPictureModal imgSrc={imgSrc} setShowPictureModal={setShowPictureModal} avatar_img={avatar_img} toggle={toggle} />
+                            </Modal> : null}
+                    </div>
+                    <div className='profileNameContainer'>
+                        <div>
+                            <div className='profileDisplayName'>
+                                {userProfile?.display_name}
+                            </div>
+                            {(userProfile?.first_name || userProfile?.last_name) && (userProfile.first_name !== "null" && userProfile.last_name !== "null")
+                                ? <div className='profileName'>
+                                    {userProfile?.first_name} {userProfile?.last_name}
+                                </div>
+                                : null
+                            }
+                        </div>
+                        <div>
+                            {correctUser && (
+                                <button className='updateImage3' onClick={toggle3}>Update Image</button>
+                            )}
+                            {toggleDisplay3 && (
+                                <div className='replaceDiv3'>
+                                    {/* <div> */}
+                                    <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
+                                    <label htmlFor='file2' className='imageUpload'>Replace Image</label>
+                                    {/* </div> */}
+                                </div>
+                            )}
+                            {toggleDisplay3 && (
+                                <div className='deleteDiv3' onClick={showDelete2}>
+                                    Delete Image
+                                </div>
+                            )}
+                            {showBannerModal === true ?
+                                <Modal>
+                                    <UserBannerModal bannerSrc={bannerSrc} setShowBannerModal={setShowBannerModal} header_img={header_img} toggle3={toggle3} />
+                                </Modal> : null
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className='bodyHeader'>
+                    <div className='allTrackDiv'>
+                        All Tracks
+                    </div>
+                    <div className='editButtonDiv'>
+                        {userProfile?.id === sessionUser?.id
+                            ? <button onClick={() => setShowModal(true)} className='editButton'>Edit</button>
                             : null
                         }
-                    </div>
-                    <div>
-                        {correctUser && (
-                            <button className='updateImage3' onClick={toggle3}>Update Image</button>
+                        {showModal && (
+                            <Modal onClose={() => setShowModal(false)}>
+                                <EditUserProfile setShowModal={setShowModal} />
+                            </Modal>
                         )}
-                        {toggleDisplay3 && (
-                            <div className='replaceDiv3'>
-                                {/* <div> */}
-                                <input type="file" name="file2" id="file2" onChange={updateFile2} className='imageInputs' />
-                                <label htmlFor='file2' className='imageUpload'>Replace Image</label>
-                                {/* </div> */}
-                            </div>
-                        )}
-                        {toggleDisplay3 && (
-                            <div className='deleteDiv3' onClick={showDelete2}>
-                                Delete Image
-                            </div>
-                        )}
-                        {showBannerModal === true ?
-                            <Modal>
-                                <UserBannerModal bannerSrc={bannerSrc} setShowBannerModal={setShowBannerModal} header_img={header_img} toggle3={toggle3} />
-                            </Modal> : null
+                        {userProfile?.id === sessionUser?.id
+                            ? <button onClick={() => setShowDeleteProfileModal(true)} className='deleteButton'>Delete Profile</button>
+                            : null
                         }
+                        {showDeleteProfileModal && (
+                            <Modal onClose={() => setShowDeleteProfileModal(false)}>
+                                <DeleteProfileModal setShowDeleteProfileModal={setShowDeleteProfileModal} />
+                            </Modal>
+                        )}
+                    </div>
+                </div>
+                <div className='profileBodyContainer'>
+                    <div className='allTracksDivContainer'>
+                        <div className='allTracksDiv'>
+                            {/* All Tracks */}
+                            {/* <div> */}
+                            <Tracks setTrackCount={setTrackCount} />
+                            {/* </div> */}
+                        </div>
+                        <div className='bottomFiller' />
+                    </div>
+                    <div className='aboutMe'>
+                        <div className='trackCounterDiv'>
+                            Tracks : {trackCount}
+                        </div>
+                        <div>
+                            {userProfile?.bio === "null" ? "" : userProfile?.bio}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className='bodyHeader'>
-                <div className='allTrackDiv'>
-                    All Tracks
-                </div>
-                <div className='editButtonDiv'>
-                    {userProfile?.id === sessionUser?.id
-                        ? <button onClick={() => setShowModal(true)} className='editButton'>Edit</button>
-                        : null
-                    }
-                    {showModal && (
-                        <Modal onClose={() => setShowModal(false)}>
-                            <EditUserProfile setShowModal={setShowModal} />
-                        </Modal>
-                    )}
-                    {userProfile?.id === sessionUser?.id
-                        ? <button onClick={() => setShowDeleteProfileModal(true)} className='deleteButton'>Delete Profile</button>
-                        : null
-                    }
-                    {showDeleteProfileModal && (
-                        <Modal onClose={() => setShowDeleteProfileModal(false)}>
-                            <DeleteProfileModal setShowDeleteProfileModal={setShowDeleteProfileModal} />
-                        </Modal>
-                    )}
-                </div>
-            </div>
-            <div className='profileBodyContainer'>
-                <div className='allTracksDiv'>
-                    {/* All Tracks */}
-                    {/* <div> */}
-                    <Tracks setTrackCount={setTrackCount}/>
-                    {/* </div> */}
-                </div>
-                <div className='aboutMe'>
-                    <div className='trackCounterDiv'>
-                        Tracks : {trackCount}
-                    </div>
-                    <div>
-                        {userProfile?.bio === "null" ? "" : userProfile?.bio}
-                    </div>
-                </div>
-            </div>
+            <BottomAudioPlayer />
         </div>
     );
 }

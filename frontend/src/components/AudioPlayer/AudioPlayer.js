@@ -16,7 +16,7 @@ function BottomAudioPlayer() {
         <>
             <AudioPlayer
                 className='fixedBottom'
-                autoPlay
+                autoPlay={false}
                 src={currentSongSrc}
                 onPlay={e => console.log("onPlay")}
                 layout={'horizontal-reverse'}
