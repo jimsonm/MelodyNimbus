@@ -105,7 +105,7 @@ function TrackPage() {
                                     alt='profileAvatar'
                                     className='userProfileTrackPage2'
                                 />
-                                <div>
+                                <div className='flexCenter'>
                                     {userProfile?.display_name}
                                 </div>
                             </div>

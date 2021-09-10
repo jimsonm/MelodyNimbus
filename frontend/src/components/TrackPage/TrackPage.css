@@ -1,27 +1,32 @@
 .userProfileTrackPage1 {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
 }
 
 .userProfileTrackPage2 {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-
 .trackCoverArt2 {
-    width: 340px;
-    height: 340px;
-    object-fit: cover;
+  width: 340px;
+  height: 340px;
+  object-fit: cover;
 }
 
 .trackPageContainer {
-    width: 1240px;
+  width: 1240px;
 }
 
 .writeComment {
-    width: 100%;
+  width: 100%;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

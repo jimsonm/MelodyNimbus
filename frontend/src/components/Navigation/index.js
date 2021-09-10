@@ -6,7 +6,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 
-function Navigation({ isLoaded }) {
+function Navigation({ isLoaded, BottomAudioPlayer }) {
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;

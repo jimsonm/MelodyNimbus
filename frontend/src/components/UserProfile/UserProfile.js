@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 import Tracks from '../Tracks/Tracks';
 import BottomAudioPlayer from "../AudioPlayer/AudioPlayer";
 
-function UserProfilePage() {
+function UserProfilePage({BottomAudioPlayer}) {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user)
@@ -220,7 +220,7 @@ function UserProfilePage() {
                     </div>
                 </div>
             </div>
-            <BottomAudioPlayer />
+            {BottomAudioPlayer}
         </div>
     );
 }

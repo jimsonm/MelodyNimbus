@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage/HomePage";
 import Tracks from "./components/Tracks/Tracks";
 import Upload from './components/Upload/Upload';
 import TrackPage from './components/TrackPage/TrackPage';
+import BottomAudioPlayer from "./components/AudioPlayer/AudioPlayer";
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
     <>
       <Switch>
         <Route exact path='/'>
-          <HomePage isLoaded={isLoaded}/>
+          <HomePage isLoaded={isLoaded} BottomAudioPlayer={<BottomAudioPlayer/>}/>
         </Route>
         <Route exact path='/users/:id/tracks'>
           <Navigation isLoaded={isLoaded} />
@@ -34,7 +35,7 @@ function App() {
         </Route>
         <Route exact path='/users/:id'>
           <Navigation isLoaded={isLoaded} />
-          <UserProfilePage />
+          <UserProfilePage BottomAudioPlayer={<BottomAudioPlayer/>}/>
         </Route>
         <Route exact path='/users'>
           <Navigation isLoaded={isLoaded} />
