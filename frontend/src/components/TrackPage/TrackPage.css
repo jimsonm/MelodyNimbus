@@ -30,3 +30,12 @@
   justify-content: center;
   align-items: center;
 }
+
+.trackPageContainer {
+    width: 800px;
+}
+
+.flexboxBetween {
+    display: flex;
+    justify-content: space-between;
+}

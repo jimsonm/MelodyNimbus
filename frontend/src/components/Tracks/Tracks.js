@@ -66,9 +66,9 @@ function Tracks({ setTrackCount }) {
                                 {/* </NavLink> */}
                             </div>
                             <div>
-                                <NavLink to={`/users/${userId.id}/${track.id}`}>
+                                {/* <NavLink to={`/users/${userId.id}/${track.id}`}> */}
                                     {track?.track_name}
-                                </NavLink>
+                                {/* </NavLink> */}
                             </div>
                             <div className='trackDescription'>
                                 {track?.description}

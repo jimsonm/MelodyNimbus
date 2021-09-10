@@ -40,9 +40,9 @@ function TrackPage() {
     return (
         <div>
             {selectedTrack !== undefined && (
-                <div className='flexCenter trackPageContainer'>
-                    <div>
-                        <div className='flexbox'>
+                <div className='flexCenter'>
+                    <div className='trackPageContainer'>
+                        <div className='flexboxBetween'>
                             <div className='block'>
                                 <div>
                                     {userProfile?.display_name}
