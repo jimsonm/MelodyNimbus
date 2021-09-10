@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { setCurrentSong, setCurrentSongState } from '../../store/current';
 
 
 function ProfileButton({ user }) {
@@ -14,6 +15,7 @@ function ProfileButton({ user }) {
   // console.log(currState);
 
   const toProfile = () => {
+    // dispatch(setCurrentSongState(currState));
     history.push(`/users/${sessionUser.id}`, currState)
   }
 
