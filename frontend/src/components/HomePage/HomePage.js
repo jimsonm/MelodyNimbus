@@ -10,14 +10,12 @@ import './HomePage.css';
 import { NavLink } from 'react-router-dom';
 import Carousel from "./Carousel";
 import { setCurrentSong } from "../../store/current";
-// import BottomAudioPlayer from "../AudioPlayer/AudioPlayer";
 
 
-function HomePage({ isLoaded, BottomAudioPlayer }) {
+function HomePage({ isLoaded }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [currentSongId, setCurrentSongId] = useState();
-    // const users = useSelector((state) => (state.user));
 
     useEffect(() => {
         dispatch(setCurrentSong(currentSongId))
@@ -92,7 +90,6 @@ function HomePage({ isLoaded, BottomAudioPlayer }) {
                         </div>
                         <UsersContainer />
                     </div>
-                    {BottomAudioPlayer}
                 </>
             )}
         </div>

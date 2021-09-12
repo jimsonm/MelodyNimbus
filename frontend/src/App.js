@@ -15,7 +15,6 @@ import BottomAudioPlayer from "./components/AudioPlayer/AudioPlayer";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [audioState, setAudioState] = useState();
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);

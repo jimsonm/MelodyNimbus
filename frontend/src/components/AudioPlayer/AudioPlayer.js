@@ -20,12 +20,6 @@ function BottomAudioPlayer({ audioState, setAudioState }) {
         }
     }, [isSongPlaying])
 
-    // const onAudioPlaying = () => {
-    //     setAudioState(audioRef.current.audio.current.currentTime)
-    //     // console.log(audioRef)
-    //     // console.log(audioRef.current.audio.current.currentTime)
-    // }
-
     const onPlay = () => {
         if (audioRef) {
             audioRef.current.audio.current.id = `audio-element${currentSong?.id}`
@@ -34,18 +28,6 @@ function BottomAudioPlayer({ audioState, setAudioState }) {
             audioRef.current.audio.current.play();
         }
     }
-
-    // const onLoad = () => {
-    //     if (audioState > 0) {
-    //         console.log(audioState)
-    //         audioRef.current.pause();
-    //         audioRef.current.load();
-    //         audioRef.current.currentTime = audioState;
-    //         audioRef.current.play();
-    //         // audioRef.currentTime = audioState
-    //     }
-    //     console.log('works')
-    // }
 
     useEffect(() => {
         setCurrentSongSrc(currentSong?.track_src)

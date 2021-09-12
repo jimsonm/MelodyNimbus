@@ -50,8 +50,6 @@ function TrackPage() {
                                 <div>
                                     {selectedTrack?.track_name}
                                 </div>
-                                {/* </div>
-                            <div> */}
                                 <audio controls>
                                     <source src={selectedTrack?.track_src} type="audio/mp3" />
                                 </audio>

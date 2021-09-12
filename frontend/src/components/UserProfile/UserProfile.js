@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as userActions from '../../store/users';
-import * as sessionActions from '../../store/session';
 import './UserProfile.css';
 import { Modal } from '../../context/Modal';
 import EditUserProfile from './EditUserProfile';
@@ -11,9 +10,8 @@ import DeleteImageModal from "../DeleteImageModal";
 import DeleteProfileModal from "../DeleteProfileModal";
 import { useParams } from 'react-router-dom';
 import Tracks from '../Tracks/Tracks';
-import BottomAudioPlayer from "../AudioPlayer/AudioPlayer";
 
-function UserProfilePage({BottomAudioPlayer}) {
+function UserProfilePage() {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user)

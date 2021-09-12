@@ -71,7 +71,6 @@ function Tracks({ setTrackCount }) {
     }
 
     const showConfirmDelete = (e) => {
-        // const selectedTrack = allTracks?.find(track => track.id === +e.target.value)
         const id = e.target.value;
         setDeleteTrackId(id);
         setShowDeleteModal(true);
@@ -117,7 +116,6 @@ function Tracks({ setTrackCount }) {
                                 ? <GrPause onClick={pauseSong}/>
                                 : <GrPlay onClick={() => updateCurrent(track.id)} />
                                 }
-                                {/* <button onClick={() => updateCurrent(track.id)}>Play</button> */}
                                 {/* <div ref={waveformRef}></div> */}
                                 {/* <Waveform track={track} /> */}
                             </div>
@@ -170,9 +168,7 @@ function Tracks({ setTrackCount }) {
                             Nothing to hear here
                         </div>
                         <div className='uploadNavLink'>
-                            {/* <NavLink exact to='/upload'> */}
                             Stay tuned and check back later to see if they share tracks in the future.
-                            {/* </NavLink> */}
                         </div>
                     </div>
                     : null
