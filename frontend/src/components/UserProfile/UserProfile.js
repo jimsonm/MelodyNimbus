@@ -220,7 +220,7 @@ function UserProfilePage({BottomAudioPlayer}) {
                     </div>
                 </div>
             </div>
-            {BottomAudioPlayer}
+            {/* {BottomAudioPlayer} */}
         </div>
     );
 }

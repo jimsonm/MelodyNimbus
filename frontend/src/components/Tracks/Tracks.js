@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import * as userActions from '../../store/users';
 import './Tracks.css';
 import { Modal } from '../../context/Modal';
 import EditTrackModal from '../EditTrackModal';
 import DeleteTrackModal from "../DeleteTrackModal";
+import { setCurrentSong } from "../../store/current";
+// import WaveSurfer from 'wavesurfer.js';
+// import Waveform from "./Wavesurfer";
 
 function Tracks({ setTrackCount }) {
     const userId = useParams();
@@ -19,11 +22,39 @@ function Tracks({ setTrackCount }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [editTrack, setEditTrack] = useState();
     const [deleteTrackId, setDeleteTrackId] = useState();
+    const currentSong = useSelector((state) => state.current.song);
+
+    // const waveformRef = useRef();
 
     let allTracks = null;
     if (users && tracksBySelectedUser) {
         allTracks = Object.values(tracksBySelectedUser)
     }
+
+    const updateCurrent = (trackId) => {
+        dispatch(setCurrentSong(trackId))
+    }
+
+    // useEffect(() => {
+    //     if (currentSong) {
+    //         if (waveformRef.current) {
+    //             const wavesurfer = WaveSurfer.create({
+    //                 container: waveformRef.current,
+    //                 barWidth: 3,
+    //                 cursorWidth: 1,
+    //                 // container: '#waveform',
+    //                 backend: 'WebAudio',
+    //                 height: 80,
+    //                 progressColor: '#2D5BFF',
+    //                 responsive: true,
+    //                 waveColor: '#EFEFEF',
+    //                 cursorColor: 'transparent',
+    //             });
+    //             wavesurfer.load(currentSong.track_src)
+    //             // wavesurfer.play()
+    //         }
+    //     }
+    // }, [updateCurrent]);
 
     const showEditTrack = (e) => {
         const selectedTrack = allTracks?.find(track => track.id === +e.target.value)
@@ -67,17 +98,16 @@ function Tracks({ setTrackCount }) {
                             </div>
                             <div>
                                 {/* <NavLink to={`/users/${userId.id}/${track.id}`}> */}
-                                    {track?.track_name}
+                                {track?.track_name}
                                 {/* </NavLink> */}
                             </div>
                             <div className='trackDescription'>
                                 {track?.description}
                             </div>
                             <div>
-                                {/* audio player */}
-                                <audio controls>
-                                    <source src={track?.track_src} type="audio/mp3" />
-                                </audio>
+                                <button onClick={() => updateCurrent(track.id)}>Play</button>
+                                {/* <div ref={waveformRef}></div> */}
+                                {/* <Waveform track={track} /> */}
                             </div>
                             <div>
                                 {sessionUser?.id === userProfile?.id ? (

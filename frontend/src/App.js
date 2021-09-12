@@ -24,9 +24,7 @@ function App() {
     <>
       <Switch>
         <Route exact path='/'>
-          <HomePage isLoaded={isLoaded}
-          // BottomAudioPlayer={<BottomAudioPlayer audioState={audioState} setAudioState={setAudioState}/>}
-          />
+          <HomePage isLoaded={isLoaded} />
         </Route>
         <Route exact path='/users/:id/tracks'>
           <Navigation isLoaded={isLoaded} />
@@ -38,9 +36,7 @@ function App() {
         </Route>
         <Route exact path='/users/:id'>
           <Navigation isLoaded={isLoaded} />
-          <UserProfilePage
-          // BottomAudioPlayer={<BottomAudioPlayer audioState={audioState} setAudioState={setAudioState}/>}
-          />
+          <UserProfilePage />
         </Route>
         <Route exact path='/users'>
           <Navigation isLoaded={isLoaded} />

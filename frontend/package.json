@@ -15,7 +15,8 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
-    "swiper": "^6.7.5"
+    "swiper": "^6.7.5",
+    "wavesurfer.js": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

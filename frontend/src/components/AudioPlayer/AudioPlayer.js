@@ -15,6 +15,11 @@ function BottomAudioPlayer({ audioState, setAudioState }) {
     //     // console.log(audioRef.current.audio.current.currentTime)
     // }
 
+    const onPlay = () => {
+        audioRef.current.audio.current.id = `audio-element${currentSong?.id}`
+        console.log(audioRef.current.audio.current.id)
+    }
+
     // const onLoad = () => {
     //     if (audioState > 0) {
     //         console.log(audioState)
@@ -38,10 +43,14 @@ function BottomAudioPlayer({ audioState, setAudioState }) {
                 className='fixedBottom'
                 autoPlay={false}
                 src={currentSongSrc}
-                onPlay={e => console.log("onPlay")}
+                onPlay={onPlay}
                 layout={'horizontal-reverse'}
-                // onListen={onAudioPlaying}
-                // onCanPlayThrough={onLoad}
+                customAdditionalControls={
+                    [
+                        RHAP_UI.LOOP,
+                        <marquee>{currentSong?.track_name}</marquee>,
+                    ]
+                }
             />
         </>
     )
