@@ -47,6 +47,6 @@
 <br>
  
  ## Future Features:
-  - [ ] Persisting Music Player
+  - [ ] Audio waveform display
   - [ ] Track Comments
   - [ ] Search Feature for tracks and/or users
