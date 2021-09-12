@@ -1,13 +1,24 @@
 import './AudioPlayer.css'
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState, useRef } from 'react';
+import { setIsSongPlaying } from '../../store/current'
 
 function BottomAudioPlayer({ audioState, setAudioState }) {
+    const dispatch = useDispatch()
     const audioRef = useRef()
     const currentSong = useSelector(state => state.current.song)
     const [currentSongSrc, setCurrentSongSrc] = useState('')
+    const isSongPlaying = useSelector(state => state.current.isPlaying)
+
+    useEffect(() => {
+        if (isSongPlaying === false && audioRef) {
+            audioRef.current.audio.current.pause()
+        } else if (isSongPlaying === true && audioRef) {
+            audioRef.current.audio.current.play()
+        }
+    }, [isSongPlaying])
 
     // const onAudioPlaying = () => {
     //     setAudioState(audioRef.current.audio.current.currentTime)
@@ -16,8 +27,12 @@ function BottomAudioPlayer({ audioState, setAudioState }) {
     // }
 
     const onPlay = () => {
-        audioRef.current.audio.current.id = `audio-element${currentSong?.id}`
-        console.log(audioRef.current.audio.current.id)
+        if (audioRef) {
+            audioRef.current.audio.current.id = `audio-element${currentSong?.id}`
+            console.log(audioRef.current.audio.current)
+            dispatch(setIsSongPlaying(true));
+            audioRef.current.audio.current.play();
+        }
     }
 
     // const onLoad = () => {

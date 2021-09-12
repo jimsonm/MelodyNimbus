@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const SET_SONG = 'current/SET_SONG';
 const SET_SONG_STATE = 'current/SET_SONG_STATE';
+const IS_PLAYING = 'current/IS_PLAYING';
 
 const setSong = (song) => ({
     type: SET_SONG,
@@ -11,6 +12,11 @@ const setSong = (song) => ({
 const setSongState = (songState) => ({
     type: SET_SONG_STATE,
     songState,
+});
+
+const isSongPlaying = (isPlaying) => ({
+    type: IS_PLAYING,
+    isPlaying,
 });
 
 export const setCurrentSong = (songId) => async (dispatch) => {
@@ -25,6 +31,10 @@ export const setCurrentSongState = (songState) => async (dispatch) => {
     dispatch(setSongState(songState));
 }
 
+export const setIsSongPlaying = (isPlaying) => async (dispatch) => {
+    dispatch(isSongPlaying(isPlaying));
+}
+
 const initialState = {}
 
 const currentReducer = (state = initialState, action) => {
@@ -37,6 +47,10 @@ const currentReducer = (state = initialState, action) => {
         case SET_SONG_STATE:
             newState = { ...state }
             newState.songState = action.songState
+            return newState;
+        case IS_PLAYING:
+            newState = { ...state }
+            newState.isPlaying = action.isPlaying
             return newState;
         default:
             return state;

@@ -7,6 +7,8 @@ import { Modal } from '../../context/Modal';
 import EditTrackModal from '../EditTrackModal';
 import DeleteTrackModal from "../DeleteTrackModal";
 import { setCurrentSong } from "../../store/current";
+import { GrPlay, GrPause } from "react-icons/gr";
+import { setIsSongPlaying } from "../../store/current";
 // import WaveSurfer from 'wavesurfer.js';
 // import Waveform from "./Wavesurfer";
 
@@ -23,6 +25,7 @@ function Tracks({ setTrackCount }) {
     const [editTrack, setEditTrack] = useState();
     const [deleteTrackId, setDeleteTrackId] = useState();
     const currentSong = useSelector((state) => state.current.song);
+    const currentIsPlaying = useSelector((state) => state.current.isPlaying);
 
     // const waveformRef = useRef();
 
@@ -31,8 +34,13 @@ function Tracks({ setTrackCount }) {
         allTracks = Object.values(tracksBySelectedUser)
     }
 
+    const pauseSong = () => {
+        dispatch(setIsSongPlaying(false));
+    }
+
     const updateCurrent = (trackId) => {
         dispatch(setCurrentSong(trackId))
+        dispatch(setIsSongPlaying(true));
     }
 
     // useEffect(() => {
@@ -105,7 +113,11 @@ function Tracks({ setTrackCount }) {
                                 {track?.description}
                             </div>
                             <div>
-                                <button onClick={() => updateCurrent(track.id)}>Play</button>
+                                {track.id === currentSong?.id && currentIsPlaying === true
+                                ? <GrPause onClick={pauseSong}/>
+                                : <GrPlay onClick={() => updateCurrent(track.id)} />
+                                }
+                                {/* <button onClick={() => updateCurrent(track.id)}>Play</button> */}
                                 {/* <div ref={waveformRef}></div> */}
                                 {/* <Waveform track={track} /> */}
                             </div>
