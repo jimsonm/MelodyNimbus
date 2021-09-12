@@ -215,6 +215,7 @@ input[type="file"] {
 .allTracksDivContainer {
   margin-left: 30px;
   width: 70%;
+  min-height: calc(100vh - 340px - 60px);
 }
 
 .allTracksDiv {
@@ -252,4 +253,8 @@ input[type="file"] {
 .bottomFiller {
   height: 60px;
   border: none;
+}
+
+.moreUploadDiv {
+  margin: 15px 0px;
 }

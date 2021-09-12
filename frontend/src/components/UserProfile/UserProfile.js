@@ -8,12 +8,13 @@ import UserPictureModal from '../UserPictureModal';
 import UserBannerModal from "../UserBannerModal";
 import DeleteImageModal from "../DeleteImageModal";
 import DeleteProfileModal from "../DeleteProfileModal";
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Tracks from '../Tracks/Tracks';
 
-function UserProfilePage({ setShowAudioPlayer}) {
+function UserProfilePage({ setShowAudioPlayer }) {
     const userId = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user)
     const userProfile = useSelector((state) => state.user[userId.id]);
     const [avatar_img, setAvatar_Img] = useState(userProfile?.avatar_img);
@@ -38,6 +39,10 @@ function UserProfilePage({ setShowAudioPlayer}) {
     }, [dispatch, userId]);
 
     const correctUser = (sessionUser?.id === userProfile?.id)
+
+    const toUpload = () => {
+        history.push(`/upload`)
+    }
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -203,9 +208,19 @@ function UserProfilePage({ setShowAudioPlayer}) {
                         <div className='allTracksDiv'>
                             {/* All Tracks */}
                             {/* <div> */}
-                            <Tracks setTrackCount={setTrackCount} setShowAudioPlayer={setShowAudioPlayer}/>
+                            <Tracks setTrackCount={setTrackCount} setShowAudioPlayer={setShowAudioPlayer} />
                             {/* </div> */}
                         </div>
+                        {correctUser &&
+                            <>
+                                <div className='flexCenter moreUploadDiv'>
+                                    More uploads means more listeners.
+                                </div>
+                                <div className='flexCenter'>
+                                    <button onClick={toUpload} className='saveButton'>Upload More</button>
+                                </div>
+                            </>
+                        }
                         <div className='bottomFiller' />
                     </div>
                     <div className='aboutMe'>

@@ -1,7 +1,13 @@
 .userListDiv {
     display: flex;
-    margin: 25px;
-    padding: 25px;
+    margin: 50px;
+    transition: transform .5s;
+    transition: opacity .5s;
+}
+
+.userListDiv:hover {
+    transform: scale(1.25);
+    opacity: 0.7;
 }
 
 .userDivs {
