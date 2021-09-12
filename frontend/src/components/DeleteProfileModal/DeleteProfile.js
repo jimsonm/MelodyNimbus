@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom';
 import * as userActions from '../../store/users';
 
-function DeleteProfile({setShowDeleteProfileModal}) {
+function DeleteProfile({ setShowDeleteProfileModal }) {
     let history = useHistory();
     const dispatch = useDispatch();
     const { id } = useParams();
@@ -11,11 +11,16 @@ function DeleteProfile({setShowDeleteProfileModal}) {
     console.log(userProfile);
 
     const deleteAccount = async () => {
-        await dispatch(userActions.deleteUser({
-            user_id: +id
-        }))
-        await setShowDeleteProfileModal(false)
-        await history.push('/');
+        if (+id === 1) {
+            window.alert("You cannot delete the demo user.");
+            await setShowDeleteProfileModal(false)
+        } else {
+            await dispatch(userActions.deleteUser({
+                user_id: +id
+            }))
+            await setShowDeleteProfileModal(false)
+            await history.push('/');
+        }
     }
 
     return (
