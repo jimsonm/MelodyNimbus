@@ -15,6 +15,7 @@ import BottomAudioPlayer from "./components/AudioPlayer/AudioPlayer";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showAudioPlayer, setShowAudioPlayer] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -23,11 +24,11 @@ function App() {
     <>
       <Switch>
         <Route exact path='/'>
-          <HomePage isLoaded={isLoaded} />
+          <HomePage isLoaded={isLoaded} setShowAudioPlayer={setShowAudioPlayer}/>
         </Route>
         <Route exact path='/users/:id/tracks'>
           <Navigation isLoaded={isLoaded} />
-          <Tracks />
+          <Tracks setShowAudioPlayer={setShowAudioPlayer}/>
         </Route>
         <Route exact path='/users/:id/:track_id'>
           <Navigation isLoaded={isLoaded} />
@@ -35,7 +36,7 @@ function App() {
         </Route>
         <Route exact path='/users/:id'>
           <Navigation isLoaded={isLoaded} />
-          <UserProfilePage />
+          <UserProfilePage setShowAudioPlayer={setShowAudioPlayer} />
         </Route>
         <Route exact path='/users'>
           <Navigation isLoaded={isLoaded} />
@@ -46,7 +47,9 @@ function App() {
           <Upload />
         </Route>
       </Switch>
-      <BottomAudioPlayer />
+      {showAudioPlayer &&
+        <BottomAudioPlayer />
+      }
     </>
   );
 }

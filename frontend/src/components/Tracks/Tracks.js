@@ -12,7 +12,7 @@ import { setIsSongPlaying } from "../../store/current";
 // import WaveSurfer from 'wavesurfer.js';
 // import Waveform from "./Wavesurfer";
 
-function Tracks({ setTrackCount }) {
+function Tracks({ setTrackCount, setShowAudioPlayer }) {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -39,7 +39,8 @@ function Tracks({ setTrackCount }) {
     }
 
     const updateCurrent = (trackId) => {
-        dispatch(setCurrentSong(trackId))
+        setShowAudioPlayer(true);
+        dispatch(setCurrentSong(trackId));
         dispatch(setIsSongPlaying(true));
     }
 

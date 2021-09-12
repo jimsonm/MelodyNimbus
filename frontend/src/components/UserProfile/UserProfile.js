@@ -11,7 +11,7 @@ import DeleteProfileModal from "../DeleteProfileModal";
 import { useParams } from 'react-router-dom';
 import Tracks from '../Tracks/Tracks';
 
-function UserProfilePage() {
+function UserProfilePage({ setShowAudioPlayer}) {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user)
@@ -203,7 +203,7 @@ function UserProfilePage() {
                         <div className='allTracksDiv'>
                             {/* All Tracks */}
                             {/* <div> */}
-                            <Tracks setTrackCount={setTrackCount} />
+                            <Tracks setTrackCount={setTrackCount} setShowAudioPlayer={setShowAudioPlayer}/>
                             {/* </div> */}
                         </div>
                         <div className='bottomFiller' />

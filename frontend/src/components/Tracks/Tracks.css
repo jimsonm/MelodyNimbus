@@ -13,7 +13,7 @@
 }
 
 .trackContainer {
-  min-height: calc(100vh - 340px + 60px);
+  min-height: calc(100vh - 340px - 120px);
 }
 
 .trackCoverArt {

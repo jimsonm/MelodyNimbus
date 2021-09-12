@@ -20,10 +20,14 @@ function BottomAudioPlayer({ audioState, setAudioState }) {
         }
     }, [isSongPlaying])
 
+    const onPause = () => {
+        dispatch(setIsSongPlaying(false));
+        audioRef.current.audio.current.pause();
+    }
+
     const onPlay = () => {
         if (audioRef) {
             audioRef.current.audio.current.id = `audio-element${currentSong?.id}`
-            console.log(audioRef.current.audio.current)
             dispatch(setIsSongPlaying(true));
             audioRef.current.audio.current.play();
         }
@@ -41,6 +45,7 @@ function BottomAudioPlayer({ audioState, setAudioState }) {
                 autoPlay={false}
                 src={currentSongSrc}
                 onPlay={onPlay}
+                onPause={onPause}
                 layout={'horizontal-reverse'}
                 customAdditionalControls={
                     [

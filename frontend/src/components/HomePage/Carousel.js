@@ -7,12 +7,17 @@ import './Carousel.css';
 
 SwiperCore.use([EffectCoverflow, Navigation, Pagination])
 
-function Carousel({setCurrentSongId}) {
+function Carousel({setCurrentSongId, setShowAudioPlayer}) {
     const users = useSelector((state) => (state.user));
 
     let songs;
     if (users.tracks) {
         songs = Object.values(users.tracks);
+    }
+
+    const onCoverArtClick = (songId) => {
+        setShowAudioPlayer(true);
+        setCurrentSongId(songId);
     }
 
     const slides = [];
@@ -24,7 +29,7 @@ function Carousel({setCurrentSongId}) {
                 slides.push(
                     <div key={i}>
                         <SwiperSlide key={i} className='songSlide'>
-                            <img src={song.cover_art} className='carouselCoverArt' onClick={() => setCurrentSongId(song.id)}/>
+                            <img src={song.cover_art} className='carouselCoverArt' onClick={() => onCoverArtClick(song.id)}/>
                             <div className='carouselTrackName'>
                             {song.track_name}
                             </div>

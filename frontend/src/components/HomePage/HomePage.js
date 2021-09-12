@@ -12,7 +12,7 @@ import Carousel from "./Carousel";
 import { setCurrentSong } from "../../store/current";
 
 
-function HomePage({ isLoaded }) {
+function HomePage({ isLoaded, setShowAudioPlayer }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [currentSongId, setCurrentSongId] = useState();
@@ -82,7 +82,7 @@ function HomePage({ isLoaded }) {
                         <div className='carouselTextDiv'>
                             Trending tracks produced by MelodyNimbus users.
                         </div>
-                        <Carousel setCurrentSongId={setCurrentSongId}/>
+                        <Carousel setCurrentSongId={setCurrentSongId} setShowAudioPlayer={setShowAudioPlayer}/>
                     </div>
                     <div className='userDiv'>
                         <div className='userTextDiv'>
