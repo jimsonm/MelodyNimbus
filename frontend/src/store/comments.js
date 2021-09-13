@@ -29,6 +29,14 @@ export const addComment = ({user_id, track_id, comment}) => async (dispatch) => 
     dispatch(setComments(allComments));
 }
 
+export const deleteComment = (commentId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/comments/${commentId}`, {
+        method: 'DELETE',
+    });
+    const allComments = await response.json();
+    dispatch(setComments(allComments));
+}
+
 const initialState = {}
 
 const commentsReducer = (state = initialState, action) => {

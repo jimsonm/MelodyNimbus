@@ -41,7 +41,7 @@
   justify-content: space-between;
   margin: 10px 0px;
   padding: 10px 10px;
-  background-color: beige;
+  background-color: #dbdbdb;
   border-radius: 10px;
 }
 
@@ -99,4 +99,26 @@
 
 .postComment:hover {
   cursor: pointer;
+}
+
+.trackCommentDiv {
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  margin: 10px 55px 10px 10px;
+}
+
+.trackCommentSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.editIcon,
+.deleteIcon {
+  width: 20px;
+  height: 20px;
+  margin: 0px 5px;
 }

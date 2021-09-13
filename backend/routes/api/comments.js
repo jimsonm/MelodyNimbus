@@ -40,4 +40,17 @@ router.post(
     })
 )
 
+router.delete(
+    '/:id',
+    asyncHandler(async (req, res) => {
+        await Track_Comment.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        const comments = await Track_Comment.findAll();
+        return res.json(comments);
+    })
+)
+
 module.exports = router;

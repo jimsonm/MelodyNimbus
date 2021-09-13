@@ -8,8 +8,9 @@ import EditTrackModal from '../EditTrackModal';
 import DeleteTrackModal from '../DeleteTrackModal';
 import { GrPlay, GrPause } from "react-icons/gr";
 import { setIsSongPlaying, setCurrentSong } from '../../store/current';
-import { FaRegCommentDots } from "react-icons/fa";
-import { getCommentsByTrack, addComment } from '../../store/comments';
+import { FaRegCommentDots, FaTrashAlt } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
+import { getCommentsByTrack, addComment, deleteComment } from '../../store/comments';
 
 function TrackPage({ setShowAudioPlayer }) {
     const { id } = useParams();
@@ -36,8 +37,12 @@ function TrackPage({ setShowAudioPlayer }) {
     }
 
     const addAComment = (user_id, track_id, comment) => {
-        dispatch(addComment({user_id, track_id, comment}));
+        dispatch(addComment({ user_id, track_id, comment }));
         setComment('');
+    }
+
+    const deleteAComment = (commentId) => {
+        dispatch(deleteComment(commentId));
     }
 
     const showEditTrack = () => {
@@ -93,16 +98,16 @@ function TrackPage({ setShowAudioPlayer }) {
                                     {selectedTrack?.description}
                                 </div>
                                 <div>
-                                {sessionUser?.id === userProfile?.id ? (
-                                    <button onClick={showEditTrack} value={selectedTrack.id} className='editButton2'>
-                                        Edit
-                                    </button>) : null
-                                }
-                                {sessionUser?.id === userProfile?.id ? (
-                                    <button onClick={showConfirmDelete} value={selectedTrack.id} className='deleteButton2'>
-                                        Delete Track
-                                    </button>) : null
-                                }
+                                    {sessionUser?.id === userProfile?.id ? (
+                                        <button onClick={showEditTrack} value={selectedTrack.id} className='editButton2'>
+                                            Edit
+                                        </button>) : null
+                                    }
+                                    {sessionUser?.id === userProfile?.id ? (
+                                        <button onClick={showConfirmDelete} value={selectedTrack.id} className='deleteButton2'>
+                                            Delete Track
+                                        </button>) : null
+                                    }
                                 </div>
                             </div>
                             <div>
@@ -126,7 +131,7 @@ function TrackPage({ setShowAudioPlayer }) {
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
                             />
-                            <FaRegCommentDots className='postComment' onClick={() => addAComment(sessionUser.id, selectedTrack.id, comment)}/>
+                            <FaRegCommentDots className='postComment' onClick={() => addAComment(sessionUser.id, selectedTrack.id, comment)} />
                         </div>
                         <div>
                             {showTrackModal && (
@@ -140,15 +145,25 @@ function TrackPage({ setShowAudioPlayer }) {
                                 </Modal>
                             )}
                         </div>
-                        {allComments && allComments?.map((comment) => 
-                            <div key={comment.id}>
+                        {allComments && allComments?.map((comment) =>
+                            <div key={comment.id} className='trackCommentDiv'>
                                 <img
                                     src={users[comment.user_id]?.avatar_img}
                                     alt="coverArt"
                                     className='trackCoverArt'
                                 />
-                                <div>
-                                {comment.response_text}
+                                <div className='trackCommentSection'>
+                                    <div>
+                                        {comment.response_text}
+                                    </div>
+                                    <div>
+                                        {sessionUser?.id === comment?.user_id &&
+                                            <div className='flexCenter'>
+                                                <FiEdit className='editIcon'/>
+                                                <FaTrashAlt className='deleteIcon' onClick={() => deleteAComment(comment.id)}/>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         )
