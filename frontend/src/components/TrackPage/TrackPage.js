@@ -9,7 +9,7 @@ import DeleteTrackModal from '../DeleteTrackModal';
 import { GrPlay, GrPause } from "react-icons/gr";
 import { setIsSongPlaying, setCurrentSong } from '../../store/current';
 import { FaRegCommentDots } from "react-icons/fa";
-import { getCommentsByTrack } from '../../store/comments';
+import { getCommentsByTrack, addComment } from '../../store/comments';
 
 function TrackPage({ setShowAudioPlayer }) {
     const { id } = useParams();
@@ -23,6 +23,7 @@ function TrackPage({ setShowAudioPlayer }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const currentIsPlaying = useSelector((state) => state.current.isPlaying);
     const [comment, setComment] = useState('');
+    const commentObj = useSelector((state) => state.comment);
     const allComments = useSelector((state) => Object.values(state.comment));
 
     useEffect(() => {
@@ -34,11 +35,15 @@ function TrackPage({ setShowAudioPlayer }) {
         selectedTrack = tracksBySelectedUser[track_id];
     }
 
-    const showEditTrack = (e) => {
+    const addAComment = (user_id, track_id, comment) => {
+        dispatch(addComment({user_id, track_id, comment}));
+    }
+
+    const showEditTrack = () => {
         setShowTrackModal(true)
     }
 
-    const showConfirmDelete = (e) => {
+    const showConfirmDelete = () => {
         setShowDeleteModal(true)
     }
 
@@ -119,7 +124,7 @@ function TrackPage({ setShowAudioPlayer }) {
                                 className='writeComment'
                                 onChange={(e) => setComment(e.target.value)}
                             />
-                            <FaRegCommentDots className='postComment' />
+                            <FaRegCommentDots className='postComment' onClick={() => addAComment(sessionUser.id, selectedTrack.id, comment)}/>
                         </div>
                         <div>
                             {showTrackModal && (

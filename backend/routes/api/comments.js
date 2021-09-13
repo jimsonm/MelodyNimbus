@@ -26,4 +26,18 @@ router.get(
     })
 )
 
+router.post(
+    '/',
+    asyncHandler(async (req, res) => {
+        const { track_id, user_id, comment } = req.body;
+        console.log('postzzzzzzzzzzz', req.body)
+        const newComment = await Track_Comment.create({
+            track_id,
+            user_id,
+            response_text: comment
+        });
+        return res.json(newComment);
+    })
+)
+
 module.exports = router;
