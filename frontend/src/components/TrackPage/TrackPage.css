@@ -39,6 +39,7 @@
 .flexboxBetween {
   display: flex;
   justify-content: space-between;
+  margin: 20px 0px;
 }
 
 .displayName2 {
@@ -74,6 +75,7 @@
   color: black;
   text-align: center;
   transition: all 0.2s;
+  width: 120px;
 }
 
 .editButton2:hover,

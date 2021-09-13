@@ -13,9 +13,11 @@ export const getComments = () => async (dispatch) => {
     dispatch(setComments(comments));
 }
 
-export const getCommemntsByTrack = (track) => async (dispatch) => {
-    const response = await csrfFetch(`/api/comments/${track}`);
+export const getCommentsByTrack = (trackId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/comments/${trackId}`);
+    console.log(response)
     const comments = await response.json();
+    console.log(comments)
     dispatch(setComments(comments));
 }
 
@@ -25,10 +27,11 @@ const commentsReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case SET_COMMENTS:
-            newState = { ...state };
+            newState = {};
             action.comments.forEach(comment => {
                 newState[comment.id] = comment;
             });
+            return newState;
         default:
             return state;
     }

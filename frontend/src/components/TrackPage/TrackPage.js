@@ -9,20 +9,25 @@ import DeleteTrackModal from '../DeleteTrackModal';
 import { GrPlay, GrPause } from "react-icons/gr";
 import { setIsSongPlaying, setCurrentSong } from '../../store/current';
 import { FaRegCommentDots } from "react-icons/fa";
+import { getCommentsByTrack } from '../../store/comments';
 
-function TrackPage({ setShowAudioPlayer}) {
+function TrackPage({ setShowAudioPlayer }) {
     const { id } = useParams();
     const { track_id } = useParams();
     const dispatch = useDispatch();
-    const users = useSelector((state) => Object.values(state.user));
+    const users = useSelector((state) => (state.user));
     const sessionUser = useSelector((state) => state.session.user);
     const userProfile = useSelector((state) => state.user[id]);
-    const selectedUser = users[id - 1];
     const tracksBySelectedUser = useSelector((state) => state.user.tracks);
     const [showTrackModal, setShowTrackModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const currentIsPlaying = useSelector((state) => state.current.isPlaying);
     const [comment, setComment] = useState('');
+    const allComments = useSelector((state) => Object.values(state.comment));
+
+    useEffect(() => {
+        dispatch(getCommentsByTrack(track_id));
+    }, []);
 
     let selectedTrack;
     if (tracksBySelectedUser) {
@@ -58,7 +63,7 @@ function TrackPage({ setShowAudioPlayer}) {
                 <div className='flexCenter'>
                     <div className='trackPageContainer'>
                         <div className='flexboxBetween'>
-                            <div className='block descriptionContainer'>
+                            <div className='descriptionContainer'>
                                 <div className='playContainer'>
                                     <div>
                                         {currentIsPlaying === true
@@ -81,16 +86,18 @@ function TrackPage({ setShowAudioPlayer}) {
                                 <div className='trackDescription2'>
                                     {selectedTrack?.description}
                                 </div>
+                                <div>
                                 {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showEditTrack} value={selectedTrack.id} className='editButton2'>
-                                    Edit
-                                </button>) : null
-                            }
-                            {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showConfirmDelete} value={selectedTrack.id} className='deleteButton2'>
-                                    Delete Track
-                                </button>) : null
-                            }
+                                    <button onClick={showEditTrack} value={selectedTrack.id} className='editButton2'>
+                                        Edit
+                                    </button>) : null
+                                }
+                                {sessionUser?.id === userProfile?.id ? (
+                                    <button onClick={showConfirmDelete} value={selectedTrack.id} className='deleteButton2'>
+                                        Delete Track
+                                    </button>) : null
+                                }
+                                </div>
                             </div>
                             <div>
                                 <img
@@ -112,7 +119,7 @@ function TrackPage({ setShowAudioPlayer}) {
                                 className='writeComment'
                                 onChange={(e) => setComment(e.target.value)}
                             />
-                            <FaRegCommentDots className='postComment'/>
+                            <FaRegCommentDots className='postComment' />
                         </div>
                         <div>
                             {showTrackModal && (
@@ -126,18 +133,17 @@ function TrackPage({ setShowAudioPlayer}) {
                                 </Modal>
                             )}
                         </div>
-                        {/* <div className='flexbox'>
-                            <div className='block'>
+                        {allComments && allComments?.map((comment) => 
+                            <div key={comment.id}>
                                 <img
-                                    src={userProfile?.avatar_img}
-                                    alt='profileAvatar'
-                                    className='userProfileTrackPage2'
+                                    src={users[comment.user_id]?.avatar_img}
+                                    alt="coverArt"
+                                    className='trackCoverArt'
                                 />
-                                <div className='flexCenter'>
-                                    {userProfile?.display_name}
-                                </div>
+                                {comment.response_text}
                             </div>
-                        </div> */}
+                        )
+                        }
                     </div>
                 </div>
             )}

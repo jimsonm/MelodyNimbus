@@ -48,7 +48,7 @@ router.get(
     '',
     asyncHandler(async (req, res) => {
         const users = await User.findAll();
-        res.json(users);
+        return res.json(users);
     })
 )
 
