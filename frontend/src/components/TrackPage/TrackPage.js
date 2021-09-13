@@ -8,6 +8,7 @@ import EditTrackModal from '../EditTrackModal';
 import DeleteTrackModal from '../DeleteTrackModal';
 import { GrPlay, GrPause } from "react-icons/gr";
 import { setIsSongPlaying, setCurrentSong } from '../../store/current';
+import { FaRegCommentDots } from "react-icons/fa";
 
 function TrackPage({ setShowAudioPlayer}) {
     const { id } = useParams();
@@ -21,6 +22,7 @@ function TrackPage({ setShowAudioPlayer}) {
     const [showTrackModal, setShowTrackModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const currentIsPlaying = useSelector((state) => state.current.isPlaying);
+    const [comment, setComment] = useState('');
 
     let selectedTrack;
     if (tracksBySelectedUser) {
@@ -108,7 +110,9 @@ function TrackPage({ setShowAudioPlayer}) {
                                 type='text'
                                 placeholder='Write a comment'
                                 className='writeComment'
+                                onChange={(e) => setComment(e.target.value)}
                             />
+                            <FaRegCommentDots className='postComment'/>
                         </div>
                         <div>
                             {showTrackModal && (
@@ -122,7 +126,7 @@ function TrackPage({ setShowAudioPlayer}) {
                                 </Modal>
                             )}
                         </div>
-                        <div className='flexbox'>
+                        {/* <div className='flexbox'>
                             <div className='block'>
                                 <img
                                     src={userProfile?.avatar_img}
@@ -133,10 +137,7 @@ function TrackPage({ setShowAudioPlayer}) {
                                     {userProfile?.display_name}
                                 </div>
                             </div>
-                            {/* <div>
-                                {selectedTrack?.description}
-                            </div> */}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             )}

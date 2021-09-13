@@ -2,6 +2,7 @@
   width: 40px;
   height: 40px;
   object-fit: cover;
+  margin: 0px 5px;
 }
 
 .userProfileTrackPage2 {
@@ -83,4 +84,10 @@
 
 .deleteButton2 {
   margin: 0px 0px 0px 10px;
+}
+
+.postComment {
+  margin: 0px 10px;
+  width: 40px;
+  height: 40px;
 }
