@@ -29,3 +29,15 @@
     margin: 15px;
     justify-content: flex-end;
 }
+
+.descriptionContainer2 {
+    display: flex;
+    margin: 10px;
+}
+
+.flexboxDelete {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin: 0px 40px;
+}

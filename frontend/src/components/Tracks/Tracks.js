@@ -145,7 +145,7 @@ function Tracks({ setTrackCount, setShowAudioPlayer }) {
                 )}
                 {showDeleteModal && (
                     <Modal onClose={() => setShowDeleteModal(false)}>
-                        <DeleteTrackModal setShowDeleteModal={setShowDeleteModal} trackId={deleteTrackId} />
+                        <DeleteTrackModal setShowDeleteModal={setShowDeleteModal} trackId={deleteTrackId} setShowAudioPlayer={setShowAudioPlayer}/>
                     </Modal>
                 )}
                 {allTracks?.length === 0 && userProfile?.id === sessionUser?.id ?
