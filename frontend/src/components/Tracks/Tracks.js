@@ -99,12 +99,12 @@ function Tracks({ setTrackCount, setShowAudioPlayer }) {
                             />
                         </div>
                         <div className='descriptionContainer'>
-                            <div>
+                            <div className='displayName'>
                                 {/* <NavLink to={`/users/${userId.id}`} activeClassName='whiteActive2'> */}
                                 {selectedUser?.display_name}
                                 {/* </NavLink> */}
                             </div>
-                            <div>
+                            <div className='trackName'>
                                 {/* <NavLink to={`/users/${userId.id}/${track.id}`}> */}
                                 {track?.track_name}
                                 {/* </NavLink> */}

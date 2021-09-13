@@ -12,10 +12,6 @@
   padding: 15px;
 }
 
-.trackContainer {
-  /* min-height: calc(100vh - 340px - 120px); */
-}
-
 .trackCoverArt {
   height: 160px;
   width: 160px;
@@ -23,13 +19,21 @@
 }
 
 .descriptionContainer {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   margin: 10px 30px;
   word-wrap: break-word;
   overflow: hidden;
 }
 
 .trackDescription {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  color: #696969;
+  font-size: 16px;
 }
 
 .TrackContainer {
@@ -72,4 +76,13 @@
 
 .whiteActive2:hover {
   background-color: white;
+}
+
+.displayName {
+  color: #696969;
+  font-size: 16px;
+}
+
+.trackName {
+  font-size: 22px;
 }
