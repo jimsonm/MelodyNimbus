@@ -24,7 +24,7 @@ function App() {
     <>
       <Switch>
         <Route exact path='/'>
-          <HomePage isLoaded={isLoaded} setShowAudioPlayer={setShowAudioPlayer}/>
+          <HomePage isLoaded={isLoaded} setShowAudioPlayer={setShowAudioPlayer} showAudioPlayer={showAudioPlayer}/>
         </Route>
         <Route exact path='/users/:id/tracks'>
           <Navigation isLoaded={isLoaded} />
@@ -36,7 +36,7 @@ function App() {
         </Route>
         <Route exact path='/users/:id'>
           <Navigation isLoaded={isLoaded} />
-          <UserProfilePage setShowAudioPlayer={setShowAudioPlayer} />
+          <UserProfilePage setShowAudioPlayer={setShowAudioPlayer}/>
         </Route>
         <Route exact path='/users'>
           <Navigation isLoaded={isLoaded} />

@@ -1,23 +1,43 @@
 import { useSelector, useDispatch } from "react-redux";
-
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectCoverflow, Navigation, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.css';
 import './Carousel.css';
+import { setIsSongPlaying } from '../../store/current';
 
 SwiperCore.use([EffectCoverflow, Navigation, Pagination])
 
-function Carousel({setCurrentSongId, setShowAudioPlayer}) {
+function Carousel({ setCurrentSongId, setShowAudioPlayer, showAudioPlayer }) {
+    const dispatch = useDispatch();
     const users = useSelector((state) => (state.user));
+    const [showPlay, setShowPlay] = useState(false);
+    const [hoverSongId, setHoverSongId] = useState();
+    const isSongPlaying = useSelector((state) => (state.current.isPlaying));
 
     let songs;
     if (users.tracks) {
         songs = Object.values(users.tracks);
     }
 
+    const onArtHover = (songId) => {
+        setShowPlay(true);
+        setHoverSongId(songId)
+    }
+
+    const onArtLeave = () => {
+        setShowPlay(false);
+        setHoverSongId(null)
+    }
+
     const onCoverArtClick = (songId) => {
         setShowAudioPlayer(true);
         setCurrentSongId(songId);
+        dispatch(setIsSongPlaying(true));
+    }
+
+    const onCoverArtPause = () => {
+        dispatch(setIsSongPlaying(false));
     }
 
     const slides = [];
@@ -29,9 +49,37 @@ function Carousel({setCurrentSongId, setShowAudioPlayer}) {
                 slides.push(
                     <div key={i}>
                         <SwiperSlide key={i} className='songSlide'>
-                            <img src={song.cover_art} className='carouselCoverArt' onClick={() => onCoverArtClick(song.id)}/>
+                            {/* {showPlay &&
+                            <div className='carouselPlayButtonContainer'>
+                                <div className='carouselPlayButton'
+                                onClick={() => onCoverArtClick(song.id)}/>
+                            </div>
+                            } */}
+                            <div className='flexCenter carouselSlideContain'
+                                onMouseEnter={() => onArtHover(song.id)}
+                                onMouseLeave={() => onArtLeave()}
+                            >
+                                {showPlay && hoverSongId === song.id && showAudioPlayer === false &&
+                                    <div className='carouselPlayButtonContainer' onClick={() => onCoverArtClick(song.id)}>
+                                        <div className='carouselPlayButton' />
+                                    </div>
+                                }
+                                {showPlay && hoverSongId === song.id && isSongPlaying === false &&
+                                    <div className='carouselPlayButtonContainer' onClick={() => onCoverArtClick(song.id)}>
+                                        <div className='carouselPlayButton' />
+                                    </div>
+                                }
+                                {showPlay && hoverSongId === song.id && isSongPlaying === true &&
+                                    <div className='carouselPlayButtonContainer' onClick={() => onCoverArtPause()}>
+                                        <div className='carouselPauseButton' />
+                                    </div>
+                                }
+                                <img src={song.cover_art}
+                                    className='carouselCoverArt'
+                                />
+                            </div>
                             <div className='carouselTrackName'>
-                            {song.track_name}
+                                {song.track_name}
                             </div>
                         </SwiperSlide>
                     </div>
@@ -53,7 +101,7 @@ function Carousel({setCurrentSongId, setShowAudioPlayer}) {
                     clickable: true,
                     // dynamicBullets: true,
                     // dynamicMainBullets: 1,
-                    }}
+                }}
                 spaceBetween={0}
                 slidesPerView={5}
                 loop={true}
