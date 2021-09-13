@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 SwiperCore.use([EffectCoverflow, Navigation, Pagination])
 
-function Carousel({ setCurrentSongId, setShowAudioPlayer, showAudioPlayer }) {
+function Carousel({ setCurrentSongId, setShowAudioPlayer, showAudioPlayer, currentSongId }) {
     const dispatch = useDispatch();
     const users = useSelector((state) => (state.user));
     const [showPlay, setShowPlay] = useState(false);
@@ -64,7 +64,12 @@ function Carousel({ setCurrentSongId, setShowAudioPlayer, showAudioPlayer }) {
                                         <div className='carouselPlayButton' />
                                     </div>
                                 }
-                                {showPlay && hoverSongId === song.id && isSongPlaying === true &&
+                                {showPlay && hoverSongId === song.id && isSongPlaying === true && hoverSongId !== currentSongId &&
+                                    <div className='carouselPlayButtonContainer' onClick={() => onCoverArtClick(song.id)}>
+                                        <div className='carouselPlayButton' />
+                                    </div>
+                                }
+                                {showPlay && hoverSongId === song.id && isSongPlaying === true && hoverSongId === currentSongId &&
                                     <div className='carouselPlayButtonContainer' onClick={() => onCoverArtPause()}>
                                         <div className='carouselPauseButton' />
                                     </div>

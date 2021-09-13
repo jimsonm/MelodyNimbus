@@ -82,7 +82,7 @@ function HomePage({ isLoaded, setShowAudioPlayer, showAudioPlayer }) {
                         <div className='carouselTextDiv'>
                             Trending tracks produced by MelodyNimbus users.
                         </div>
-                        <Carousel setCurrentSongId={setCurrentSongId} setShowAudioPlayer={setShowAudioPlayer} showAudioPlayer={showAudioPlayer}/>
+                        <Carousel setCurrentSongId={setCurrentSongId} setShowAudioPlayer={setShowAudioPlayer} showAudioPlayer={showAudioPlayer} currentSongId={currentSongId}/>
                     </div>
                     <div className='userDiv'>
                         <div className='userTextDiv'>
