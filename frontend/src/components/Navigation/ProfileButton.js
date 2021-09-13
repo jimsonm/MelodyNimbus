@@ -12,10 +12,8 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
   const currState = useSelector(state => state.current);
-  // console.log(currState);
 
   const toProfile = () => {
-    // dispatch(setCurrentSongState(currState));
     history.push(`/users/${sessionUser.id}`, currState)
   }
 

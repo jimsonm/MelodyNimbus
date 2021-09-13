@@ -30,7 +30,6 @@ router.post(
     '/',
     asyncHandler(async (req, res) => {
         const { track_id, user_id, comment } = req.body;
-        console.log('postzzzzzzzzzzz', req.body)
         const newComment = await Track_Comment.create({
             track_id,
             user_id,
@@ -44,6 +43,21 @@ router.delete(
     '/:id',
     asyncHandler(async (req, res) => {
         await Track_Comment.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        const comments = await Track_Comment.findAll();
+        return res.json(comments);
+    })
+)
+
+router.put(
+    '/:id',
+    asyncHandler(async (req, res) => {
+        await Track_Comment.update({
+            response_text: req.body.comment
+        }, {
             where: {
                 id: req.params.id
             }

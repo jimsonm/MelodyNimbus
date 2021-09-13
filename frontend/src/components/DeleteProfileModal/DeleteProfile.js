@@ -8,7 +8,6 @@ function DeleteProfile({ setShowDeleteProfileModal }) {
     const dispatch = useDispatch();
     const { id } = useParams();
     const userProfile = useSelector((state) => state.user[id]);
-    console.log(userProfile);
 
     const deleteAccount = async () => {
         if (+id === 1) {

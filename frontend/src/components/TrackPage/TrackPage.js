@@ -10,7 +10,9 @@ import { GrPlay, GrPause } from "react-icons/gr";
 import { setIsSongPlaying, setCurrentSong } from '../../store/current';
 import { FaRegCommentDots, FaTrashAlt } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
-import { getCommentsByTrack, addComment, deleteComment } from '../../store/comments';
+import { IoMdSave } from "react-icons/io";
+import { ImCancelCircle } from "react-icons/im";
+import { getCommentsByTrack, addComment, deleteComment, editComment } from '../../store/comments';
 
 function TrackPage({ setShowAudioPlayer }) {
     const { id } = useParams();
@@ -24,7 +26,10 @@ function TrackPage({ setShowAudioPlayer }) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const currentIsPlaying = useSelector((state) => state.current.isPlaying);
     const [comment, setComment] = useState('');
-    const commentObj = useSelector((state) => state.comment);
+    const [isEditable, setIsEditable] = useState(false);
+    const [edittedComment, setEdittedComment] = useState('');
+    const [currentComment, setCurrentComment] = useState();
+    const commentsObj = useSelector((state) => state.comments);
     const allComments = useSelector((state) => Object.values(state.comment));
 
     useEffect(() => {
@@ -43,6 +48,22 @@ function TrackPage({ setShowAudioPlayer }) {
 
     const deleteAComment = (commentId) => {
         dispatch(deleteComment(commentId));
+    }
+
+    const editAComment = (commentId, edittedComment) => {
+        dispatch(editComment(commentId, edittedComment));
+        setIsEditable(false);
+        setEdittedComment('');
+    }
+
+    const onEditClick = (commentId) => {
+        setIsEditable(true);
+        setCurrentComment(commentId);
+    }
+
+    const cancelEdit = () => {
+        setIsEditable(false);
+        setEdittedComment('');
     }
 
     const showEditTrack = () => {
@@ -153,14 +174,35 @@ function TrackPage({ setShowAudioPlayer }) {
                                     className='trackCoverArt'
                                 />
                                 <div className='trackCommentSection'>
-                                    <div>
-                                        {comment.response_text}
-                                    </div>
+                                    {!isEditable &&
+                                        <div>
+                                            {comment.response_text}
+                                        </div>
+                                    }
+                                    {isEditable && currentComment !== comment.id &&
+                                        <div>
+                                            {comment.response_text}
+                                        </div>
+                                    }
+                                    {isEditable && currentComment === comment.id &&
+                                        <textarea
+                                            value={edittedComment}
+                                            onChange={(e) => setEdittedComment(e.target.value)}
+                                            className='editCommentTextArea'
+                                            placeholder={comment.response_text}
+                                        />
+                                    }
                                     <div>
                                         {sessionUser?.id === comment?.user_id &&
                                             <div className='flexCenter'>
-                                                <FiEdit className='editIcon'/>
-                                                <FaTrashAlt className='deleteIcon' onClick={() => deleteAComment(comment.id)}/>
+                                                {isEditable && currentComment === comment.id ? <IoMdSave className='saveIcon' onClick={() => editAComment(comment.id, edittedComment)} />
+                                                    : <FiEdit className='editIcon' onClick={() => onEditClick(comment.id)} />}
+                                                <FaTrashAlt className='deleteIcon' onClick={() => deleteAComment(comment.id)} />
+                                            </div>
+                                        }
+                                        {isEditable && currentComment === comment.id &&
+                                            <div className='flexCenter'>
+                                                <ImCancelCircle className='cancelIcon' onClick={cancelEdit}/>
                                             </div>
                                         }
                                     </div>

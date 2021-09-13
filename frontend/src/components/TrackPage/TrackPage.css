@@ -117,8 +117,15 @@
 }
 
 .editIcon,
-.deleteIcon {
+.deleteIcon,
+.saveIcon,
+.cancelIcon {
   width: 20px;
   height: 20px;
   margin: 0px 5px;
+}
+
+.editCommentTextArea {
+  width: 100%;
+  height: 100%;
 }
