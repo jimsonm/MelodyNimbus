@@ -5,6 +5,7 @@ import SwiperCore, { EffectCoverflow, Navigation, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.css';
 import './Carousel.css';
 import { setIsSongPlaying } from '../../store/current';
+import { NavLink } from 'react-router-dom';
 
 SwiperCore.use([EffectCoverflow, Navigation, Pagination])
 
@@ -49,12 +50,6 @@ function Carousel({ setCurrentSongId, setShowAudioPlayer, showAudioPlayer }) {
                 slides.push(
                     <div key={i}>
                         <SwiperSlide key={i} className='songSlide'>
-                            {/* {showPlay &&
-                            <div className='carouselPlayButtonContainer'>
-                                <div className='carouselPlayButton'
-                                onClick={() => onCoverArtClick(song.id)}/>
-                            </div>
-                            } */}
                             <div className='flexCenter carouselSlideContain'
                                 onMouseEnter={() => onArtHover(song.id)}
                                 onMouseLeave={() => onArtLeave()}
@@ -74,12 +69,16 @@ function Carousel({ setCurrentSongId, setShowAudioPlayer, showAudioPlayer }) {
                                         <div className='carouselPauseButton' />
                                     </div>
                                 }
-                                <img src={song.cover_art}
-                                    className='carouselCoverArt'
-                                />
+                                <NavLink to={`/users/${song.user_id}/${song.id}`}>
+                                    <img src={song.cover_art}
+                                        className='carouselCoverArt'
+                                    />
+                                </NavLink>
                             </div>
                             <div className='carouselTrackName'>
-                                {song.track_name}
+                                <NavLink to={`/users/${song.user_id}/${song.id}`}>
+                                    {song.track_name}
+                                </NavLink>
                             </div>
                         </SwiperSlide>
                     </div>

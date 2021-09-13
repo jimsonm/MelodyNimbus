@@ -37,6 +37,7 @@ function TrackPage({ setShowAudioPlayer }) {
 
     const addAComment = (user_id, track_id, comment) => {
         dispatch(addComment({user_id, track_id, comment}));
+        setComment('');
     }
 
     const showEditTrack = () => {
@@ -122,6 +123,7 @@ function TrackPage({ setShowAudioPlayer }) {
                                 type='text'
                                 placeholder='Write a comment'
                                 className='writeComment'
+                                value={comment}
                                 onChange={(e) => setComment(e.target.value)}
                             />
                             <FaRegCommentDots className='postComment' onClick={() => addAComment(sessionUser.id, selectedTrack.id, comment)}/>
@@ -145,7 +147,9 @@ function TrackPage({ setShowAudioPlayer }) {
                                     alt="coverArt"
                                     className='trackCoverArt'
                                 />
+                                <div>
                                 {comment.response_text}
+                                </div>
                             </div>
                         )
                         }
