@@ -6,8 +6,10 @@ import * as userActions from '../../store/users';
 import { Modal } from '../../context/Modal';
 import EditTrackModal from '../EditTrackModal';
 import DeleteTrackModal from '../DeleteTrackModal';
+import { GrPlay, GrPause } from "react-icons/gr";
+import { setIsSongPlaying, setCurrentSong } from '../../store/current';
 
-function TrackPage() {
+function TrackPage({ setShowAudioPlayer}) {
     const { id } = useParams();
     const { track_id } = useParams();
     const dispatch = useDispatch();
@@ -18,6 +20,7 @@ function TrackPage() {
     const tracksBySelectedUser = useSelector((state) => state.user.tracks);
     const [showTrackModal, setShowTrackModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const currentIsPlaying = useSelector((state) => state.current.isPlaying);
 
     let selectedTrack;
     if (tracksBySelectedUser) {
@@ -32,6 +35,16 @@ function TrackPage() {
         setShowDeleteModal(true)
     }
 
+    const pauseSong = () => {
+        dispatch(setIsSongPlaying(false));
+    }
+
+    const updateCurrent = (trackId) => {
+        setShowAudioPlayer(true);
+        dispatch(setCurrentSong(trackId));
+        dispatch(setIsSongPlaying(true));
+    }
+
     useEffect(() => {
         dispatch(userActions.getTracksFromUser(id))
         dispatch(userActions.getUsers())
@@ -43,16 +56,39 @@ function TrackPage() {
                 <div className='flexCenter'>
                     <div className='trackPageContainer'>
                         <div className='flexboxBetween'>
-                            <div className='block'>
-                                <div>
-                                    {userProfile?.display_name}
+                            <div className='block descriptionContainer'>
+                                <div className='playContainer'>
+                                    <div>
+                                        {currentIsPlaying === true
+                                            ? <GrPause onClick={pauseSong} className='pauseIcon' />
+                                            : <GrPlay onClick={() => updateCurrent(selectedTrack.id)} className='playIcon' />
+                                        }
+                                        {/* <div ref={waveformRef}></div> */}
+                                        {/* <Waveform track={track} /> */}
+                                    </div>
+                                    <div>
+                                        <div className='displayName2'>
+                                            {userProfile?.display_name}
+                                        </div>
+                                        <div className='trackName2'>
+                                            {selectedTrack?.track_name}
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div>
-                                    {selectedTrack?.track_name}
+                                <div className='trackDescription2'>
+                                    {selectedTrack?.description}
                                 </div>
-                                <audio controls>
-                                    <source src={selectedTrack?.track_src} type="audio/mp3" />
-                                </audio>
+                                {sessionUser?.id === userProfile?.id ? (
+                                <button onClick={showEditTrack} value={selectedTrack.id} className='editButton2'>
+                                    Edit
+                                </button>) : null
+                            }
+                            {sessionUser?.id === userProfile?.id ? (
+                                <button onClick={showConfirmDelete} value={selectedTrack.id} className='deleteButton2'>
+                                    Delete Track
+                                </button>) : null
+                            }
                             </div>
                             <div>
                                 <img
@@ -75,16 +111,6 @@ function TrackPage() {
                             />
                         </div>
                         <div>
-                            {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showEditTrack} value={selectedTrack.id} className='editButton'>
-                                    Edit
-                                </button>) : null
-                            }
-                            {sessionUser?.id === userProfile?.id ? (
-                                <button onClick={showConfirmDelete} value={selectedTrack.id} className='deleteButton'>
-                                    Delete Track
-                                </button>) : null
-                            }
                             {showTrackModal && (
                                 <Modal onClose={() => setShowTrackModal(false)}>
                                     <EditTrackModal setShowTrackModal={setShowTrackModal} track={selectedTrack} />
@@ -107,9 +133,9 @@ function TrackPage() {
                                     {userProfile?.display_name}
                                 </div>
                             </div>
-                            <div>
+                            {/* <div>
                                 {selectedTrack?.description}
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

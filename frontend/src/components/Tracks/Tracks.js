@@ -6,9 +6,8 @@ import './Tracks.css';
 import { Modal } from '../../context/Modal';
 import EditTrackModal from '../EditTrackModal';
 import DeleteTrackModal from "../DeleteTrackModal";
-import { setCurrentSong } from "../../store/current";
 import { GrPlay, GrPause } from "react-icons/gr";
-import { setIsSongPlaying } from "../../store/current";
+import { setCurrentSong, setIsSongPlaying } from "../../store/current";
 // import WaveSurfer from 'wavesurfer.js';
 // import Waveform from "./Wavesurfer";
 
@@ -99,26 +98,30 @@ function Tracks({ setTrackCount, setShowAudioPlayer }) {
                             />
                         </div>
                         <div className='descriptionContainer'>
-                            <div className='displayName'>
-                                {/* <NavLink to={`/users/${userId.id}`} activeClassName='whiteActive2'> */}
-                                {selectedUser?.display_name}
-                                {/* </NavLink> */}
-                            </div>
-                            <div className='trackName'>
-                                {/* <NavLink to={`/users/${userId.id}/${track.id}`}> */}
-                                {track?.track_name}
-                                {/* </NavLink> */}
+                            <div className='playContainer'>
+                                <div>
+                                    {track.id === currentSong?.id && currentIsPlaying === true
+                                        ? <GrPause onClick={pauseSong} className='pauseIcon' />
+                                        : <GrPlay onClick={() => updateCurrent(track.id)} className='playIcon' />
+                                    }
+                                    {/* <div ref={waveformRef}></div> */}
+                                    {/* <Waveform track={track} /> */}
+                                </div>
+                                <div>
+                                    <div className='displayName'>
+                                        {/* <NavLink to={`/users/${userId.id}`} activeClassName='whiteActive2'> */}
+                                        {selectedUser?.display_name}
+                                        {/* </NavLink> */}
+                                    </div>
+                                    <div className='trackName'>
+                                        <NavLink to={`/users/${userId.id}/${track.id}`}>
+                                            {track?.track_name}
+                                        </NavLink>
+                                    </div>
+                                </div>
                             </div>
                             <div className='trackDescription'>
                                 {track?.description}
-                            </div>
-                            <div>
-                                {track.id === currentSong?.id && currentIsPlaying === true
-                                ? <GrPause onClick={pauseSong}/>
-                                : <GrPlay onClick={() => updateCurrent(track.id)} />
-                                }
-                                {/* <div ref={waveformRef}></div> */}
-                                {/* <Waveform track={track} /> */}
                             </div>
                             <div>
                                 {sessionUser?.id === userProfile?.id ? (

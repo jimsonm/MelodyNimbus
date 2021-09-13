@@ -32,7 +32,7 @@ function App() {
         </Route>
         <Route exact path='/users/:id/:track_id'>
           <Navigation isLoaded={isLoaded} />
-          <TrackPage />
+          <TrackPage setShowAudioPlayer={setShowAudioPlayer}/>
         </Route>
         <Route exact path='/users/:id'>
           <Navigation isLoaded={isLoaded} />

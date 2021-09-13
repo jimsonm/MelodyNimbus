@@ -12,8 +12,8 @@
 }
 
 .trackCoverArt2 {
-  width: 340px;
-  height: 340px;
+  width: 250px;
+  height: 250px;
   object-fit: cover;
 }
 
@@ -32,10 +32,55 @@
 }
 
 .trackPageContainer {
-    width: 800px;
+  width: 800px;
 }
 
 .flexboxBetween {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+}
+
+.displayName2 {
+  color: #696969;
+  font-size: 16px;
+}
+
+.trackName2 {
+  font-size: 22px;
+}
+
+.trackDescription2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #696969;
+  font-size: 16px;
+  margin: 15px 0px;
+}
+
+.editButton2,
+.deleteButton2 {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.editButton2:hover,
+.deleteButton2:hover {
+  color:#000000;
+  background-color: gray;
+}
+
+.deleteButton2 {
+  margin: 0px 0px 0px 10px;
 }

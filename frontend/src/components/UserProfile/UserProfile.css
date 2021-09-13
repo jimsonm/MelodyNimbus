@@ -78,8 +78,24 @@
 
 .editButton,
 .deleteButton {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
   margin: 0px 0px 0px 10px;
-  padding: 5px;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  color:#000000;
+  background-color: gray;
 }
 
 .rightDiv {

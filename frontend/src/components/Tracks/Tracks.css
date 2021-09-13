@@ -29,7 +29,7 @@
 
 .trackDescription {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;  
   overflow: hidden;
   color: #696969;
@@ -63,7 +63,24 @@
 
 .editTrackButton,
 .deleteTrackButton {
-  padding: 5px;
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 10px 0px 0px 0px;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.editTrackButton:hover,
+.deleteTrackButton:hover {
+  color:#000000;
+  background-color: gray;
 }
 
 .deleteTrackButton {
@@ -85,4 +102,15 @@
 
 .trackName {
   font-size: 22px;
+}
+
+.playContainer {
+  display: flex;
+}
+
+.pauseIcon,
+.playIcon {
+  width: 40px;
+  height: 40px;
+  margin: 0px 10px;
 }
