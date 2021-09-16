@@ -40,14 +40,18 @@ router.post(
 )
 
 router.delete(
-    '/:id',
+    '/:trackId/:commentId',
     asyncHandler(async (req, res) => {
         await Track_Comment.destroy({
             where: {
-                id: req.params.id
+                id: req.params.commentId
             }
         });
-        const comments = await Track_Comment.findAll();
+        const comments = await Track_Comment.findAll({
+            where: {
+                track_id: req.params.trackId
+            }
+        });
         return res.json(comments);
     })
 )

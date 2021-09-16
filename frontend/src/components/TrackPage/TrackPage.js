@@ -46,8 +46,8 @@ function TrackPage({ setShowAudioPlayer }) {
         setComment('');
     }
 
-    const deleteAComment = (commentId) => {
-        dispatch(deleteComment(commentId));
+    const deleteAComment = (track_id, commentId) => {
+        dispatch(deleteComment(track_id, commentId));
     }
 
     const editAComment = (commentId, edittedComment) => {
@@ -141,7 +141,7 @@ function TrackPage({ setShowAudioPlayer }) {
                         </div>
                         <div className='flexbox'>
                             <img
-                                src={userProfile?.avatar_img}
+                                src={sessionUser?.avatar_img}
                                 alt='profileAvatar'
                                 className='userProfileTrackPage1'
                             />
@@ -197,7 +197,7 @@ function TrackPage({ setShowAudioPlayer }) {
                                             <div className='flexCenter'>
                                                 {isEditable && currentComment === comment.id ? <IoMdSave className='saveIcon' onClick={() => editAComment(comment.id, edittedComment)} />
                                                     : <FiEdit className='editIcon' onClick={() => onEditClick(comment.id)} />}
-                                                <FaTrashAlt className='deleteIcon' onClick={() => deleteAComment(comment.id)} />
+                                                <FaTrashAlt className='deleteIcon' onClick={() => deleteAComment(selectedTrack.id, comment.id)} />
                                             </div>
                                         }
                                         {isEditable && currentComment === comment.id &&
