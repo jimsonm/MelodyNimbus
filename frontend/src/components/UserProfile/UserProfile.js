@@ -32,6 +32,13 @@ function UserProfilePage({ setShowAudioPlayer }) {
     const [bannerSrc, setBannerSrc] = useState();
     const [trackCount, setTrackCount] = useState();
     const playingSong = useSelector((state) => state.current.song);
+    const tracks = useSelector((state) => (state.user.tracks));
+
+    let tracksList = [];
+    if (tracks) {
+        tracksList = Object.keys(tracks);
+    }
+    console.log(tracks);
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))
@@ -211,7 +218,7 @@ function UserProfilePage({ setShowAudioPlayer }) {
                             <Tracks setTrackCount={setTrackCount} setShowAudioPlayer={setShowAudioPlayer} />
                             {/* </div> */}
                         </div>
-                        {correctUser &&
+                        {correctUser && tracksList.length > 0 &&
                             <>
                                 <div className='flexCenter moreUploadDiv'>
                                     More uploads means more listeners.
