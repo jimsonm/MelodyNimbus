@@ -42,8 +42,11 @@
 }
 
 .noTrackContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 300px;
-  width: 580px;
+  width: 100%;
   text-align: center;
   padding: 39px 0px 120px;
 }

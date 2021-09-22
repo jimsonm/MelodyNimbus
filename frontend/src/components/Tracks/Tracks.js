@@ -163,11 +163,13 @@ function Tracks({ setTrackCount, setShowAudioPlayer }) {
                 }
                 {allTracks?.length === 0 && userProfile?.id !== sessionUser?.id ?
                     <div className='noTrackContainer'>
+                        <div>
                         <img
                             alt='no tracks image'
                             className='noTracksImage'
                             src='https://melody-nimbus.s3.us-west-1.amazonaws.com/no-tracks.png'
                         />
+                        </div>
                         <div className='quietDiv'>
                             Nothing to hear here
                         </div>
