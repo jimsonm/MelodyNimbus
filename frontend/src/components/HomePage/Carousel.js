@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectCoverflow, Navigation, Pagination } from 'swiper';
 import 'swiper/swiper-bundle.css';
@@ -97,14 +97,10 @@ function Carousel({ setCurrentSongId, setShowAudioPlayer, showAudioPlayer, curre
         <>
             <Swiper id="main"
                 effect="coverflow"
-                // tag="section"
-                // wrapperTag="ul"
                 className='swiperContainer'
                 navigation
                 pagination={{
                     clickable: true,
-                    // dynamicBullets: true,
-                    // dynamicMainBullets: 1,
                 }}
                 spaceBetween={0}
                 slidesPerView={5}

@@ -19,7 +19,7 @@ function HomePage({ isLoaded, setShowAudioPlayer, showAudioPlayer }) {
 
     useEffect(() => {
         dispatch(setCurrentSong(currentSongId))
-    }, [currentSongId])
+    }, [currentSongId, dispatch])
 
     useEffect(async () => {
         await dispatch(sessionActions.restoreUser());

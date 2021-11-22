@@ -31,14 +31,12 @@ function UserProfilePage({ setShowAudioPlayer }) {
     const [imgSrc, setImgSrc] = useState();
     const [bannerSrc, setBannerSrc] = useState();
     const [trackCount, setTrackCount] = useState();
-    const playingSong = useSelector((state) => state.current.song);
     const tracks = useSelector((state) => (state.user.tracks));
 
     let tracksList = [];
     if (tracks) {
         tracksList = Object.keys(tracks);
     }
-    console.log(tracks);
 
     useEffect(() => {
         dispatch(userActions.getUsers(userId.id))

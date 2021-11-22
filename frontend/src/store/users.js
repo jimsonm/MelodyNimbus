@@ -43,8 +43,6 @@ export const addTrack = (track) => async (dispatch) => {
         },
         body: formData,
     })
-    // const data = await res.json();
-    // dispatch(setUsers(data))
 }
 
 export const editTrack = (track) => async (dispatch) => {

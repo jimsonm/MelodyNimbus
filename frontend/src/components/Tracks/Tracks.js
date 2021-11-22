@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import * as userActions from '../../store/users';
 import './Tracks.css';
 import { Modal } from '../../context/Modal';
@@ -8,8 +8,6 @@ import EditTrackModal from '../EditTrackModal';
 import DeleteTrackModal from "../DeleteTrackModal";
 import { GrPlay, GrPause } from "react-icons/gr";
 import { setCurrentSong, setIsSongPlaying } from "../../store/current";
-// import WaveSurfer from 'wavesurfer.js';
-// import Waveform from "./Wavesurfer";
 
 function Tracks({ setTrackCount, setShowAudioPlayer }) {
     const userId = useParams();
@@ -26,8 +24,6 @@ function Tracks({ setTrackCount, setShowAudioPlayer }) {
     const currentSong = useSelector((state) => state.current.song);
     const currentIsPlaying = useSelector((state) => state.current.isPlaying);
 
-    // const waveformRef = useRef();
-
     let allTracks = null;
     if (users && tracksBySelectedUser) {
         allTracks = Object.values(tracksBySelectedUser)
@@ -42,27 +38,6 @@ function Tracks({ setTrackCount, setShowAudioPlayer }) {
         dispatch(setCurrentSong(trackId));
         dispatch(setIsSongPlaying(true));
     }
-
-    // useEffect(() => {
-    //     if (currentSong) {
-    //         if (waveformRef.current) {
-    //             const wavesurfer = WaveSurfer.create({
-    //                 container: waveformRef.current,
-    //                 barWidth: 3,
-    //                 cursorWidth: 1,
-    //                 // container: '#waveform',
-    //                 backend: 'WebAudio',
-    //                 height: 80,
-    //                 progressColor: '#2D5BFF',
-    //                 responsive: true,
-    //                 waveColor: '#EFEFEF',
-    //                 cursorColor: 'transparent',
-    //             });
-    //             wavesurfer.load(currentSong.track_src)
-    //             // wavesurfer.play()
-    //         }
-    //     }
-    // }, [updateCurrent]);
 
     const showEditTrack = (e) => {
         const selectedTrack = allTracks?.find(track => track.id === +e.target.value)
@@ -104,14 +79,10 @@ function Tracks({ setTrackCount, setShowAudioPlayer }) {
                                         ? <GrPause onClick={pauseSong} className='pauseIcon' />
                                         : <GrPlay onClick={() => updateCurrent(track.id)} className='playIcon' />
                                     }
-                                    {/* <div ref={waveformRef}></div> */}
-                                    {/* <Waveform track={track} /> */}
                                 </div>
                                 <div>
                                     <div className='displayName'>
-                                        {/* <NavLink to={`/users/${userId.id}`} activeClassName='whiteActive2'> */}
                                         {selectedUser?.display_name}
-                                        {/* </NavLink> */}
                                     </div>
                                     <div className='trackName'>
                                         <NavLink to={`/users/${userId.id}/${track.id}`}>

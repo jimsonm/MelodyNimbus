@@ -9,7 +9,6 @@ function EditUserProfile({ setShowModal }) {
     const userId = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    // const userProfile = useSelector((state) => state.user[userId.id]);
     const [display_name, setDisplay_Name] = useState(sessionUser.display_name);
     const [image, setImage] = useState(sessionUser.avatar_img);
     const [first_name, setFirst_Name] = useState(sessionUser.first_name === "null" ? "" : sessionUser.first_name);

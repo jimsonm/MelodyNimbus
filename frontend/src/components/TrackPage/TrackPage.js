@@ -29,7 +29,6 @@ function TrackPage({ setShowAudioPlayer }) {
     const [isEditable, setIsEditable] = useState(false);
     const [edittedComment, setEdittedComment] = useState('');
     const [currentComment, setCurrentComment] = useState();
-    const commentsObj = useSelector((state) => state.comments);
     const allComments = useSelector((state) => Object.values(state.comment));
 
     useEffect(() => {

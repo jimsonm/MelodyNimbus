@@ -20,10 +20,10 @@ export const getCommentsByTrack = (trackId) => async (dispatch) => {
 }
 
 export const addComment = ({user_id, track_id, comment}) => async (dispatch) => {
-    const response = await csrfFetch('/api/comments', {
-        method: 'POST',
-        body: JSON.stringify({user_id, track_id, comment}),
-    });
+    // const response = await csrfFetch('/api/comments', {
+    //     method: 'POST',
+    //     body: JSON.stringify({user_id, track_id, comment}),
+    // });
     const commentsRes = await csrfFetch(`/api/comments/${track_id}`);
     const allComments = await commentsRes.json();
     dispatch(setComments(allComments));

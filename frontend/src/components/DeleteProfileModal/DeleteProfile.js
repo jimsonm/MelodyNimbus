@@ -1,5 +1,5 @@
 import './DeleteProfile.css';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams, useHistory } from 'react-router-dom';
 import * as userActions from '../../store/users';
 
@@ -7,7 +7,6 @@ function DeleteProfile({ setShowDeleteProfileModal }) {
     let history = useHistory();
     const dispatch = useDispatch();
     const { id } = useParams();
-    const userProfile = useSelector((state) => state.user[id]);
 
     const deleteAccount = async () => {
         if (+id === 1) {
